@@ -53,7 +53,8 @@ urlParams | The request parameter keys, the divided second parts of the not
 regex     | If set, this regular expression is used to divide the second parts
           | of the not found uri. Else it is divided at uri separators (/).
 
-Look into the folder core/components/customrequest/configs.example for
+Look into the folder core/components/customrequest/configs.example for example 
+config files.
 
 Notes
 --------------------------------------------------------------------------------
