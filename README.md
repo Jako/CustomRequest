@@ -47,12 +47,12 @@ The following keys could be used in the array:
 
 Key       | Description
 ----------|------------
-id        | The id of a MODX resource
-alias     | The string the first signs of the not found uri is compared with.
-urlParams | The request parameter keys, the divided second parts of the not found uri are assigned to.
-regex     | If set, this regular expression is used to divide the second parts of the not found uri. Else it is divided at uri separators (/)
+id        | The id of a MODX resource, the not found URI is forwarded to.
+alias     | The first characters the not found URI is compared with. If found, this config is used and comparing is stopped.
+urlParams | The request parameter keys, the divided second parts of the not found URI are assigned to.
+regex     | If set, this regular expression is used to divide the second parts of the not found URI. If not set, it is divided at the URI separators `/`.
 
-Look into the folder core/components/customrequest/configs.example for
+Look into the folder `core/components/customrequest/configs.example` for example config files.
 
 Notes
 --------------------------------------------------------------------------------
