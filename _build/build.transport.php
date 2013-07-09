@@ -4,9 +4,9 @@
  *
  * Copyright 2013 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
- * CustomRequest is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU General Public License as published by the Free 
- * Software Foundation; either version 2 of the License, or (at your option) any 
+ * CustomRequest is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option) any
  * later version.
  *
  * CustomRequest is distributed in the hope that it will be useful, but 
@@ -41,7 +41,7 @@ $sources = array(
 	'root' => $root,
 	'build' => $root . '_build/',
 	'data' => $root . '_build/data/',
-    'events' => $root . '_build/data/events/',
+	'events' => $root . '_build/data/events/',
 	'resolvers' => $root . '_build/resolvers/',
 	'properties' => $root . '_build/properties/',
 	'chunks' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/chunks/',
@@ -50,6 +50,7 @@ $sources = array(
 	'lexicon' => $root . 'core/components/' . PKG_NAME_LOWER . '/lexicon/',
 	'docs' => $root . 'core/components/' . PKG_NAME_LOWER . '/docs/',
 	'pages' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/pages/',
+	'templates' => $root . 'core/components/' . PKG_NAME_LOWER . '/templates/',
 	'source_assets' => $root . 'assets/components/' . PKG_NAME_LOWER,
 	'source_core' => $root . 'core/components/' . PKG_NAME_LOWER,
 );
@@ -70,6 +71,7 @@ $modx->loadClass('transport.modPackageBuilder', '', false, true);
 $builder = new modPackageBuilder($modx);
 $builder->createPackage(PKG_NAME_LOWER, PKG_VERSION, PKG_RELEASE);
 $builder->registerNamespace(PKG_NAME_LOWER, false, true, '{core_path}components/' . PKG_NAME_LOWER . '/');
+
 /* create category */
 $category = $modx->newObject('modCategory');
 $category->set('id', 1);
@@ -131,17 +133,19 @@ $attr = array(
 $vehicle = $builder->createVehicle($category, $attr);
 unset($category, $attr);
 
-$modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers to plugin...');
+$modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers ...');
 $vehicle->resolve('file', array(
 	'source' => $sources['source_core'],
 	'target' => "return MODX_CORE_PATH . 'components/';"
 ));
+$modx->log(modX::LOG_LEVEL_INFO, 'Packaged in folders.');
+flush();
 $builder->putVehicle($vehicle);
 
 /* load system settings */
 $settings = include $sources['data'] . 'transport.settings.php';
 if (!is_array($settings)) {
-	$modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in settings.');
+	$modx->log(modX::LOG_LEVEL_ERROR, 'No settings defined.');
 } else {
 	$attr = array(
 		xPDOTransport::UNIQUE_KEY => 'key',
@@ -165,7 +169,7 @@ $builder->setPackageAttributes(array(
 ));
 
 /* zip up package */
-$modx->log(modX::LOG_LEVEL_INFO, 'Packing up transport package zip...');
+$modx->log(modX::LOG_LEVEL_INFO, 'Packing up transport package zip ...');
 $builder->pack();
 
 $mtime = microtime();
