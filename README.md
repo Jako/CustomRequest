@@ -34,7 +34,7 @@ Each entry in a config file could contain the following lines
 
 ```php
 $settings['test'] = array(
-	'id' => 200,
+	'resourceId' => 200,
 	'alias' => 'completely/different/uri/',
 	'urlParams' => array('parameter1', 'parameter2'),
 	'regEx' => '#(.*?)-(.*)#i'
@@ -45,14 +45,15 @@ One of the array keys 'id' or 'alias' is required.
 
 The following keys could be used in the array:
 
-Key       | Description
-----------|------------
-id        | The id of a MODX resource, the not found URI is forwarded to.
-alias     | The first characters the not found URI is compared with. If found, this config is used and comparing is stopped.
-urlParams | The request parameter keys, the divided second parts of the not found URI are assigned to.
-regex     | If set, this regular expression is used to divide the second parts of the not found URI. If not set, it is divided at the URI separators `/`.
+Key        | Description
+-----------|------------
+resourceId | The id of a MODX resource, the not found URI is forwarded to.
+alias      | The first characters the not found URI is compared with. If found, this config is used and comparing is stopped.
+urlParams  | The request parameter keys, the divided second parts of the not found URI are assigned to.
+regex      | If set, this regular expression is used to divide the second parts of the not found URI. If not set, it is divided at the URI separators `/`.
 
-Look into the folder `core/components/customrequest/configs.example` for example config files.
+Look into the folder `core/components/customrequest/configs.example` for example
+config files.
 
 Notes
 --------------------------------------------------------------------------------

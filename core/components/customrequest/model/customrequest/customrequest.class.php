@@ -23,7 +23,7 @@
  *
  * @author      Thomas Jakobi (thomas.jakobi@partout.info)
  * @copyright   Copyright 2013, Thomas Jakobi
- * @version     1.0
+ * @version     1.0.1
  */
 class CustomRequest {
 

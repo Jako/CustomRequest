@@ -1,5 +1,8 @@
 History
 ================================================================================
 
+- 1.0.1
+    - Wrong documentation and examples ('resourceId' instead of 'id')
+
 - 1.0
-    - initial release for MODX Revolution
+    - Initial release for MODX Revolution
