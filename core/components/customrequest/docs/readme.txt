@@ -1,14 +1,14 @@
 CustomRequest
 ================================================================================
 
-Beautiful URLs everywhere
+Use pretty URLs everywhere.
 for the MODX Revolution content management framework
 
 Features
 --------------------------------------------------------------------------------
-CustomRequest is an effective tool for MODX Revolution to write pretty URLs and
-map those URLs to a MODX resource and set the request parameter by separating
-the URI path at the URI separators or by a regular expression.
+CustomRequest is an effective tool for MODX Revolution to map pretty but not
+found URLs to a MODX resource and set the request parameter by separating the
+URI path at the URI separators or by a regular expression.
 
 The first characters of the not found URI will be compared with the alias value
 of each config entry. If found, this config entry is used. The alias is stripped
@@ -39,7 +39,7 @@ $settings['test'] = array(
 	'regEx' => '#(.*?)-(.*)#i'
 );
 
-One of the array keys 'id' or 'alias' is required.
+One of the array keys 'resourceId' or 'alias' is required.
 
 The following keys could be used in the array:
 
@@ -53,7 +53,7 @@ urlParams  | The request parameter keys, the divided second parts of the not
 regex      | If set, this regular expression is used to divide the second parts
            | of the not found uri. Else it is divided at uri separators (/).
 
-Look into the folder core/components/customrequest/configs.example for example 
+Look into the folder core/components/customrequest/configs.example for example
 config files.
 
 Notes

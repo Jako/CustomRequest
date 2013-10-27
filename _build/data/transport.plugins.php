@@ -35,7 +35,7 @@ $plugins[0]->set('plugincode', getSnippetContent($sources['plugins'] . 'customre
 $events = include $sources['events'].'customrequest.events.php';
 if (is_array($events) && !empty($events)) {
     $plugins[0]->addMany($events);
-    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' plugin events for CustomRequest.'); flush();
+    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' plugin events for CustomRequest.');
 } else {
     $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find plugin events for CustomRequest!');
 }

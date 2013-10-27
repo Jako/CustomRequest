@@ -23,6 +23,8 @@
  *
  * CustomRequest build script
  */
+ob_start();
+
 $mtime = microtime();
 $mtime = explode(' ', $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -43,7 +45,8 @@ $sources = array(
 	'data' => $root . '_build/data/',
 	'events' => $root . '_build/data/events/',
 	'resolvers' => $root . '_build/resolvers/',
-	'properties' => $root . '_build/properties/',
+	'properties' => $root . '_build/data/properties/',
+	'permissions' => $root . '_build/data/permissions/',
 	'chunks' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/chunks/',
 	'snippets' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/snippets/',
 	'plugins' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/plugins/',
@@ -63,21 +66,21 @@ require_once $sources['build'] . '/includes/functions.php';
 
 $modx = new modX();
 $modx->initialize('mgr');
+
 echo '<pre>'; /* used for nice formatting of log messages */
 $modx->setLogLevel(modX::LOG_LEVEL_INFO);
 $modx->setLogTarget('ECHO');
 
-$modx->loadClass('transport.modPackageBuilder', '', false, true);
+$modx->loadClass('transport.modPackageBuilder', '', FALSE, TRUE);
 $builder = new modPackageBuilder($modx);
 $builder->createPackage(PKG_NAME_LOWER, PKG_VERSION, PKG_RELEASE);
-$builder->registerNamespace(PKG_NAME_LOWER, false, true, '{core_path}components/' . PKG_NAME_LOWER . '/');
+$builder->registerNamespace(PKG_NAME_LOWER, FALSE, TRUE, '{core_path}components/' . PKG_NAME_LOWER . '/');
 
 /* create category */
 $category = $modx->newObject('modCategory');
 $category->set('id', 1);
 $category->set('category', PKG_NAME);
 $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in category.');
-flush();
 
 /* add snippets */
 $snippets = include $sources['data'] . 'transport.snippets.php';
@@ -88,7 +91,6 @@ if (is_array($snippets)) {
 	$modx->log(modX::LOG_LEVEL_ERROR, 'No snippets defined.');
 }
 $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($snippets) . ' snippets.');
-flush();
 unset($snippets);
 
 /* add plugins */
@@ -100,30 +102,29 @@ if (is_array($plugins)) {
 	$modx->log(modX::LOG_LEVEL_ERROR, 'No plugins defined.');
 }
 $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($plugins) . ' plugins.');
-flush();
 unset($plugins);
 
 /* create category vehicle */
 $attr = array(
 	xPDOTransport::UNIQUE_KEY => 'category',
-	xPDOTransport::PRESERVE_KEYS => false,
-	xPDOTransport::UPDATE_OBJECT => true,
-	xPDOTransport::RELATED_OBJECTS => true,
+	xPDOTransport::PRESERVE_KEYS => FALSE,
+	xPDOTransport::UPDATE_OBJECT => TRUE,
+	xPDOTransport::RELATED_OBJECTS => TRUE,
 	xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
 		'Snippets' => array(
 			xPDOTransport::UNIQUE_KEY => 'name',
-			xPDOTransport::PRESERVE_KEYS => false,
-			xPDOTransport::UPDATE_OBJECT => true,
+			xPDOTransport::PRESERVE_KEYS => FALSE,
+			xPDOTransport::UPDATE_OBJECT => TRUE,
 		),
 		'Plugins' => array(
 			xPDOTransport::UNIQUE_KEY => 'name',
-			xPDOTransport::PRESERVE_KEYS => false,
-			xPDOTransport::UPDATE_OBJECT => true,
-			xPDOTransport::RELATED_OBJECTS => true,
+			xPDOTransport::PRESERVE_KEYS => FALSE,
+			xPDOTransport::UPDATE_OBJECT => TRUE,
+			xPDOTransport::RELATED_OBJECTS => TRUE,
 			xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
 				'PluginEvents' => array(
-					xPDOTransport::PRESERVE_KEYS => true,
-					xPDOTransport::UPDATE_OBJECT => false,
+					xPDOTransport::PRESERVE_KEYS => TRUE,
+					xPDOTransport::UPDATE_OBJECT => FALSE,
 					xPDOTransport::UNIQUE_KEY => array('pluginid', 'event'),
 				)
 			)
@@ -139,7 +140,6 @@ $vehicle->resolve('file', array(
 	'target' => "return MODX_CORE_PATH . 'components/';"
 ));
 $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in folders.');
-flush();
 $builder->putVehicle($vehicle);
 
 /* load system settings */
@@ -149,8 +149,8 @@ if (!is_array($settings)) {
 } else {
 	$attr = array(
 		xPDOTransport::UNIQUE_KEY => 'key',
-		xPDOTransport::PRESERVE_KEYS => true,
-		xPDOTransport::UPDATE_OBJECT => false,
+		xPDOTransport::PRESERVE_KEYS => TRUE,
+		xPDOTransport::UPDATE_OBJECT => FALSE,
 	);
 	foreach ($settings as $setting) {
 		$vehicle = $builder->createVehicle($setting, $attr);
@@ -170,7 +170,7 @@ $builder->setPackageAttributes(array(
 
 /* zip up package */
 $modx->log(modX::LOG_LEVEL_INFO, 'Packing up transport package zip ...');
-$builder->pack();
+$built = $builder->pack();
 
 $mtime = microtime();
 $mtime = explode(" ", $mtime);
@@ -179,6 +179,23 @@ $tend = $mtime;
 $totalTime = ($tend - $tstart);
 $totalTime = sprintf("%2.4f s", $totalTime);
 
-$modx->log(modX::LOG_LEVEL_INFO, "\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
+if ($built) {
+	$modx->log(modX::LOG_LEVEL_INFO, "\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
+
+	ob_end_clean();
+
+	$filename = $builder->filename;
+	$directory = $builder->directory;
+
+	header('Pragma: no-cache');
+	header('Expires: 0');
+	header('Content-type: application/zip');
+	header('Content-Disposition: attachment; filename=' . $filename);
+	header('Content-Length: ' . filesize($directory . $filename));
+	readfile($directory . $filename);
+} else {
+	$modx->log(modX::LOG_LEVEL_INFO, "\n<br />Error: No Package Built.<br />\nExecution time: {$totalTime}\n");
+	ob_end_flush();
+}
 
 exit();
