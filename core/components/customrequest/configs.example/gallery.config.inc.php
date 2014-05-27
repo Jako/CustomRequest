@@ -1,6 +1,5 @@
 <?php
 $settings['gallery'] = array(
-	'resourceId' => 100,
-	'urlParams' => array('galAlbum', 'galItem')
+    'resourceId' => 100,
+    'urlParams' => array('galAlbum', 'galItem')
 );
-?>

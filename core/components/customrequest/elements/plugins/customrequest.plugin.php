@@ -22,26 +22,25 @@
  *
  * @author      Thomas Jakobi (thomas.jakobi@partout.info)
  * @copyright   Copyright 2013, Thomas Jakobi
- * @version     1.0.1
+ * @version     1.0.2
  */
-$customrequestCorePath = $modx->getOption('customrequest.core_path',null,$modx->getOption('core_path').'components/customrequest/');
+$customrequestCorePath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/');
 
 $requestUri = trim($_SERVER['REQUEST_URI'], '/');
 
-$customrequest = $modx->getService('customrequest','CustomRequest',$customrequestCorePath.'model/customrequest/',$scriptProperties);
+$customrequest = $modx->getService('customrequest', 'CustomRequest', $customrequestCorePath . 'model/customrequest/', $scriptProperties);
 $customrequest->initialize();
 
 $eventName = $modx->event->name;
 switch ($eventName) {
-	case 'OnPageNotFound':
-		if ($customrequest->searchAliases($requestUri)) {
-			$customrequest->setRequest();
-		}
-		break;
-	case 'OnWebPagePrerender':
-		/* TODO: replace not friendly URL parameter (for URLs with a valid CustomRequest config) with friendly ones */
-		break;
+    case 'OnPageNotFound':
+        if ($customrequest->searchAliases($requestUri)) {
+            $customrequest->setRequest();
+        }
+        break;
+    case 'OnWebPagePrerender':
+        /* TODO: replace not friendly URL parameter (for URLs with a valid CustomRequest config) with friendly ones */
+        break;
 }
 
 return;
-?>
