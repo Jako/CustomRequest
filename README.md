@@ -21,41 +21,59 @@ MODX Package Management
 
 Parameters
 --------------------------------------------------------------------------------
-The following parameters could be set in system settings
+The following parameter could be set in system settings
 
 Parameter   | Description
 ------------|------------
 debug       | Log debug information in MODX error log
-configsPath | The folder where the plugin config files are load from
 
-Config Files
+Configuation
 --------------------------------------------------------------------------------
-Each entry in a config file could contain the following lines
+You could configure CustomRequest in a custom manager page in the extras menu. The CustomRequest could be created on that page.
 
-```php
-$settings['test'] = array(
-	'resourceId' => 200,
-	'alias' => 'completely/different/uri/',
-	'urlParams' => array('parameter1', 'parameter2'),
-	'regEx' => '#(.*?)-(.*)#i'
-);
-```
+The configurations are executed in the order of the grid on this page. If there are two configurations starting with the same alias path, the first configuration is used. You can change the order of the configurations by drag&drop.
 
-One of the array keys 'resourceId' or 'alias' is required.
-
-The following keys could be used in the array:
+The following settings could be used in each configuration:
 
 Key        | Description
 -----------|------------
-resourceId | The id of a MODX resource, the not found URI is forwarded to.
-alias      | The first characters the not found URI is compared with. If found, this config is used and comparing is stopped.
-urlParams  | The request parameter keys, the divided second parts of the not found URI are assigned to.
-regex      | If set, this regular expression is used to divide the second parts of the not found URI. If not set, it is divided at the URI separators `/`.
+Name | A name to identify this configuration.
+Alias Path | The first characters of a not found URI are compared with this string. If both paths are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.
+Resource | A not found URI is forwarded to this resource, if the current configuration is used.
+URI Parameter | The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators `/`
+Regular Expression | This optional regular expression is used to divide the second parts of the not found URI. The search results are assigned to the request parameters in the order of occurrence.
 
-Look into the folder `core/components/customrequest/configs.example` for example
-config files.
-
-Notes
+Examples
 --------------------------------------------------------------------------------
-1. If you are using two or more nested aliases in your configs, the deeper alias should be defined before the narrower alias in the configs. See `core/components/customrequest/configs.example/calendar.config.inc.php`
+
+#### Calendar
+
+Name | Alias Path | Resource | URI Parameter | Regular Expression
+--------------|------------|----------|---------------|-------------------
+Date | calendar/date/ | | ["year", "month", "day", "title"] |
+Calendar | calendar/ | | ["year", "month", "day"] |
+
+1. If you are using two or more nested aliases in your configs, the deeper alias should be defined before the narrower alias in the configs.
+
+#### Gallery
+
+Name | Alias Path | Resource | URI Parameter | Regular Expression
+--------------|------------|----------|---------------|-------------------
+Gallery |  | Gallery Folder | ["galAlbum", "galItem"] |
+
+#### Test
+
+Name | Alias Path | Resource | URI Parameter | Regular Expression
+--------------|------------|----------|---------------|-------------------
+Test | completely/different/uri/ | Test | ["parameter1", "parameter2"] |
+
+1. The Alias Path does not have to match the alias of the Resource.
+
+#### Regular Expression
+
+Name | Alias Path | Resource | URI Parameter | Regular Expression
+--------------|------------|----------|---------------|-------------------
+Expression | | Expression | ["string", "numeric"] | (.*?)-(\d+)
+
+1. This rule does not make much sense. If you have a better one ...
 

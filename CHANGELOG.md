@@ -1,6 +1,9 @@
 History
 ================================================================================
 
+- 1.1.0
+    - New Custom Manager Page that replaces the config files
+    - Automatic Import for old config files
 - 1.0.3
     - Bugfix: Existing url parameters issue
     - Change: Build by Git-Package-Management

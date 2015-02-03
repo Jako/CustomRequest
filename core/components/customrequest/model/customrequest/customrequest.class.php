@@ -10,7 +10,6 @@
  */
 class CustomRequest
 {
-
     /**
      * A reference to the modX instance
      * @var modX $modx
@@ -33,7 +32,7 @@ class CustomRequest
      * The requests array
      * @var array requests
      */
-    public $requests;
+    public $requests = array();
 
     /**
      * The found resource id
@@ -62,7 +61,7 @@ class CustomRequest
     /**
      * CustomRequest constructor
      *
-     * @param modX &$modx A reference to the modX instance.
+     * @param modX $modx A reference to the modX instance.
      * @param array $options An array of options. Optional.
      */
     function __construct(modX &$modx, array $options = array())
@@ -70,20 +69,94 @@ class CustomRequest
         $this->modx = &$modx;
 
         $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/customrequest/');
+        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/customrequest/');
+        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/customrequest/');
 
-        /* loads some default paths for easier management */
+        // Load some default paths for easier management
         $this->options = array_merge(array(
             'namespace' => $this->namespace,
+            'assetsPath' => $assetsPath,
+            'assetsUrl' => $assetsUrl,
+            'cssUrl' => $assetsUrl . 'css/',
+            'jsUrl' => $assetsUrl . 'js/',
+            'imagesUrl' => $assetsUrl . 'images/',
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
+            'chunksPath' => $corePath . 'elements/chunks/',
+            'pagesPath' => $corePath . 'elements/pages/',
+            'snippetsPath' => $corePath . 'elements/snippets/',
             'pluginsPath' => $corePath . 'elements/plugins/',
+            'processorsPath' => $corePath . 'processors/',
+            'templatesPath' => $corePath . 'templates/',
             'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/', true),
-            'debug' => $this->getOption('debug', null, false),
+            'cachePath' => $this->modx->getOption('core_path') . 'cache/',
+            'connectorUrl' => $assetsUrl . 'connector.php'
         ), $options);
 
-        $this->requests = $this->modx->fromJson($this->options['aliases'], true);
+        // Load (system) properties
+        $this->options = array_merge($this->options, array(
+            'debug' => $this->getOption('debug', null, false)
+        ));
+
+        $this->modx->addPackage('customrequest', $this->getOption('modelPath'));
+        $this->modx->lexicon->load('customrequest:default');
+
+        if (isset($this->options['aliases'])) {
+            $this->requests = $this->modx->fromJson($this->options['aliases'], true);
+        }
         if (!$this->requests) {
             $this->requests = array();
+        }
+
+        // Import old config files if no configuration is set
+        if (!$this->modx->getCount('CustomrequestConfigs')) {
+            $i = 0;
+            $configFiles = glob($this->getOption('configsPath') . '*.config.inc.php');
+            // Import old config files
+            foreach ($configFiles as $configFile) {
+                // $settings will be defined in each config file
+                $settings = array();
+                include $configFile;
+                foreach ($settings as $key => $setting) {
+                    // fill urlParams if defined
+                    $urlParams = (isset($setting['urlParams']) && is_array($setting['urlParams'])) ? $setting['urlParams'] : array();
+                    $regEx = (isset($setting['regEx'])) ? $setting['regEx'] : '';
+                    if (isset($setting['alias'])) {
+                        // if alias is defined, calculate the other values
+                        if (isset($setting['resourceId'])) {
+                            $resourceId = $setting['resourceId'];
+                        } elseif ($res = $this->modx->getObject('modResource', array('uri' => $setting['alias']))) {
+                            $resourceId = $res->get('id');
+                        } else {
+                            // if resourceId could not be calculated, don't use that setting
+                            if ($this->getOption('debug')) {
+                                $this->modx->log(modX::LOG_LEVEL_INFO, 'CustomRequest Plugin: Could not calculate the resourceId for the given alias');
+                            }
+                            break;
+                        }
+                        $alias = $setting['alias'];
+                    } elseif (isset($setting['resourceId'])) {
+                        $resourceId = $setting['resourceId'];
+                        if (isset($setting['alias'])) {
+                            $alias = $setting['alias'];
+                        } else {
+                            $alias = '';
+                        }
+                    }
+                    $config = $this->modx->newObject('CustomrequestConfigs');
+                    $config->fromArray(array(
+                        'name' => ucfirst($key),
+                        'menuindex' => $i,
+                        'alias' => $alias,
+                        'resourceid' => $resourceId,
+                        'urlparams' => json_encode($urlParams),
+                        'regex' => $regEx
+                    ));
+                    $config->save();
+                    $i++;
+                }
+            }
+            return;
         }
     }
 
@@ -119,54 +192,48 @@ class CustomRequest
      */
     public function initialize()
     {
-        // TODO: Caching of these calculated values.
-        $configFiles = glob($this->getOption('configsPath') . '*.config.inc.php');
+        $configs = $this->modx->getCollection('CustomrequestConfigs');
+
+        // TODO: Caching of the calculated values.
         // import config files
-        foreach ($configFiles as $configFile) {
-            // $settings will be defined in each config file
-            $settings = array();
-            include $configFile;
-            foreach ($settings as $setting) {
-                // fill urlParams if defined
-                $urlParams = (isset($setting['urlParams']) && is_array($setting['urlParams'])) ? $setting['urlParams'] : array();
-                $regEx = (isset($setting['regEx']) && is_array($setting['regEx'])) ? $setting['regEx'] : false;
-                if (isset($setting['alias'])) {
-                    // if alias is defined, calculate the other values
-                    if (isset($setting['resourceId'])) {
-                        $resourceId = $setting['resourceId'];
-                    } elseif ($res = $this->modx->getObject('modResource', array('uri' => $setting['alias']))) {
-                        $resourceId = $res->get('id');
-                    } else {
-                        // if resourceId could not be calculated, don't use that setting
-                        if ($this->getOption('debug')) {
-                            $this->modx->log(modX::LOG_LEVEL_INFO, 'CustomRequest Plugin: Could not calculate the resourceId for the given alias');
-                        }
-                        break;
+        foreach ($configs as $config) {
+            // fill urlParams if defined
+            $urlParams = ($tmp = json_decode($config->get('urlparams'))) ? $tmp : array();
+            $regEx = $config->get('regex');
+            if ($alias = $config->get('alias')) {
+                // if alias is defined, calculate the other values
+                if ($config->get('resourceid')) {
+                    $resourceId = $config->get('resourceid');
+                } elseif ($res = $this->modx->getObject('modResource', array('uri' => $config->get('alias')))) {
+                    $resourceId = $res->get('id');
+                } else {
+                    // if resourceId could not be calculated or is not set, don't use that setting
+                    if ($this->getOption('debug')) {
+                        $this->modx->log(modX::LOG_LEVEL_INFO, 'CustomRequest Plugin: Could not calculate the resourceId for the given alias "' . $alias . '"');
                     }
-                    $alias = $setting['alias'];
-                } elseif (isset($setting['resourceId'])) {
-                    // else if resourceId is defined, calculate the other values
-                    $resourceId = $setting['resourceId'];
-                    if (isset($setting['alias'])) {
-                        $alias = $setting['alias'];
-                    } elseif ($url = $this->modx->makeUrl($setting['resourceId'])) {
-                        // cutoff trailing .html or /
-                        $alias = trim(str_replace('.html', '', $url), '/');
-                    } else {
-                        // if alias could not be calculated, don't use that setting
-                        if ($this->getOption('debug')) {
-                            $this->modx->log(modX::LOG_LEVEL_INFO, 'CustomRequest Plugin: Could not calculate the alias for the given resourceId');
-                        }
-                        break;
-                    }
+                    break;
                 }
-                $this->requests[$alias] = array(
-                    'resourceId' => $resourceId,
-                    'alias' => $alias,
-                    'urlParams' => $urlParams,
-                    'regEx' => $regEx
-                );
+            } elseif ($resourceId = $config->get('resourceid')) {
+                // else if resourceId is defined, calculate the other values
+                if ($config->get('alias')) {
+                    $alias = $config->get('alias');
+                } elseif ($alias = $this->modx->makeUrl($config->get('resourceid'))) {
+                    // cutoff trailing .html or /
+                    $alias = trim(str_replace('.html', '', $alias), '/');
+                } else {
+                    // if alias could not be calculated, don't use that setting
+                    if ($this->getOption('debug')) {
+                        $this->modx->log(modX::LOG_LEVEL_INFO, 'CustomRequest Plugin: Could not calculate the alias for the given resourceId "' . $resourceId . '"');
+                    }
+                    break;
+                }
             }
+            $this->requests[$alias] = array(
+                'resourceId' => $resourceId,
+                'alias' => $alias,
+                'urlParams' => $urlParams,
+                'regEx' => $regEx
+            );
         }
         return;
     }

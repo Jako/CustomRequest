@@ -3,7 +3,7 @@
   "lowCaseName": "customrequest",
   "description": "Use friendly URLs everywhere",
   "author": "Thomas Jakobi",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "package": {
     "menus": [
       {
@@ -29,13 +29,12 @@
         "type": "combo-boolean",
         "area": "system",
         "value": ""
-      },
-      {
-        "key": "configsPath",
-        "type": "textfield",
-        "area": "system",
-        "value": ""
       }
+    ]
+  },
+  "database": {
+    "tables": [
+      "CustomrequestConfigs"
     ]
   },
   "build": {
