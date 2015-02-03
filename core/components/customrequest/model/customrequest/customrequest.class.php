@@ -3,29 +3,13 @@
 /**
  * CustomRequest
  *
- * Copyright 2013 by Thomas Jakobi <thomas.jakobi@partout.info>
- *
- * CustomRequest is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version.
- *
- * CustomRequest is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along with
- * CustomRequest; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ * Copyright 2013-2015 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package customrequest
  * @subpackage classfile
- *
- * @author      Thomas Jakobi (thomas.jakobi@partout.info)
- * @copyright   Copyright 2013, Thomas Jakobi
- * @version     1.0.2
  */
-class CustomRequest {
+class CustomRequest
+{
 
     /**
      * A reference to the modX instance
@@ -34,14 +18,20 @@ class CustomRequest {
     public $modx;
 
     /**
-     * A configuration array
-     * @var array $config
+     * The namespace
+     * @var string $namespace
      */
-    public $config;
+    public $namespace = 'customrequest';
 
     /**
-     * A setting array
-     * @var array $setting
+     * The class options
+     * @var array $options
+     */
+    public $options = array();
+
+    /**
+     * The requests array
+     * @var array requests
      */
     public $requests;
 
@@ -59,7 +49,7 @@ class CustomRequest {
 
     /**
      * The found url params
-     * @var int $resourceId
+     * @var int $urlParams
      */
     private $urlParams;
 
@@ -73,25 +63,52 @@ class CustomRequest {
      * CustomRequest constructor
      *
      * @param modX &$modx A reference to the modX instance.
-     * @param array $config An array of configuration options. Optional.
+     * @param array $options An array of options. Optional.
      */
-    function __construct(modX &$modx, array $config = array()) {
-        $this->modx = & $modx;
+    function __construct(modX &$modx, array $options = array())
+    {
+        $this->modx = &$modx;
 
-        $corePath = $this->modx->getOption('customrequest.core_path', null, MODX_CORE_PATH . 'components/customrequest/');
+        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/customrequest/');
 
         /* loads some default paths for easier management */
-        $this->config = array_merge(array(
+        $this->options = array_merge(array(
+            'namespace' => $this->namespace,
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
             'pluginsPath' => $corePath . 'elements/plugins/',
-            'configsPath' => $this->modx->getOption('customrequest.configsPath', null, $corePath . 'configs/'),
-            'debug' => $this->modx->getOption('customrequest.debug', null, false),
-        ), $config);
-        $this->requests = $this->modx->fromJson($this->config['aliases'], true);
+            'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/', true),
+            'debug' => $this->getOption('debug', null, false),
+        ), $options);
+
+        $this->requests = $this->modx->fromJson($this->options['aliases'], true);
         if (!$this->requests) {
             $this->requests = array();
         }
+    }
+
+    /**
+     * Get a local configuration option or a namespaced system setting by key.
+     *
+     * @param string $key The option key to search for.
+     * @param array $options An array of options that override local options.
+     * @param mixed $default The default value returned, if the option is not found locally or as a namespaced system setting.
+     * @param bool $skipEmpty If true: use default value if option value is empty.
+     * @return mixed The option value or the default value specified.
+     */
+    public function getOption($key, $options = array(), $default = null, $skipEmpty = false)
+    {
+        $option = $default;
+        if (!empty($key) && is_string($key)) {
+            if ($options !== null && array_key_exists($key, $options) && !($skipEmpty && empty($options[$key]))) {
+                $option = $options[$key];
+            } elseif (array_key_exists($key, $this->options) && !($skipEmpty && empty($options[$key]))) {
+                $option = $this->options[$key];
+            } elseif (array_key_exists("{$this->namespace}.{$key}", $this->modx->config)) {
+                $option = $this->modx->getOption("{$this->namespace}.{$key}", null, $default, $skipEmpty);
+            }
+        }
+        return $option;
     }
 
     /**
@@ -100,9 +117,10 @@ class CustomRequest {
      * @access public
      * @return void
      */
-    public function initialize() {
+    public function initialize()
+    {
         // TODO: Caching of these calculated values.
-        $configFiles = glob($this->config['configsPath'] . '*.config.inc.php');
+        $configFiles = glob($this->getOption('configsPath') . '*.config.inc.php');
         // import config files
         foreach ($configFiles as $configFile) {
             // $settings will be defined in each config file
@@ -120,7 +138,7 @@ class CustomRequest {
                         $resourceId = $res->get('id');
                     } else {
                         // if resourceId could not be calculated, don't use that setting
-                        if ($this->config['debug']) {
+                        if ($this->getOption('debug')) {
                             $this->modx->log(modX::LOG_LEVEL_INFO, 'CustomRequest Plugin: Could not calculate the resourceId for the given alias');
                         }
                         break;
@@ -132,10 +150,11 @@ class CustomRequest {
                     if (isset($setting['alias'])) {
                         $alias = $setting['alias'];
                     } elseif ($url = $this->modx->makeUrl($setting['resourceId'])) {
-                        $alias = $url;
+                        // cutoff trailing .html or /
+                        $alias = trim(str_replace('.html', '', $url), '/');
                     } else {
                         // if alias could not be calculated, don't use that setting
-                        if ($this->config['debug']) {
+                        if ($this->getOption('debug')) {
                             $this->modx->log(modX::LOG_LEVEL_INFO, 'CustomRequest Plugin: Could not calculate the alias for the given resourceId');
                         }
                         break;
@@ -160,7 +179,8 @@ class CustomRequest {
      * @param string $search A string to search the allowed aliases in
      * @return boolean
      */
-    public function searchAliases($search) {
+    public function searchAliases($search)
+    {
         $valid = false;
         // loop through the allowed aliases
         if (is_array($this->requests) && count($this->requests)) {
@@ -180,7 +200,7 @@ class CustomRequest {
                 }
             }
         } else {
-            if ($this->config['debug']) {
+            if ($this->getOption('debug')) {
                 $this->modx->log(modX::LOG_LEVEL_INFO, 'CustomRequest Plugin: No valid configs found.');
             }
         }
@@ -193,12 +213,13 @@ class CustomRequest {
      * @access public
      * @return void
      */
-    public function setRequest() {
+    public function setRequest()
+    {
         $params = str_replace('.html', '', $this->urlParams);
         if ($this->regEx) {
             $params = preg_match($this->regEx, $params);
         } else {
-            $params = explode('/', $params);
+            $params = explode('/', trim($params, '/'));
         }
         if (count($params) >= 1) {
             $setting = $this->requests[$this->alias];
@@ -206,8 +227,10 @@ class CustomRequest {
             foreach ($params as $key => $value) {
                 if (isset($setting['urlParams'][$key])) {
                     $_REQUEST[$setting['urlParams'][$key]] = $value;
+                    $_GET[$setting['urlParams'][$key]] = $value;
                 } else {
                     $_REQUEST['p' . ($key + 1)] = $value;
+                    $_GET['p' . ($key + 1)] = $value;
                 }
             }
         }

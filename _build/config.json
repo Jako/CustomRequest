@@ -1,0 +1,46 @@
+{
+  "name": "CustomRequest",
+  "lowCaseName": "customrequest",
+  "description": "Use friendly URLs everywhere",
+  "author": "Thomas Jakobi",
+  "version": "1.0.3",
+  "package": {
+    "menus": [
+      {
+        "text": "customrequest.menu_home",
+        "description": "customrequest.menu_home_desc",
+        "action": "home",
+        "parent": "components",
+        "namespace": "customrequest"
+      }
+    ],
+    "elements": {
+      "plugins": [
+        {
+          "name": "CustomRequest",
+          "file": "customrequest.plugin.php",
+          "events": ["OnPageNotFound"]
+        }
+      ]
+    },
+    "systemSettings": [
+      {
+        "key": "debug",
+        "type": "combo-boolean",
+        "area": "system",
+        "value": ""
+      },
+      {
+        "key": "configsPath",
+        "type": "textfield",
+        "area": "system",
+        "value": ""
+      }
+    ]
+  },
+  "build": {
+    "readme": "docs/readme.txt",
+    "license": "docs/license.txt",
+    "changelog": "docs/changelog.txt"
+  }
+}
