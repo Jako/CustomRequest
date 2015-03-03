@@ -1,6 +1,8 @@
 History
 ================================================================================
 
+- 1.1.1
+    - Bugfixes
 - 1.1.0
     - New Custom Manager Page that replaces the config files
     - Automatic Import for old config files

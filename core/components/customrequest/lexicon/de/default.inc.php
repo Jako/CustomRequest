@@ -16,8 +16,8 @@ $_lang['customrequest_desc'] = 'Benutzerfreundliche URLs überall';
 $_lang['customrequest.menu_home'] = 'CustomRequest';
 $_lang['customrequest.menu_home_desc'] = 'Benutzerfreundliche URLs überall';
 
-$_lang['setting_customrequest.debug'] = 'Protokolliere Debug-Informationen im MODX Fehlerprotokoll';
-$_lang['setting_customrequest.configsPath'] = 'Verzeichnis aus dem die Config Dateien für das CustomRequest Plugin geladen werden';
+$_lang['setting_customrequest.debug'] = 'Debug-Informationen';
+$_lang['setting_customrequest.debug_desc'] = 'Protokolliere Debug-Informationen im MODX Fehlerprotokoll';
 
 $_lang['customrequest.configs'] = 'Konfigurationen';
 $_lang['customrequest.configs_desc'] = 'Erstellen bzw. Bearbeiten Sie Ihre CustomRequest Konfigurationen.';
@@ -28,6 +28,7 @@ $_lang['customrequest.configs_remove'] = 'Konfiguration Löschen';
 $_lang['customrequest.configs_remove_confirm'] = 'Sind Sie sicher, dass sie diese CustomRequest Konfiguration löschen wollen?';
 $_lang['customrequest.configs_name'] = 'Konfigurations-Name';
 $_lang['customrequest.configs_alias'] = 'Alias-Pfad';
+$_lang['customrequest.configs_alias_generated'] = 'Generiert';
 $_lang['customrequest.configs_alias_desc'] = 'Mit diesem Pfad wird der Anfang einer nicht gefundenen URI verglichen. Wenn beide Pfade übereinstimmen, dann wird diese Konfiguration benutzt. Wenn der Alias-Pfad nicht gesetzt ist, wird der Alias-Pfad der angegegeben Ressource herangezogen.';
 $_lang['customrequest.configs_resourceid'] = 'Ressource';
 $_lang['customrequest.configs_resourceid_desc'] = 'Auf diese Ressource wird eine nicht gefundene URI bei erfolgreichem Vergleich mit dem Alias-Pfad umgeleitet.';

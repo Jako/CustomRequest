@@ -2,6 +2,11 @@ CustomRequest.combo.Resource = function (config) {
     config = config || {};
     this.ident = config.ident || 'customrequest-mecitem' + Ext.id();
     Ext.applyIf(config, {
+        url: CustomRequest.config.connectorUrl,
+        baseParams: {
+            action: 'mgr/resources/getlist',
+            combo: true
+        },
         pageSize: 10,
         fields: ['id', 'pagetitle'],
         displayField: 'pagetitle',
@@ -11,11 +16,7 @@ CustomRequest.combo.Resource = function (config) {
         typeAhead: true,
         minChars: 1,
         forceSelection: true,
-        url: CustomRequest.config.connectorUrl,
-        baseParams: {
-            action: 'mgr/resources/getList',
-            combo: true
-        }
+        triggerAction: 'all'
     });
     CustomRequest.combo.Resource.superclass.constructor.call(this, config);
 };
@@ -44,15 +45,13 @@ CustomRequest.grid.Configs = function (config) {
         baseParams: {
             action: 'mgr/configs/getList'
         },
-        save_action: 'mgr/configs/updateFromGrid',
-        autosave: true,
-        fields: ['id', 'name', 'menuindex', 'alias', 'pagetitle', 'resourceid', 'urlparams', 'regex'],
+        fields: ['id', 'name', 'menuindex', 'alias', 'alias_gen', 'pagetitle', 'resourceid', 'urlparams', 'regex'],
         autoHeight: true,
         paging: true,
         remoteSort: false,
         enableDragDrop: true,
         ddGroup: 'customrequest-grid-dd',
-        autoExpandColumn: 'name',
+        autoExpandColumn: 'alias',
         columns: [{
             header: _('id'),
             dataIndex: 'id',
@@ -61,14 +60,27 @@ CustomRequest.grid.Configs = function (config) {
         }, {
             header: _('customrequest.configs_name'),
             dataIndex: 'name',
+            editable: false,
+            editor: {
+                xtype: 'textfield',
+                allowBlank: false
+            },
             width: 100
         }, {
             header: _('customrequest.configs_alias'),
-            dataIndex: 'alias',
-            width: 80
+            dataIndex: 'alias_gen',
+            editable: false,
+            editor: {
+                xtype: 'textfield'
+            },
+            width: 150
         }, {
             header: _('customrequest.configs_resourceid'),
             dataIndex: 'pagetitle',
+            editable: false,
+            editor: {
+                xtype: 'textfield'
+            },
             width: 80
         }, {
             header: _('actions'),
@@ -117,7 +129,8 @@ CustomRequest.grid.Configs = function (config) {
     CustomRequest.grid.Configs.superclass.constructor.call(this, config)
 };
 Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
-    windows: {}, getMenu: function () {
+    windows: {},
+    getMenu: function () {
         var m = [],
             n = this.menu.record;
         m.push({
@@ -274,8 +287,6 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
 });
 Ext.reg('customrequest-grid-configs', CustomRequest.grid.Configs);
 
-Ext.QuickTips.init();
-
 CustomRequest.window.CreateUpdateConfig = function (config) {
     config = config || {};
     this.ident = config.ident || 'customrequest-mecitem' + Ext.id();
@@ -337,28 +348,3 @@ CustomRequest.window.CreateUpdateConfig = function (config) {
 };
 Ext.extend(CustomRequest.window.CreateUpdateConfig, MODx.Window);
 Ext.reg('customrequest-window-config-create-update', CustomRequest.window.CreateUpdateConfig);
-
-CustomRequest.combo.FieldconfigSource = function (config) {
-    config = config || {};
-    Ext.applyIf(config, {
-        pageSize: 10,
-        fields: ['display', 'fieldname'],
-        displayField: 'display',
-        valueField: 'fieldname',
-        lazyRender: true,
-        editable: true,
-        typeAhead: true,
-        minChars: 1,
-        forceSelection: true,
-        url: CustomRequest.config.connectorUrl,
-        baseParams: {
-            action: 'mgr/csvconfigs/getList',
-            recordId: config.recordId,
-            combo: true
-        }
-    });
-    CustomRequest.combo.FieldconfigSource.superclass.constructor.call(this, config);
-};
-Ext.extend(CustomRequest.combo.FieldconfigSource, MODx.combo.ComboBox);
-Ext.reg('customrequest-combo-fieldconfig-source', CustomRequest.combo.FieldconfigSource);
-

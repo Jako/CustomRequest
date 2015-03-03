@@ -16,8 +16,8 @@ $_lang['customrequest_desc'] = 'Use friendly URLs everywhere';
 $_lang['customrequest.menu_home'] = 'CustomRequest';
 $_lang['customrequest.menu_home_desc'] = 'Use friendly URLs everywhere';
 
-$_lang['setting_customrequest.debug'] = 'Log debug information in MODX error log';
-$_lang['setting_customrequest.configsPath'] = 'The folder where the plugin config files are load from';
+$_lang['setting_customrequest.debug'] = 'Log debug information';
+$_lang['setting_customrequest.debug_desc'] = 'Log debug information in MODX error log';
 
 $_lang['customrequest.configs'] = 'Configurations';
 $_lang['customrequest.configs_desc'] = 'Create and modify your CustomRequest configurations.';
@@ -28,6 +28,7 @@ $_lang['customrequest.configs_remove'] = 'Remove Configuration';
 $_lang['customrequest.configs_remove_confirm'] = 'Are you sure you want to delete this CustomRequest Configuration?';
 $_lang['customrequest.configs_name'] = 'Configuration Name';
 $_lang['customrequest.configs_alias'] = 'Alias Path';
+$_lang['customrequest.configs_alias_generated'] = 'Generated';
 $_lang['customrequest.configs_alias_desc'] = 'The first characters of a not found URI are compared with this string. If both paths are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.';
 $_lang['customrequest.configs_resourceid'] = 'Resource';
 $_lang['customrequest.configs_resourceid_desc'] = 'A not found URI is forwarded to this resource, if the current configuration is used.';

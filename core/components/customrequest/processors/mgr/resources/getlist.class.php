@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Get list processor for CustomRequest CMP.
  *
@@ -18,7 +19,7 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(
-                'pagetitle:LIKE' => '%'.$query.'%'
+                'pagetitle:LIKE' => '%' . $query . '%'
             ));
         }
         $c->where(array(
@@ -27,6 +28,13 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
         ));
         $c->sortby('pagetitle', 'ASC');
         return $c;
+    }
+
+    public function prepareRow(xPDOObject $object)
+    {
+        $ta = $object->toArray('', false, true);
+        $ta['pagetitle'] = $ta['pagetitle'] . ' (' . $ta['id'] . ')';
+        return $ta;
     }
 
 }

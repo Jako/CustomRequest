@@ -9,22 +9,26 @@
  *
  * CustomRequest plugin
  */
+
 $customrequestCorePath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/');
 
-$requestUri = trim(strtok($_SERVER['REQUEST_URI'],'?'),'/');
+$requestUri = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
 $customrequest = $modx->getService('customrequest', 'CustomRequest', $customrequestCorePath . 'model/customrequest/', $scriptProperties);
-$customrequest->initialize();
 
 $eventName = $modx->event->name;
 switch ($eventName) {
     case 'OnPageNotFound':
-        if ($customrequest->searchAliases($requestUri)) {
-            $customrequest->setRequest();
+        if ($modx->context->get('key') !== 'mgr') {
+            $customrequest->initialize();
+            if ($customrequest->searchAliases($requestUri)) {
+                $customrequest->setRequest();
+            }
         }
         break;
     case 'OnWebPagePrerender':
-        /* TODO: replace not friendly URL parameter (for URLs with a valid CustomRequest config) with friendly ones */
+        // TODO: replace not friendly URL parameter (for URLs with a valid CustomRequest config) with friendly ones
+        // A lot easier, if there would be an onMakeUrl event.
         break;
 }
 

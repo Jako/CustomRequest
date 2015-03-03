@@ -217,7 +217,7 @@ class CustomRequest
                 // else if resourceId is defined, calculate the other values
                 if ($config->get('alias')) {
                     $alias = $config->get('alias');
-                } elseif ($alias = $this->modx->makeUrl($config->get('resourceid'))) {
+                } elseif ($resourceId && $alias = $this->modx->makeUrl($resourceId)) {
                     // cutoff trailing .html or /
                     $alias = trim(str_replace('.html', '', $alias), '/');
                 } else {
@@ -248,6 +248,9 @@ class CustomRequest
      */
     public function searchAliases($search)
     {
+        // strip cultureKey i.e. in Babel installations.
+        $search = preg_replace('#' . $this->modx->cultureKey . '/(.*)#i', '$1', $search);
+
         $valid = false;
         // loop through the allowed aliases
         if (is_array($this->requests) && count($this->requests)) {
