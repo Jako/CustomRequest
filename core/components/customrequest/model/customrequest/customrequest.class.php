@@ -249,7 +249,11 @@ class CustomRequest
     public function searchAliases($search)
     {
         // strip cultureKey i.e. in Babel installations.
-        $search = ltrim($search, $this->modx->cultureKey.'/');
+        $base = $this->modx->cultureKey.'/';
+
+        if(substr($search, 0, strlen($base)) == $base)  {
+            $search = substr($search, strlen($base));
+        }
 
         $valid = false;
         // loop through the allowed aliases
