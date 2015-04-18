@@ -68,6 +68,8 @@ class CustomRequest
     {
         $this->modx = &$modx;
 
+        $this->modx->lexicon->load('customrequest:default');
+
         $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/customrequest/');
         $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/customrequest/');
         $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/customrequest/');
@@ -99,7 +101,6 @@ class CustomRequest
         ));
 
         $this->modx->addPackage('customrequest', $this->getOption('modelPath'));
-        $this->modx->lexicon->load('customrequest:default');
 
         if (isset($this->options['aliases'])) {
             $this->requests = $this->modx->fromJson($this->options['aliases'], true);
