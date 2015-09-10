@@ -1,0 +1,44 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "CustomRequest\n\n\nUse pretty URLs everywhere in the MODX Revolution content management framework\n\n\nFeatures\n\n\nCustomRequest is an effective tool for MODX Revolution to map pretty but not\nfound URLs to a MODX resource and set the request parameters by separating the\nURI path at the URI separators or by a regular expression.\n\n\nThe first characters of the not found URI will be compared with the alias value\nof each config entry. If found, this config entry is used. The alias is stripped\nfrom the not found URI and the remaining string is used to set the request\nparameters.\n\n\nConfiguation\n\n\nYou could configure CustomRequest in a custom manager page in the extras menu. \nThe CustomRequest configurations could be created on that page.\n\n\nThe configurations are executed in the order of the grid on this page. If there \nare two configurations starting with the same alias path, the first \nconfiguration is used. You can change the order of the configurations by \ndrag and drop.\n\n\nThe following settings could be set in each configuration:\n\n\n\n\n\n\n\n\nKey\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nName\n\n\nA name to identify this configuration.\n\n\n\n\n\n\nAlias Path\n\n\nThe first characters of a not found URI are compared with this string. If both paths are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.\n\n\n\n\n\n\nResource\n\n\nA not found URI is forwarded to this resource, if the current configuration is used.\n\n\n\n\n\n\nURI Parameter\n\n\nThe request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators \n/\n\n\n\n\n\n\nRegular Expression\n\n\nThis optional regular expression is used to divide the second parts of the not found URI. The regular expression has to contain \ndelimiters\n. The search results are assigned to the request parameters in the order of occurrence.\n\n\n\n\n\n\n\n\nExamples\n\n\nCalendar \n1\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nDate\n\n\ncalendar/date/\n\n\n\n\n[\"year\", \"month\", \"day\", \"title\"]\n\n\n\n\n\n\n\n\nCalendar\n\n\ncalendar/\n\n\n\n\n[\"year\", \"month\", \"day\"]\n\n\n\n\n\n\n\n\n\n\nGallery\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nGallery\n\n\n\n\nGallery Folder\n\n\n[\"galAlbum\", \"galItem\"]\n\n\n\n\n\n\n\n\n\n\nDifferent URI \n2\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nTest\n\n\ncompletely/different/uri/\n\n\nTest\n\n\n[\"parameter1\", \"parameter2\"]\n\n\n\n\n\n\n\n\n\n\nRegular Expression \n3\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nExpression\n\n\n\n\nExpression\n\n\n[\"string\", \"numeric\"]\n\n\n#(.*?)-(\\d+)#\n\n\n\n\n\n\n\n\nSystem Settings\n\n\nThe following parameter could be set in system settings\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ndebug\n\n\nLog debug information in MODX error log\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIf you are using two or more nested aliases in your configs, the deeper alias should be defined before the narrower alias in the configs.\n\n\n\n\n\n\nThe Alias Path does not have to match the alias of the Resource.\n\n\n\n\n\n\nThis rule does not make much sense. If you have a better one ...", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#customrequest", 
+            "text": "Use pretty URLs everywhere in the MODX Revolution content management framework", 
+            "title": "CustomRequest"
+        }, 
+        {
+            "location": "/#features", 
+            "text": "CustomRequest is an effective tool for MODX Revolution to map pretty but not\nfound URLs to a MODX resource and set the request parameters by separating the\nURI path at the URI separators or by a regular expression.  The first characters of the not found URI will be compared with the alias value\nof each config entry. If found, this config entry is used. The alias is stripped\nfrom the not found URI and the remaining string is used to set the request\nparameters.", 
+            "title": "Features"
+        }, 
+        {
+            "location": "/#configuation", 
+            "text": "You could configure CustomRequest in a custom manager page in the extras menu. \nThe CustomRequest configurations could be created on that page.  The configurations are executed in the order of the grid on this page. If there \nare two configurations starting with the same alias path, the first \nconfiguration is used. You can change the order of the configurations by \ndrag and drop.  The following settings could be set in each configuration:     Key  Description      Name  A name to identify this configuration.    Alias Path  The first characters of a not found URI are compared with this string. If both paths are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.    Resource  A not found URI is forwarded to this resource, if the current configuration is used.    URI Parameter  The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators  /    Regular Expression  This optional regular expression is used to divide the second parts of the not found URI. The regular expression has to contain  delimiters . The search results are assigned to the request parameters in the order of occurrence.", 
+            "title": "Configuation"
+        }, 
+        {
+            "location": "/#examples", 
+            "text": "Calendar  1     Name  Alias Path  Resource  URI Parameter  Regular Expression      Date  calendar/date/   [\"year\", \"month\", \"day\", \"title\"]     Calendar  calendar/   [\"year\", \"month\", \"day\"]      Gallery     Name  Alias Path  Resource  URI Parameter  Regular Expression      Gallery   Gallery Folder  [\"galAlbum\", \"galItem\"]      Different URI  2     Name  Alias Path  Resource  URI Parameter  Regular Expression      Test  completely/different/uri/  Test  [\"parameter1\", \"parameter2\"]      Regular Expression  3     Name  Alias Path  Resource  URI Parameter  Regular Expression      Expression   Expression  [\"string\", \"numeric\"]  #(.*?)-(\\d+)#", 
+            "title": "Examples"
+        }, 
+        {
+            "location": "/#system-settings", 
+            "text": "The following parameter could be set in system settings     Parameter  Description      debug  Log debug information in MODX error log         If you are using two or more nested aliases in your configs, the deeper alias should be defined before the narrower alias in the configs.    The Alias Path does not have to match the alias of the Resource.    This rule does not make much sense. If you have a better one ...", 
+            "title": "System Settings"
+        }, 
+        {
+            "location": "/contributors/", 
+            "text": "Contributors\n\n\nThe CustomRequest project was started in 2013 by \nThomas Jakobi\n.\n\n\nMany thanks to everyone who has contributed to this project:\n\n\n\n\n@Boddlnagg", 
+            "title": "Contributors"
+        }, 
+        {
+            "location": "/contributors/#contributors", 
+            "text": "The CustomRequest project was started in 2013 by  Thomas Jakobi .  Many thanks to everyone who has contributed to this project:   @Boddlnagg", 
+            "title": "Contributors"
+        }
+    ]
+}
