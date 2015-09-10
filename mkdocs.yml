@@ -1,0 +1,15 @@
+site_name: CustomRequest
+docs_dir: core/components/customrequest/docs
+site_dir: _build/site
+
+repo_url: https://github.com/Jako/CustomRequest
+
+pages:
+- Home: 'index.md'
+- Contributors: 'contributors.md'
+
+theme: flatly
+
+markdown_extensions:
+    - footnotes
+    - tables
