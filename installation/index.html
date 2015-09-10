@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Contributors - CustomRequest</title>
+	<title>Installation - CustomRequest</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -56,14 +56,14 @@
             
             
             
-                <li >
-                    <a href="../installation/">Installation</a>
+                <li class="active">
+                    <a href="./">Installation</a>
                 </li>
             
             
             
-                <li class="active">
-                    <a href="./">Contributors</a>
+                <li >
+                    <a href="../contributors/">Contributors</a>
                 </li>
             
             
@@ -72,12 +72,12 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li >
-                    <a rel="next" href="../installation/">
+                    <a rel="next" href="..">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
-                <li class="disabled">
-                    <a rel="prev" >
+                <li >
+                    <a rel="prev" href="../contributors/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -100,20 +100,36 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#contributors">Contributors</a></li>
+        <li class="main active"><a href="#install-from-modx-extras">Install from MODX Extras</a></li>
+        
+    
+        <li class="main "><a href="#manual-installation">Manual installation</a></li>
+        
+    
+        <li class="main "><a href="#build-it-from-source">Build it from source</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="contributors">Contributors</h1>
-<p>The CustomRequest project was started in 2013 by <a href="https://github.com/jako">Thomas Jakobi</a>.</p>
-<p>Many thanks to everyone who has contributed to this project:</p>
+<h2 id="install-from-modx-extras">Install from MODX Extras</h2>
+<p>Search for CustomRequest in the Package Manager of a MODX installation and install it in there.</p>
+<h2 id="manual-installation">Manual installation</h2>
+<p>If you can't access the MODX Extras Repository in your MODX installation, you can manually install CustomRequest.</p>
 <ul>
-<li><a href="https://github.com/benjamindean">@benjamindean</a></li>
-<li><a href="https://github.com/Boddlnagg">@Boddlnagg</a></li>
+<li>Download the transport package from <a href="http://modx.com/extras/package/customrequest">MODX Extras</a>
+  (or one of the pre built transport packages in <a href="https://github.com/Jako/CustomRequest/tree/master/_packages">_packages</a>)</li>
+<li>Upload the zip file to your MODX installation's <code>core/packages</code> folder.</li>
+<li>In the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown 
+  button.</li>
+<li>CustomRequest should now show up in the list of available packages. Click the corresponding 'Install' button and follow 
+  instructions to complete the installation.</li>
 </ul>
+<h2 id="build-it-from-source">Build it from source</h2>
+<p>To build and install the package from source you could use <a href="https://github.com/TheBoxer/Git-Package-Management">Git Package Management</a>. 
+The GitHub repository of CustomRequest contains a <a href="https://github.com/Jako/CustomRequest/blob/master/_build/config.json">config.json</a> 
+to build that package locally. Use this option, if you want to debug CustomRequest and/or contribute bugfixes and enhancements.</p>
 <!-- Piwik -->
 
 <script type="text/javascript">

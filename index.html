@@ -57,6 +57,12 @@
             
             
                 <li >
+                    <a href="installation/">Installation</a>
+                </li>
+            
+            
+            
+                <li >
                     <a href="contributors/">Contributors</a>
                 </li>
             
@@ -71,7 +77,7 @@
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="contributors/">
+                    <a rel="prev" href="installation/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -100,7 +106,7 @@
         
             <li><a href="#configuation">Configuation</a></li>
         
-            <li><a href="#examples">Examples</a></li>
+            <li><a href="#example-configurations">Example Configurations</a></li>
         
             <li><a href="#system-settings">System Settings</a></li>
         
@@ -157,8 +163,10 @@ drag and drop.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="examples">Examples</h2>
-<h4 id="calendar-1">Calendar <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></h4>
+<h2 id="example-configurations">Example Configurations</h2>
+<h3 id="calendar">Calendar</h3>
+<p>With the <strong>Date</strong> configuration you could use an calendar snippet on the resource with the URI <code>calendar/date/</code>. The snippet on that resource would use the request parameters <code>year</code>, <code>month</code>, <code>day</code>, <code>title</code> to identify the event. An example URI triggering this configuration: <code>/calendar/date/2015/09/01/eventname.html</code></p>
+<p>The <strong>Calendar</strong> configuration sends the request parameters <code>year</code>, <code>month</code>, <code>day</code> to another snippet on the resource with the URI <code>calendar/</code>. Example triggering URI: <code>/calendar/2015/09/01/</code> <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></p>
 <table>
 <thead>
 <tr>
@@ -186,7 +194,8 @@ drag and drop.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="gallery">Gallery</h4>
+<h3 id="gallery">Gallery</h3>
+<p>With the <strong>Gallery</strong> configuration you could use a calendar snippet on the selected resource <code>Gallery Folder</code>. The Gallery snippet on that resource would use the request parameters <code>galAlbum</code>, <code>galItem</code> to identify the gallery and the image. An example URI triggering this configuration: <code>/gallery/01/02/</code></p>
 <table>
 <thead>
 <tr>
@@ -207,7 +216,8 @@ drag and drop.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="different-uri-2">Different URI <sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup></h4>
+<h4 id="different-uri">Different URI</h4>
+<p>With the <strong>Different URI</strong> configuration you could call the resource <code>Test</code> with a complete different URI useing the request parameters <code>parameter1</code>, <code>parameter2</code>. <sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup></p>
 <table>
 <thead>
 <tr>
@@ -220,15 +230,16 @@ drag and drop.</p>
 </thead>
 <tbody>
 <tr>
-<td>Test</td>
-<td>completely/different/uri/</td>
+<td>Different URI</td>
+<td>complete/different/uri/</td>
 <td>Test</td>
 <td>["parameter1", "parameter2"]</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<h4 id="regular-expression-3">Regular Expression <sup id="fnref:3"><a class="footnote-ref" href="#fn:3" rel="footnote">3</a></sup></h4>
+<h4 id="regular-expression">Regular Expression</h4>
+<p>You could even use Regular Expressions to set the request parameters <sup id="fnref:3"><a class="footnote-ref" href="#fn:3" rel="footnote">3</a></sup></p>
 <table>
 <thead>
 <tr>
@@ -265,6 +276,25 @@ drag and drop.</p>
 </tr>
 </tbody>
 </table>
+<!-- Piwik -->
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.partout.info/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 16]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+
+<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=16" style="border:0;" alt="" /></p></noscript>
+
+<!-- End Piwik Code -->
+
 <div class="footnote">
 <hr />
 <ol>
