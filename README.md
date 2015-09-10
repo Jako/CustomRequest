@@ -10,4 +10,4 @@ of each config entry. If found, this config entry is used. The alias is stripped
 from the not found URI and the remaining string is used to set the request
 parameters.
 
-For more information please read [documentation](http://jako.github.io/CustomRequest/).
+For more information please read the [documentation](http://jako.github.io/CustomRequest/).

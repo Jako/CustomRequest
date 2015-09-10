@@ -31,9 +31,13 @@ Resource | A not found URI is forwarded to this resource, if the current configu
 URI Parameter | The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators `/`
 Regular Expression | This optional regular expression is used to divide the second parts of the not found URI. The regular expression has to contain [delimiters](http://php.net/manual/en/regexp.reference.delimiters.php). The search results are assigned to the request parameters in the order of occurrence.
 
-##Examples
+##Example Configurations
 
-#### Calendar [^1]
+###Calendar
+
+With the **Date** configuration you could use an calendar snippet on the resource with the URI `calendar/date/`. The snippet on that resource would use the request parameters `year`, `month`, `day`, `title` to identify the event. An example URI triggering this configuration: `/calendar/date/2015/09/01/eventname.html`
+
+The **Calendar** configuration sends the request parameters `year`, `month`, `day` to another snippet on the resource with the URI `calendar/`. Example triggering URI: `/calendar/2015/09/01/` [^1]
 
 Name | Alias Path | Resource | URI Parameter | Regular Expression
 --------------|------------|----------|---------------|-------------------
@@ -42,21 +46,27 @@ Calendar | calendar/ | | ["year", "month", "day"] |
 
 [^1]: If you are using two or more nested aliases in your configs, the deeper alias should be defined before the narrower alias in the configs.
 
-#### Gallery
+###Gallery
+
+With the **Gallery** configuration you could use a calendar snippet on the selected resource `Gallery Folder`. The Gallery snippet on that resource would use the request parameters `galAlbum`, `galItem` to identify the gallery and the image. An example URI triggering this configuration: `/gallery/01/02/`
 
 Name | Alias Path | Resource | URI Parameter | Regular Expression
 --------------|------------|----------|---------------|-------------------
 Gallery |  | Gallery Folder | ["galAlbum", "galItem"] |
 
-#### Different URI [^2]
+###Different URI
+
+With the **Different URI** configuration you could call the resource `Test` with a complete different URI useing the request parameters `parameter1`, `parameter2`. [^2]
 
 Name | Alias Path | Resource | URI Parameter | Regular Expression
 --------------|------------|----------|---------------|-------------------
-Test | completely/different/uri/ | Test | ["parameter1", "parameter2"] |
+Different URI | complete/different/uri/ | Test | ["parameter1", "parameter2"] |
 
 [^2]: The Alias Path does not have to match the alias of the Resource.
 
-#### Regular Expression [^3]
+###Regular Expression
+
+You could even use Regular Expressions to set the request parameters [^3]
 
 Name | Alias Path | Resource | URI Parameter | Regular Expression
 --------------|------------|----------|---------------|-------------------
@@ -72,3 +82,18 @@ Parameter | Description
 ----------|------------
 debug | Log debug information in MODX error log
 
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.partout.info/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 16]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=16" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
