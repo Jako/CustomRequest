@@ -288,7 +288,11 @@ class CustomRequest
     {
         $params = str_replace('.html', '', $this->urlParams);
         if ($this->regEx) {
-            $params = preg_match($this->regEx, $params);
+            if (!preg_match($this->regEx, $params, $matches)) {
+                return; // return without redirecting
+            }
+            array_shift($matches); // $matches[0] contains the full match, we don't want that
+            $params = $matches;
         } else {
             $params = explode('/', trim($params, '/'));
         }
