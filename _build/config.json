@@ -3,7 +3,7 @@
   "lowCaseName": "customrequest",
   "description": "Use friendly URLs everywhere",
   "author": "Thomas Jakobi",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "package": {
     "menus": [
       {
@@ -19,7 +19,13 @@
         {
           "name": "CustomRequest",
           "file": "customrequest.plugin.php",
-          "events": ["OnPageNotFound"]
+          "events": [
+            "OnPageNotFound",
+            "OnDocFormSave",
+            "OnDocFormDelete",
+            "OnDocPublished",
+            "OnDocUnPublished"
+          ]
         }
       ]
     },

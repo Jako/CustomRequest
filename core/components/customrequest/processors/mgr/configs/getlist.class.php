@@ -30,9 +30,15 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $ta = $object->toArray('', false, true);
-        if ($resource = $this->modx->getObject('modResource', $ta['resourceid'])) {
+        $resource = $this->modx->getObject('modResource', $ta['resourceid']);
+        if ($resource) {
+            // If the alias could be retrieved by a resource id or if the alias is a valid regular rexpression
             $ta['pagetitle'] = $resource->get('pagetitle') . ' (' . $ta['resourceid'] . ')';
             $ta['alias_gen'] = ($ta['alias']) ? $ta['alias'] : '<span class="green" title="' . $this->modx->lexicon('customrequest.configs_alias_generated') . '">' . $this->makeUrl($ta['resourceid']) . '</span>';
+        } else {
+            if (@preg_match($ta['alias'], 'dummy') !== false) {
+                $ta['alias_gen'] = '<span class="blue" title="' . $this->modx->lexicon('customrequest.configs_alias_regex') . '">' . $ta['alias'] . '</span>';
+            }
         }
         return $ta;
     }

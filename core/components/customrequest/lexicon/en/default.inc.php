@@ -2,8 +2,6 @@
 /**
  * CustomRequest
  *
- * Copyright 2013 by Thomas Jakobi <thomas.jakobi@partout.info>
- *
  * @package customrequest
  * @subpackage lexicon
  *
@@ -28,8 +26,9 @@ $_lang['customrequest.configs_remove'] = 'Remove Configuration';
 $_lang['customrequest.configs_remove_confirm'] = 'Are you sure you want to delete this CustomRequest Configuration?';
 $_lang['customrequest.configs_name'] = 'Configuration Name';
 $_lang['customrequest.configs_alias'] = 'Alias Path';
-$_lang['customrequest.configs_alias_generated'] = 'Generated';
 $_lang['customrequest.configs_alias_desc'] = 'The first characters of a not found URI are compared with this string. If both paths are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.';
+$_lang['customrequest.configs_alias_generated'] = 'Generated';
+$_lang['customrequest.configs_alias_regex'] = 'Regular Expression';
 $_lang['customrequest.configs_resourceid'] = 'Resource';
 $_lang['customrequest.configs_resourceid_desc'] = 'A not found URI is forwarded to this resource, if the current configuration is used.';
 $_lang['customrequest.configs_urlparams'] = 'URI Parameter';

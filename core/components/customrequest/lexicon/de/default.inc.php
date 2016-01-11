@@ -2,8 +2,6 @@
 /**
  * CustomRequest
  *
- * Copyright 2013 by Thomas Jakobi <thomas.jakobi@partout.info>
- *
  * @package customrequest
  * @subpackage lexicon
  *
@@ -28,8 +26,9 @@ $_lang['customrequest.configs_remove'] = 'Konfiguration Löschen';
 $_lang['customrequest.configs_remove_confirm'] = 'Sind Sie sicher, dass sie diese CustomRequest Konfiguration löschen wollen?';
 $_lang['customrequest.configs_name'] = 'Konfigurations-Name';
 $_lang['customrequest.configs_alias'] = 'Alias-Pfad';
-$_lang['customrequest.configs_alias_generated'] = 'Generiert';
 $_lang['customrequest.configs_alias_desc'] = 'Mit diesem Pfad wird der Anfang einer nicht gefundenen URI verglichen. Wenn beide Pfade übereinstimmen, dann wird diese Konfiguration benutzt. Wenn der Alias-Pfad nicht gesetzt ist, wird der Alias-Pfad der angegegeben Ressource herangezogen.';
+$_lang['customrequest.configs_alias_generated'] = 'Generiert';
+$_lang['customrequest.configs_alias_regex'] = 'Regulärer Ausdruck';
 $_lang['customrequest.configs_resourceid'] = 'Ressource';
 $_lang['customrequest.configs_resourceid_desc'] = 'Auf diese Ressource wird eine nicht gefundene URI bei erfolgreichem Vergleich mit dem Alias-Pfad umgeleitet.';
 $_lang['customrequest.configs_urlparams'] = 'Request-Parameter';

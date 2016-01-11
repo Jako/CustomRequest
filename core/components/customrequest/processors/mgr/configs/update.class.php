@@ -26,6 +26,10 @@ class CustomrequestConfigsUpdateProcessor extends modObjectUpdateProcessor
             $this->addFieldError('resourceid',$this->modx->lexicon('customrequest.configs_err_ns_alias_resourceid'));
         }
 
+        $customrequestCorePath = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
+        $customrequest = $this->modx->getService('customrequest', 'CustomRequest', $customrequestCorePath . 'model/customrequest/', array());
+        $customrequest->reset();
+
         return parent::beforeSave();
     }
 }

@@ -2,8 +2,6 @@
 /**
  * CustomRequest
  *
- * Copyright 2013 by Thomas Jakobi <thomas.jakobi@partout.info>
- *
  * @package customrequest
  * @subpackage plugin
  *
@@ -18,7 +16,15 @@ $customrequest = $modx->getService('customrequest', 'CustomRequest', $customrequ
 
 $eventName = $modx->event->name;
 switch ($eventName) {
-    case 'OnPageNotFound':
+    case 'OnSiteRefresh':
+    case 'OnDocFormSave':
+    case 'OnDocFormDelete':
+    case 'OnDocPublished':
+    case 'OnDocUnPublished':
+        $customrequest->reset();
+        break;
+    case
+    'OnPageNotFound':
         if ($modx->context->get('key') !== 'mgr') {
             $customrequest->initialize();
             if ($customrequest->searchAliases($requestUri)) {
