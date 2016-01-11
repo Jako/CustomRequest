@@ -1,6 +1,9 @@
 History
 ================================================================================
 
+- 1.2.0
+    - New: Configuration is cached
+    - New: The alias of a configuration could contain a regular expression. It does not have to point to a
 - 1.1.4
     - Bugfix: RegEx evaluation
 - 1.1.3

@@ -63,6 +63,12 @@
             
             
                 <li >
+                    <a href="usage/">Usage</a>
+                </li>
+            
+            
+            
+                <li >
                     <a href="contributors/">Contributors</a>
                 </li>
             
@@ -102,13 +108,9 @@
     
         <li class="main active"><a href="#customrequest">CustomRequest</a></li>
         
+            <li><a href="#requirements">Requirements</a></li>
+        
             <li><a href="#features">Features</a></li>
-        
-            <li><a href="#configuation">Configuation</a></li>
-        
-            <li><a href="#example-configurations">Example Configurations</a></li>
-        
-            <li><a href="#system-settings">System Settings</a></li>
         
     
     </ul>
@@ -116,166 +118,26 @@
             <div class="col-md-9" role="main">
 
 <h1 id="customrequest">CustomRequest</h1>
-<p>Use pretty URLs everywhere in the MODX Revolution content management framework</p>
-<h2 id="features">Features</h2>
-<p>CustomRequest is an effective tool for MODX Revolution to map pretty but not
-found URLs to a MODX resource and set the request parameters by separating the
-URI path at the URI separators or by a regular expression.</p>
-<p>The first characters of the not found URI will be compared with the alias value
-of each config entry. If found, this config entry is used. The alias is stripped
-from the not found URI and the remaining string is used to set the request
-parameters.</p>
-<h2 id="configuation">Configuation</h2>
-<p>You could configure CustomRequest in a custom manager page in the extras menu. 
-The CustomRequest configurations could be created on that page.</p>
-<p>The configurations are executed in the order of the grid on this page. If there 
-are two configurations starting with the same alias path, the first 
-configuration is used. You can change the order of the configurations by 
-drag and drop.</p>
-<p>The following settings could be set in each configuration:</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td>A name to identify this configuration.</td>
-</tr>
-<tr>
-<td>Alias Path</td>
-<td>The first characters of a not found URI are compared with this string. If both paths are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.</td>
-</tr>
-<tr>
-<td>Resource</td>
-<td>A not found URI is forwarded to this resource, if the current configuration is used.</td>
-</tr>
-<tr>
-<td>URI Parameter</td>
-<td>The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators <code>/</code></td>
-</tr>
-<tr>
-<td>Regular Expression</td>
-<td>This optional regular expression is used to divide the second parts of the not found URI. The regular expression has to contain <a href="http://php.net/manual/en/regexp.reference.delimiters.php">delimiters</a>. The search results are assigned to the request parameters in the order of occurrence.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="example-configurations">Example Configurations</h2>
-<h3 id="calendar">Calendar</h3>
-<p>With the <strong>Date</strong> configuration you could use an calendar snippet on the resource with the URI <code>calendar/date/</code>. The snippet on that resource would use the request parameters <code>year</code>, <code>month</code>, <code>day</code>, <code>title</code> to identify the event. An example URI triggering this configuration: <code>/calendar/date/2015/09/01/eventname.html</code></p>
-<p>The <strong>Calendar</strong> configuration sends the request parameters <code>year</code>, <code>month</code>, <code>day</code> to another snippet on the resource with the URI <code>calendar/</code>. Example triggering URI: <code>/calendar/2015/09/01/</code> <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Alias Path</th>
-<th>Resource</th>
-<th>URI Parameter</th>
-<th>Regular Expression</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Date</td>
-<td>calendar/date/</td>
-<td></td>
-<td>["year", "month", "day", "title"]</td>
-<td></td>
-</tr>
-<tr>
-<td>Calendar</td>
-<td>calendar/</td>
-<td></td>
-<td>["year", "month", "day"]</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="gallery">Gallery</h3>
-<p>With the <strong>Gallery</strong> configuration you could use a calendar snippet on the selected resource <code>Gallery Folder</code>. The Gallery snippet on that resource would use the request parameters <code>galAlbum</code>, <code>galItem</code> to identify the gallery and the image. An example URI triggering this configuration: <code>/gallery/01/02/</code></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Alias Path</th>
-<th>Resource</th>
-<th>URI Parameter</th>
-<th>Regular Expression</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gallery</td>
-<td></td>
-<td>Gallery Folder</td>
-<td>["galAlbum", "galItem"]</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="different-uri">Different URI</h3>
-<p>With the <strong>Different URI</strong> configuration you could call the resource <code>Test</code> with a complete different URI useing the request parameters <code>parameter1</code>, <code>parameter2</code>. <sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Alias Path</th>
-<th>Resource</th>
-<th>URI Parameter</th>
-<th>Regular Expression</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Different URI</td>
-<td>complete/different/uri/</td>
-<td>Test</td>
-<td>["parameter1", "parameter2"]</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="regular-expression">Regular Expression</h3>
-<p>You could even use Regular Expressions to set the request parameters <sup id="fnref:3"><a class="footnote-ref" href="#fn:3" rel="footnote">3</a></sup></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Alias Path</th>
-<th>Resource</th>
-<th>URI Parameter</th>
-<th>Regular Expression</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Expression</td>
-<td></td>
-<td>Expression</td>
-<td>["string", "numeric"]</td>
-<td>#(.*?)-(\d+)#</td>
-</tr>
-</tbody>
-</table>
-<h2 id="system-settings">System Settings</h2>
-<p>The following parameter could be set in system settings</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>debug</td>
-<td>Log debug information in MODX error log</td>
-</tr>
-</tbody>
-</table>
+<p>Use pretty URLs everywhere in the MODX Revolution content management framework frontend. </p>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>MODX Revolution 2.3+</li>
+<li>PHP v5.4+</li>
+</ul>
+<h3 id="features">Features</h3>
+<p>CustomRequest is an effective routing plugin for MODX Revolution to map pretty 
+but not found URLs to a MODX resource and set the request parameters by 
+separating the URI path at the URI separators or by a regular expression.</p>
+<p>Normally the first characters of the not found URI will be compared with the 
+alias value of each config entry. If found, this config entry is used. The alias 
+path is stripped from the not found URI and the remaining string is used to set 
+the  request parameters. As a second option, the alias value of a config entry 
+could contain a valid regular expression and the not found URI will be matched 
+with that expression. If matched, this config entry is used. The first 
+subpattern part of the expression is stripped from the found pattern and the 
+remaining  string is used to identify the resource where the user is forwarded 
+to later. At least the found pattern is removed from the not found URI and the 
+remaining string is used to set the request parameters.</p>
 <!-- Piwik -->
 
 <script type="text/javascript">
@@ -293,22 +155,7 @@ drag and drop.</p>
 
 <noscript><p><img src="//piwik.partout.info/piwik.php?idsite=16" style="border:0;" alt="" /></p></noscript>
 
-<!-- End Piwik Code -->
-
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>If you are using two or more nested aliases in your configs, the deeper alias should be defined before the narrower alias in the configs.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:2">
-<p>The Alias Path does not have to match the alias of the Resource.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-<li id="fn:3">
-<p>This rule does not make much sense. If you have a better one ...&#160;<a class="footnote-backref" href="#fnref:3" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div></div>
+<!-- End Piwik Code --></div>
         </div>
 
         <footer class="col-md-12">
