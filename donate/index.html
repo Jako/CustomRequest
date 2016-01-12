@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Installation - CustomRequest</title>
+	<title>Donate - CustomRequest</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -56,8 +56,8 @@
             
             
             
-                <li class="active">
-                    <a href="./">Installation</a>
+                <li >
+                    <a href="../installation/">Installation</a>
                 </li>
             
             
@@ -74,8 +74,8 @@
             
             
             
-                <li >
-                    <a href="../donate/">Donate</a>
+                <li class="active">
+                    <a href="./">Donate</a>
                 </li>
             
             
@@ -84,12 +84,12 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li >
-                    <a rel="next" href="..">
+                    <a rel="next" href="../contributors/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
-                <li >
-                    <a rel="prev" href="../usage/">
+                <li class="disabled">
+                    <a rel="prev" >
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -112,36 +112,27 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#install-from-modx-extras">Install from MODX Extras</a></li>
-        
-    
-        <li class="main "><a href="#manual-installation">Manual installation</a></li>
-        
-    
-        <li class="main "><a href="#build-it-from-source">Build it from source</a></li>
+        <li class="main active"><a href="#support-customrequest">Support CustomRequest</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h2 id="install-from-modx-extras">Install from MODX Extras</h2>
-<p>Search for CustomRequest in the Package Manager of a MODX installation and install it in there.</p>
-<h2 id="manual-installation">Manual installation</h2>
-<p>If you can't access the MODX Extras Repository in your MODX installation, you can manually install CustomRequest.</p>
-<ul>
-<li>Download the transport package from <a href="http://modx.com/extras/package/customrequest">MODX Extras</a>
-  (or one of the pre built transport packages in <a href="https://github.com/Jako/CustomRequest/tree/master/_packages">_packages</a>)</li>
-<li>Upload the zip file to your MODX installation's <code>core/packages</code> folder.</li>
-<li>In the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown 
-  button.</li>
-<li>CustomRequest should now show up in the list of available packages. Click the corresponding 'Install' button and follow 
-  instructions to complete the installation.</li>
-</ul>
-<h2 id="build-it-from-source">Build it from source</h2>
-<p>To build and install the package from source you could use <a href="https://github.com/TheBoxer/Git-Package-Management">Git Package Management</a>. 
-The GitHub repository of CustomRequest contains a <a href="https://github.com/Jako/CustomRequest/blob/master/_build/config.json">config.json</a> 
-to build that package locally. Use this option, if you want to debug CustomRequest and/or contribute bugfixes and enhancements.</p>
+<h2 id="support-customrequest">Support CustomRequest</h2>
+<p><em>CustomRequest</em> is and always will be free and open-source, but it still requires many man-hours of development, 
+bug-fixing, support in MODX forums and on GitHub between the releases.</p>
+<p>Please support the ongoing and past development of <em>CustomRequest</em> by making a donation below.</p>
+<div style="margin-bottom: 0.5em">Donate for CustomRequest:</div>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="8ZCMBTR7T52WN">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<p><br/></p>
 <!-- Piwik -->
 
 <script type="text/javascript">
@@ -151,13 +142,13 @@ to build that package locally. Use this option, if you want to debug CustomReque
   (function() {
     var u="//piwik.partout.info/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 16]);
+    _paq.push(['setSiteId', 13]);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
 
-<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=16" style="border:0;" alt="" /></p></noscript>
+<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
 
 <!-- End Piwik Code --></div>
         </div>
