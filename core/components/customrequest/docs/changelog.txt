@@ -1,9 +1,11 @@
 History
 ================================================================================
 
+- 1.2.1
+    - New: Enhanced validation rules for a configuration during create/update
 - 1.2.0
-    - New: Configuration is cached
-    - New: The alias of a configuration could contain a regular expression.
+    - New: The configurations are cached
+    - New: The alias of a configuration could contain a regular expression
 - 1.1.4
     - Bugfix: RegEx evaluation
 - 1.1.3

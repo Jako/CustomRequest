@@ -9,6 +9,7 @@ pages:
 - Installation: 'installation.md'
 - Usage: 'usage.md'
 - Contributors: 'contributors.md'
+- Donate: 'donate.md'
 
 theme: flatly
 

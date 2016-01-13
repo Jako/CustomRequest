@@ -19,7 +19,7 @@ $_lang['setting_customrequest.debug_desc'] = 'Protokolliere Debug-Informationen 
 
 $_lang['customrequest.configs'] = 'Konfigurationen';
 $_lang['customrequest.configs_desc'] = 'Erstellen bzw. Bearbeiten Sie Ihre CustomRequest Konfigurationen.';
-$_lang['customrequest.configs_desc_extended'] = "Die Konfigurationen werden in der Reihenfolge ausgeführt, in der sie in der Tabelle aufgeführt sind. Falls zwei Konfigurationen mit dem gleichen Alias-Pfad beginnen, dann wird die erste Konfiguration benutzt. Sie können Reihenfolge der Konfigurationen per Drag&amp;Drop ändern.";
+$_lang['customrequest.configs_desc_extended'] = "Die Konfigurationen werden in der Reihenfolge ausgeführt, in der sie in der Tabelle aufgeführt sind. Falls zwei Konfigurationen mit dem gleichen Alias-Pfad beginnen, dann wird die erste Konfiguration benutzt. Sie können Reihenfolge der Konfigurationen per Drag&amp;Drop ändern.<br><br>Die Spalte 'Alias Pfad' wird grün markiert, wenn er aus einer Ressourcen ID generiert wird. Sie wird blau markiert, wenn sie einen gültigen Regulären Ausdruck enthält.";
 $_lang['customrequest.configs_create'] = 'Neue Konfiguration';
 $_lang['customrequest.configs_update'] = 'Konfiguration Bearbeiten';
 $_lang['customrequest.configs_remove'] = 'Konfiguration Löschen';
@@ -43,3 +43,5 @@ $_lang['customrequest.configs_err_nf'] = 'Konfiguration nicht gefunden.';
 $_lang['customrequest.configs_err_ns'] = 'Konfiguration nicht angegeben.';
 $_lang['customrequest.configs_err_save'] = 'Beim Speichern der Konfiguration ist ein Fehler aufgetreten.';
 $_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Bitte einen Alias angegeben oder eine Ressource auswählen.';
+$_lang['customrequest.configs_err_nv_alias_regex'] = 'Wenn keine Ressource ausgewählt ist, muss der Alias ein gültiger Regulärer Ausdruck mit Trennzeichen sein.';
+$_lang['customrequest.configs_err_nv_regex'] = 'Der Reguläre Ausdruck muss Trennzeichen enthalten und gültig sein.';

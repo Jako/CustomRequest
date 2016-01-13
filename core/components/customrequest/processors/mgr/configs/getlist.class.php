@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Get list processor for CustomRequest CMP
  *
@@ -36,6 +35,7 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
             $ta['pagetitle'] = $resource->get('pagetitle') . ' (' . $ta['resourceid'] . ')';
             $ta['alias_gen'] = ($ta['alias']) ? $ta['alias'] : '<span class="green" title="' . $this->modx->lexicon('customrequest.configs_alias_generated') . '">' . $this->makeUrl($ta['resourceid']) . '</span>';
         } else {
+            $ta['resourceid'] = '';
             if (@preg_match($ta['alias'], 'dummy') !== false) {
                 $ta['alias_gen'] = '<span class="blue" title="' . $this->modx->lexicon('customrequest.configs_alias_regex') . '">' . $ta['alias'] . '</span>';
             }

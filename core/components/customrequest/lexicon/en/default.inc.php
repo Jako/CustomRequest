@@ -19,7 +19,7 @@ $_lang['setting_customrequest.debug_desc'] = 'Log debug information in MODX erro
 
 $_lang['customrequest.configs'] = 'Configurations';
 $_lang['customrequest.configs_desc'] = 'Create and modify your CustomRequest configurations.';
-$_lang['customrequest.configs_desc_extended'] = 'The configurations are executed in the order of the grid. If there are two configurations starting with the same alias path, the first configuration is used. You can change the order of the configurations by drag&amp;drop.';
+$_lang['customrequest.configs_desc_extended'] = "The configurations are executed in the order of the grid. If there are two configurations starting with the same alias path, the first configuration is used. You can change the order of the configurations by drag&amp;drop.<br><br>The column 'Alias Path' is shown with green text, if it is generated from a Resource ID. It is shown with blue text, if it contains a regular expression.";
 $_lang['customrequest.configs_create'] = 'New Configuration';
 $_lang['customrequest.configs_update'] = 'Update Configuration';
 $_lang['customrequest.configs_remove'] = 'Remove Configuration';
@@ -43,3 +43,5 @@ $_lang['customrequest.configs_err_nf'] = 'Config not found.';
 $_lang['customrequest.configs_err_ns'] = 'Config not specified.';
 $_lang['customrequest.configs_err_save'] = 'An error occurred while trying to save the config.';
 $_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Please fill the alias and/or select a resource.';
+$_lang['customrequest.configs_err_nv_alias_regex'] = 'If no resource is selected, the alias has to be a valid regular expression containing delimiters.';
+$_lang['customrequest.configs_err_nv_regex'] = 'The regular expression has to contain delimiters and it to be valid.';
