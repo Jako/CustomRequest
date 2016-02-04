@@ -151,13 +151,14 @@ class CustomRequest
                     // If alias is defined, calculate the other values
                     if (!$resourceId) {
                         $resourceId = 0;
+                        /** @noinspection PhpUsageOfSilenceOperatorInspection */
                         if (@preg_match($alias, 'dummy') === false) {
                             // If alias is not a valid regular rexpression
                             $resourceId = $this->modx->findResource($alias);
                             if (!$resourceId) {
                                 // If resourceId could not be calculated and alias is not a valid regular expression, don't use that setting
                                 if ($this->getOption('debug')) {
-                                    $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the resourceId for the given alias "' . $alias . '"', '', 'CustomRequest Plugin');
+                                    $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the resourceId for the given alias "' . $alias . '".', '', 'CustomRequest Plugin');
                                 }
                                 break;
                             }
@@ -172,19 +173,30 @@ class CustomRequest
                         if ($config->get('alias')) {
                             $alias = $config->get('alias');
                         } else {
-                            if ($resourceId && $alias = $this->modx->makeUrl($resourceId)) {
-                                // Cutoff trailing .html or /
-                                $alias = trim(str_replace('.html', '', $alias), '/');
+                            $resource = $this->modx->getObject('modResource', $resourceId);
+                            if ($resource) {
+                                $currentContext = $this->modx->context->get('key');
+                                $this->modx->switchContext($resource->get('context_key'));
+                                $alias = $this->modx->makeUrl($resourceId);
+                                $this->modx->switchContext($currentContext);
+                                if ($alias) {
+                                    // Cutoff trailing .html or /
+                                    $alias = trim(str_replace('.html', '', $alias), '/');
+                                } else {
+                                    // If alias could not be calculated, don't use that setting
+                                    if ($this->getOption('debug')) {
+                                        $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the alias for the given resourceId "' . $resourceId . '".', '', 'CustomRequest Plugin');
+                                    }
+                                    break;
+                                }
                             } else {
                                 // If alias could not be calculated, don't use that setting
                                 if ($this->getOption('debug')) {
-                                    $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the alias for the given resourceId "' . $resourceId . '"', '', 'CustomRequest Plugin');
+                                    $this->modx->log(modX::LOG_LEVEL_INFO, 'No resource with ID "' . $resourceId . '"" found.', '', 'CustomRequest Plugin');
                                 }
                                 break;
                             }
                         }
-                    } else {
-
                     }
                 }
                 $this->requests[$alias] = array(
@@ -200,12 +212,11 @@ class CustomRequest
     }
 
     /**
-     *
+     * Reset the customrequest cache partition
      */
     public function reset()
     {
         $this->modx->cacheManager->delete($this->options['cacheKey'], $this->options['cacheOptions']);
-        $this->initialize();
     }
 
     /**
@@ -310,6 +321,8 @@ class CustomRequest
     }
 
     /**
+     * Import old config files
+     *
      * @param array $configFiles
      */
     private function importOldConfigs($configFiles)
@@ -319,6 +332,7 @@ class CustomRequest
         foreach ($configFiles as $configFile) {
             // $settings will be defined in each config file
             $settings = array();
+            /** @noinspection PhpIncludeInspection */
             include $configFile;
             foreach ($settings as $key => $setting) {
                 // Fill urlParams if defined
@@ -333,7 +347,7 @@ class CustomRequest
                         if (!$resourceId) {
                             // If resourceId could not be calculated, don't use that setting
                             if ($this->getOption('debug')) {
-                                $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the resourceId for the given alias', '', 'CustomRequest Plugin');
+                                $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the resourceId for the given alias "' . $setting['alias'] . '".', '', 'CustomRequest Plugin');
                             }
                             break;
                         }
@@ -362,7 +376,5 @@ class CustomRequest
                 $i++;
             }
         }
-
     }
-
 }

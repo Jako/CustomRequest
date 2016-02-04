@@ -16,6 +16,12 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
 
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
+        $id = $this->getProperty('id');
+        if (!empty($id)) {
+            $c->where(array(
+                'id' => $id
+            ));
+        }
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(

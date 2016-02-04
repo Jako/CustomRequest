@@ -3,7 +3,7 @@
   "lowCaseName": "customrequest",
   "description": "Use friendly URLs everywhere",
   "author": "Thomas Jakobi",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "package": {
     "menus": [
       {
@@ -24,7 +24,8 @@
             "OnDocFormSave",
             "OnDocFormDelete",
             "OnDocPublished",
-            "OnDocUnPublished"
+            "OnDocUnPublished",
+            "OnSiteRefresh"
           ]
         }
       ]
