@@ -23,8 +23,7 @@ switch ($eventName) {
     case 'OnDocUnPublished':
         $customrequest->reset();
         break;
-    case
-    'OnPageNotFound':
+    case 'OnPageNotFound':
         if ($modx->context->get('key') !== 'mgr') {
             $customrequest->initialize();
             if ($customrequest->searchAliases($requestUri)) {

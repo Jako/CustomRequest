@@ -80,8 +80,11 @@ class CustomRequest
         // Load (system) properties
         $this->options = array_merge($this->options, array(
             'debug' => $this->getOption('debug', null, false),
-            'cacheKey' => 'customrequest_requests',
-            'cacheOptions' => array()
+            'cacheKey' => 'requests',
+            'cacheOptions' => array(
+                xPDO::OPT_CACHE_KEY => 'customrequest',
+                xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_resource_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
+            )
         ));
 
         $this->modx->addPackage('customrequest', $this->getOption('modelPath'));

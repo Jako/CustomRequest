@@ -1,6 +1,10 @@
 History
 ================================================================================
 
+- 1.2.3
+    - Bugfix: Configuration caching issue
+- 1.2.2
+    - Bugfix: GPM table prefix issue
 - 1.2.1
     - New: Enhanced validation rules for a configuration during create/update
 - 1.2.0
