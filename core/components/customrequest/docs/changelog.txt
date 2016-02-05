@@ -2,7 +2,7 @@ History
 ================================================================================
 
 - 1.2.4
-    - Bugfix: Cache issue with URLs in different contexts than the current.
+    - Bugfix: Cache issue with URLs in different contexts than the current
 - 1.2.3
     - Bugfix: Configuration caching issue
 - 1.2.2
