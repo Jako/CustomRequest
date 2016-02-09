@@ -91,11 +91,11 @@ Pagination | #.*?(page/)# | | ["page"] | #(\d+)#
 
 ## System Settings
 
-The following parameter could be set in system settings
+CustomRequest uses the following system settings in the namespace `customrequest`:
 
-Parameter | Description
-----------|------------
-debug | Log debug information in the MODX error log
+Key | Description | Default
+----|-------------|--------
+customrequest.debug | Log debug information in the MODX error log | No
 
 <!-- Piwik -->
 <script type="text/javascript">
