@@ -240,7 +240,7 @@ class CustomRequest
             foreach ($this->requests as $request) {
                 if (!$request['aliasRegEx']) {
                     // Check if searched string starts with the alias
-                    if (0 === strpos($search, $request['alias'])) {
+                    if ($request['alias'] && 0 === strpos($search, $request['alias'])) {
                         $this->found = array(
                             // Strip alias from seached string
                             'urlParams' => substr($search, strlen($request['alias'])),
