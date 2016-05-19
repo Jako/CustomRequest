@@ -10,9 +10,9 @@ $xpdo_meta_map['CustomrequestConfigs']= array (
   'fields' => 
   array (
     'name' => NULL,
-    'menuindex' => NULL,
+    'menuindex' => 0,
     'alias' => NULL,
-    'resourceid' => NULL,
+    'resourceid' => 0,
     'urlparams' => NULL,
     'regex' => NULL,
   ),
@@ -31,6 +31,7 @@ $xpdo_meta_map['CustomrequestConfigs']= array (
       'precision' => '10',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 0,
     ),
     'alias' => 
     array (
@@ -45,6 +46,7 @@ $xpdo_meta_map['CustomrequestConfigs']= array (
       'precision' => '10',
       'phptype' => 'integer',
       'null' => false,
+      'default' => 0,
     ),
     'urlparams' => 
     array (

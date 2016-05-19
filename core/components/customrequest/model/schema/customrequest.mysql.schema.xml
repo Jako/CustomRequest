@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="customrequest" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="customrequest" phpdoc-subpackage="model">
     <object class="CustomrequestConfigs" table="customrequest_configs" extends="xPDOSimpleObject">
-        <field key="name" dbtype="varchar" precision="100" phptype="string" null="true" />
-        <field key="menuindex" dbtype="int" precision="10" phptype="integer" null="false" />
-        <field key="alias" dbtype="varchar" precision="100" phptype="string" null="true" />
-        <field key="resourceid" dbtype="int" precision="10" phptype="integer" null="false" />
-        <field key="urlparams" dbtype="text" phptype="string" null="true"  />
-        <field key="regex" dbtype="text" phptype="string" null="true" />
+        <field key="name" dbtype="varchar" precision="100" phptype="string" null="true"/>
+        <field key="menuindex" dbtype="int" precision="10" phptype="integer" null="false" default="0"/>
+        <field key="alias" dbtype="varchar" precision="100" phptype="string" null="true"/>
+        <field key="resourceid" dbtype="int" precision="10" phptype="integer" null="false" default="0"/>
+        <field key="urlparams" dbtype="text" phptype="string" null="true"/>
+        <field key="regex" dbtype="text" phptype="string" null="true"/>
     </object>
 </model>

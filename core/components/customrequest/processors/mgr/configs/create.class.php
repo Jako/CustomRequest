@@ -37,7 +37,7 @@ class CustomrequestConfigsCreateProcessor extends modObjectCreateProcessor
         }
 
         $count = $this->modx->getCount('CustomrequestConfigs');
-        $this->setProperty('menuindex', $count);
+        $this->object->set('menuindex', $count);
 
         if (!$this->hasErrors()) {
             $customrequestCorePath = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
