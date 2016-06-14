@@ -1,7 +1,7 @@
 <?php
 
 /**
- * CustomRequest
+ * CustomRequest Classfile
  *
  * Copyright 2013-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
@@ -23,10 +23,16 @@ class CustomRequest
     public $namespace = 'customrequest';
 
     /**
-     * The class options
-     * @var array $options
+     * The version
+     * @var string $version
      */
-    public $options = array();
+    public $version = '1.2.6';
+
+    /**
+     * The class config
+     * @var array $config
+     */
+    public $config = array();
 
     /**
      * The requests array
@@ -44,21 +50,20 @@ class CustomRequest
      * CustomRequest constructor
      *
      * @param modX $modx A reference to the modX instance.
-     * @param array $options An array of options. Optional.
+     * @param array $config An config array. Optional.
      */
-    function __construct(modX &$modx, array $options = array())
+    function __construct(modX &$modx, $config = array())
     {
-        $this->modx = &$modx;
+        $this->modx =& $modx;
 
-        $this->modx->lexicon->load('customrequest:default');
-
-        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/customrequest/');
-        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/customrequest/');
-        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/customrequest/');
+        $corePath = $this->getOption('core_path', $config, $this->modx->getOption('core_path') . 'components/' . $this->namespace . '/');
+        $assetsPath = $this->getOption('assets_path', $config, $this->modx->getOption('assets_path') . 'components/' . $this->namespace . '/');
+        $assetsUrl = $this->getOption('assets_url', $config, $this->modx->getOption('assets_url') . 'components/' . $this->namespace . '/');
 
         // Load some default paths for easier management
-        $this->options = array_merge(array(
+        $this->config = array_merge(array(
             'namespace' => $this->namespace,
+            'version' => $this->version,
             'assetsPath' => $assetsPath,
             'assetsUrl' => $assetsUrl,
             'cssUrl' => $assetsUrl . 'css/',
@@ -66,20 +71,22 @@ class CustomRequest
             'imagesUrl' => $assetsUrl . 'images/',
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
+            'vendorPath' => $corePath . 'vendor/',
             'chunksPath' => $corePath . 'elements/chunks/',
             'pagesPath' => $corePath . 'elements/pages/',
             'snippetsPath' => $corePath . 'elements/snippets/',
             'pluginsPath' => $corePath . 'elements/plugins/',
+            'controllersPath' => $corePath . 'controllers/',
             'processorsPath' => $corePath . 'processors/',
             'templatesPath' => $corePath . 'templates/',
-            'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/'),
-            'cachePath' => $this->modx->getOption('core_path') . 'cache/',
-            'connectorUrl' => $assetsUrl . 'connector.php'
-        ), $options);
+            'connectorUrl' => $assetsUrl . 'connector.php',
+        ), $config);
 
         // Load (system) properties
-        $this->options = array_merge($this->options, array(
+        $this->config = array_merge($this->config, array(
             'debug' => $this->getOption('debug', null, false),
+            'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/'),
+            'cachePath' => $this->modx->getOption('core_path') . 'cache/',
             'cacheKey' => 'requests',
             'cacheOptions' => array(
                 xPDO::OPT_CACHE_KEY => 'customrequest',
@@ -89,8 +96,8 @@ class CustomRequest
 
         $this->modx->addPackage('customrequest', $this->getOption('modelPath'));
 
-        if (isset($this->options['aliases'])) {
-            $this->requests = $this->modx->fromJson($this->options['aliases'], true);
+        if (isset($this->config['aliases'])) {
+            $this->requests = $this->modx->fromJson($this->config['aliases'], true);
         }
         if (!$this->requests) {
             $this->requests = array();
@@ -101,6 +108,9 @@ class CustomRequest
         if (!$this->modx->getCount('CustomrequestConfigs') && count($configFiles)) {
             $this->importOldConfigs($configFiles);
         }
+
+        $modx->getService('lexicon', 'modLexicon');
+        $this->modx->lexicon->load($this->namespace . ':default');
     }
 
     /**
@@ -118,8 +128,8 @@ class CustomRequest
         if (!empty($key) && is_string($key)) {
             if ($options != null && array_key_exists($key, $options)) {
                 $option = $options[$key];
-            } elseif (array_key_exists($key, $this->options)) {
-                $option = $this->options[$key];
+            } elseif (array_key_exists($key, $this->config)) {
+                $option = $this->config[$key];
             } elseif (array_key_exists("{$this->namespace}.{$key}", $this->modx->config)) {
                 $option = $this->modx->getOption("{$this->namespace}.{$key}");
             }
@@ -135,7 +145,7 @@ class CustomRequest
      */
     public function initialize()
     {
-        $this->requests = $this->modx->cacheManager->get($this->options['cacheKey'], $this->options['cacheOptions']);
+        $this->requests = $this->modx->cacheManager->get($this->config['cacheKey'], $this->config['cacheOptions']);
 
         if (empty($this->requests)) {
             // Import config records
@@ -207,7 +217,7 @@ class CustomRequest
                     'regEx' => $regEx
                 );
             }
-            $this->modx->cacheManager->set($this->options['cacheKey'], $this->requests, 0, $this->options['cacheOptions']);
+            $this->modx->cacheManager->set($this->config['cacheKey'], $this->requests, 0, $this->config['cacheOptions']);
         }
     }
 
@@ -216,7 +226,7 @@ class CustomRequest
      */
     public function reset()
     {
-        $this->modx->cacheManager->delete($this->options['cacheKey'], $this->options['cacheOptions']);
+        $this->modx->cacheManager->delete($this->config['cacheKey'], $this->config['cacheOptions']);
     }
 
     /**

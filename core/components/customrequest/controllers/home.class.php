@@ -1,12 +1,11 @@
 <?php
+
 /**
- * Configs controller class for CustomRequest CMP.
+ * Configs Controller Class
  *
  * @package customrequest
  * @subpackage controller
  */
-require_once dirname(dirname(__FILE__)) . '/model/customrequest/customrequest.class.php';
-
 class CustomrequestHomeManagerController extends modExtraManagerController
 {
     /** @var CustomRequest $customrequest */
@@ -14,9 +13,22 @@ class CustomrequestHomeManagerController extends modExtraManagerController
 
     public function initialize()
     {
-        $this->customrequest = new CustomRequest($this->modx);
+        $path = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
+        $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . '/model/customrequest/');
     }
 
+    /**
+     * @return array
+     */
+    public function getLanguageTopics()
+    {
+        return array('customrequest:default');
+    }
+
+    /**
+     * Register custom CSS/JS for the page
+     * @return void
+     */
     public function loadCustomCssJs()
     {
         $this->addCss($this->customrequest->getOption('cssUrl') . 'mgr/customrequest.css');
@@ -26,15 +38,12 @@ class CustomrequestHomeManagerController extends modExtraManagerController
         $this->addLastJavascript($this->customrequest->getOption('jsUrl') . 'mgr/sections/home.js');
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
-            CustomRequest.config = ' . $this->modx->toJSON($this->customrequest->options) . ';
-            MODx.load({ xtype: \'customrequest-page-home\'});
+            CustomRequest.config = ' . $this->modx->toJSON($this->customrequest->config) . ';
+            MODx.load({ 
+                xtype: \'customrequest-page-home\'
+            });
         });
         </script>');
-    }
-
-    public function getLanguageTopics()
-    {
-        return array('customrequest:default');
     }
 
     public function process(array $scriptProperties = array())
