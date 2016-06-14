@@ -23,8 +23,7 @@ CustomRequest.panel.Home = function (config) {
                 defaults: {
                     layout: 'form',
                     autoHeight: true,
-                    hideMode: 'offsets',
-                    padding: 15
+                    hideMode: 'offsets'
                 },
                 items: [{
                     xtype: 'customrequest-panel-configs'
@@ -44,30 +43,34 @@ CustomRequest.panel.Configs = function (config) {
         title: _('customrequest.configs'),
         items: [{
             html: '<p>' + _('customrequest.configs_desc') + '</p>',
-            border: false
+            border: false,
+            bodyCssClass: 'panel-desc'
         }, {
-            html: '<p>' + _('customrequest.configs_desc_extended') + '</p>',
-            style: {
-                'margin-top': '15px',
-                'font-style': 'italic'
-            },
-            border: false
-        }, {
-            layout: 'form',
-            id: 'customrequest-panel-configs-grid',
-            cls: 'x-form-label-left',
-            defaults: {
-                border: false,
-                autoHeight: true
-            },
-            border: true,
+            cls: 'main-wrapper',
             items: [{
-                xtype: 'customrequest-grid-configs',
-                preventRender: true
+                html: '<p>' + _('customrequest.configs_desc_extended') + '</p>',
+                style: {
+                    'margin-bottom': '10px',
+                    'font-style': 'italic'
+                },
+                border: false
+            }, {
+                layout: 'form',
+                id: 'customrequest-panel-configs-grid',
+                defaults: {
+                    border: false,
+                    autoHeight: true
+                },
+                border: true,
+                items: [{
+                    xtype: 'customrequest-grid-configs',
+                    preventRender: true
+                }]
             }]
         }]
     });
     CustomRequest.panel.Configs.superclass.constructor.call(this, config);
-};
+}
+;
 Ext.extend(CustomRequest.panel.Configs, MODx.Panel);
 Ext.reg('customrequest-panel-configs', CustomRequest.panel.Configs);

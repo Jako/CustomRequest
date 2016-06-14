@@ -31,11 +31,24 @@ class CustomrequestHomeManagerController extends modExtraManagerController
      */
     public function loadCustomCssJs()
     {
-        $this->addCss($this->customrequest->getOption('cssUrl') . 'mgr/customrequest.css');
-        $this->addJavascript($this->customrequest->getOption('jsUrl') . 'mgr/customrequest.js');
-        $this->addJavascript($this->customrequest->getOption('jsUrl') . 'mgr/widgets/configs.grid.js');
-        $this->addJavascript($this->customrequest->getOption('jsUrl') . 'mgr/widgets/home.panel.js');
-        $this->addLastJavascript($this->customrequest->getOption('jsUrl') . 'mgr/sections/home.js');
+        $assetsUrl = $this->customrequest->getOption('assetsUrl');
+        $jsUrl = $this->customrequest->getOption('jsUrl') . 'mgr/';
+        $jsSourceUrl = $assetsUrl . '../../../source/js/mgr/';
+        $cssUrl = $this->customrequest->getOption('cssUrl') . 'mgr/';
+        $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
+
+
+        if ($this->customrequest->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/customrequest/')) {
+            $this->addCss($cssSourceUrl . 'customrequest.css');
+            $this->addJavascript($jsSourceUrl . 'customrequest.js');
+            $this->addJavascript($jsSourceUrl . 'widgets/configs.grid.js');
+            $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js');
+            $this->addLastJavascript($jsSourceUrl . 'sections/home.js');
+        } else {
+            $this->addCss($cssUrl . 'customrequest.min.css');
+            $this->addJavascript($jsUrl . 'customrequest.min.js');
+        }
+
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
             CustomRequest.config = ' . $this->modx->toJSON($this->customrequest->config) . ';
