@@ -1,5 +1,5 @@
 site_name: CustomRequest
-docs_dir: core/components/customrequest/docs
+docs_dir: core/components/customrequest/docs/mkdocs
 site_dir: _build/site
 
 repo_url: https://github.com/Jako/CustomRequest
