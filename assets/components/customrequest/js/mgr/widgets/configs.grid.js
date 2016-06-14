@@ -27,14 +27,14 @@ CustomRequest.grid.Configs = function (config) {
 
     /* action button renderer */
     this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
-    + '<tpl if="action_buttons !== null">'
-    + '<ul class="action-buttons">'
-    + '<tpl for="action_buttons">'
-    + '<li><i class="icon {className} icon-{icon}" title="{text}"></i></li>'
-    + '</tpl>'
-    + '</ul>'
-    + '</tpl>'
-    + '</tpl>', {
+        + '<tpl if="action_buttons !== null">'
+        + '<ul class="action-buttons">'
+        + '<tpl for="action_buttons">'
+        + '<li><i class="icon {className} icon-{icon}" title="{text}"></i></li>'
+        + '</tpl>'
+        + '</ul>'
+        + '</tpl>'
+        + '</tpl>', {
         compiled: true
     });
 
@@ -60,35 +60,21 @@ CustomRequest.grid.Configs = function (config) {
         }, {
             header: _('customrequest.configs_name'),
             dataIndex: 'name',
-            editable: false,
-            editor: {
-                xtype: 'textfield',
-                allowBlank: false
-            },
             width: 100
         }, {
             header: _('customrequest.configs_alias'),
             dataIndex: 'alias_gen',
-            editable: false,
-            editor: {
-                xtype: 'textfield'
-            },
             width: 150
         }, {
             header: _('customrequest.configs_resourceid'),
             dataIndex: 'pagetitle',
-            editable: false,
-            editor: {
-                xtype: 'textfield'
-            },
             width: 80
         }, {
-            header: _('actions'),
             renderer: {
                 fn: this.buttonColumnRenderer,
                 scope: this
             },
-            width: 40
+            width: 20
         }],
         tbar: [{
             text: _('customrequest.configs_create'),
@@ -99,15 +85,17 @@ CustomRequest.grid.Configs = function (config) {
             xtype: 'textfield',
             id: 'customrequest-search-filter',
             emptyText: _('search') + '…',
+            submitValue: false,
             listeners: {
-                'change': {
+                change: {
                     fn: this.search,
                     scope: this
                 },
-                'render': {
+                render: {
                     fn: function (cmp) {
                         new Ext.KeyMap(cmp.getEl(), {
-                            key: Ext.EventObject.ENTER, fn: function () {
+                            key: Ext.EventObject.ENTER,
+                            fn: function () {
                                 this.fireEvent('change', this);
                                 this.blur();
                                 return true;
@@ -115,6 +103,17 @@ CustomRequest.grid.Configs = function (config) {
                             scope: cmp
                         });
                     },
+                    scope: this
+                }
+            }
+        }, {
+            xtype: 'button',
+            id: this.ident + '-filter-clear',
+            cls: 'x-form-filter-clear',
+            text: _('filter_clear'),
+            listeners: {
+                click: {
+                    fn: this.clearFilter,
                     scope: this
                 }
             }
@@ -131,14 +130,15 @@ CustomRequest.grid.Configs = function (config) {
 Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
     windows: {},
     getMenu: function () {
-        var m = [],
-            n = this.menu.record;
+        var m = [];
         m.push({
-            text: _('customrequest.configs_update'), handler: this.updateConfig
+            text: _('customrequest.configs_update'),
+            handler: this.updateConfig
         });
         m.push('-');
         m.push({
-            text: _('customrequest.configs_remove'), handler: this.removeConfig
+            text: _('customrequest.configs_remove'),
+            handler: this.removeConfig
         });
         this.addContextMenuItem(m);
     },
@@ -164,7 +164,7 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
             title: (isUpdate) ? _('customrequest.configs_update') : _('customrequest.configs_create'),
             record: r,
             listeners: {
-                'success': {
+                success: {
                     fn: function () {
                         this.refresh();
                     },
@@ -262,7 +262,6 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
                 }
             ]
         };
-
         return this.buttonColumnTpl.apply(values);
     },
     onClick: function (e) {

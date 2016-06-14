@@ -3,7 +3,7 @@
   "lowCaseName": "customrequest",
   "description": "Use friendly URLs everywhere",
   "author": "Thomas Jakobi",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "package": {
     "menus": [
       {

@@ -242,8 +242,8 @@ class CustomRequest
                     // Check if searched string starts with the alias
                     if ($request['alias'] && 0 === strpos($search, $request['alias'])) {
                         $this->found = array(
-                            // Strip alias from seached string
-                            'urlParams' => substr($search, strlen($request['alias'])),
+                            // Strip alias from seached string and urldecode it
+                            'urlParams' => urldecode(substr($search, strlen($request['alias']))),
                             // Set the found resource id
                             'resourceId' => $request['resourceId'],
                             // Set the found alias
@@ -260,8 +260,8 @@ class CustomRequest
                         $resourceId = $this->modx->findResource($alias . '/');
                         if ($resourceId) {
                             $this->found = array(
-                                // Strip alias from seached string
-                                'urlParams' => substr($search, strlen($matches[0])),
+                                // Strip alias from seached string and urldecode it
+                                'urlParams' => urldecode(substr($search, strlen($matches[0]))),
                                 // Set the found resource id
                                 'resourceId' => $resourceId,
                                 // Set the found alias

@@ -1,6 +1,8 @@
 History
 ================================================================================
 
+- 1.2.6
+    - Automatic urldecode of the remaining URL parameter part
 - 1.2.5
     - Bugfix: Save configurations issue
 - 1.2.4
