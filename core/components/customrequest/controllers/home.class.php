@@ -37,7 +37,6 @@ class CustomrequestHomeManagerController extends modExtraManagerController
         $cssUrl = $this->customrequest->getOption('cssUrl') . 'mgr/';
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
-
         if ($this->customrequest->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/customrequest/')) {
             $this->addCss($cssSourceUrl . 'customrequest.css');
             $this->addJavascript($jsSourceUrl . 'customrequest.js');
