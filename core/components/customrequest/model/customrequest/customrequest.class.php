@@ -97,7 +97,7 @@ class CustomRequest
         $this->modx->addPackage('customrequest', $this->getOption('modelPath'));
 
         if (isset($this->config['aliases'])) {
-            $this->requests = $this->modx->fromJson($this->config['aliases'], true);
+            $this->requests = $this->modx->fromJSON($this->config['aliases'], true);
         }
         if (!$this->requests) {
             $this->requests = array();
@@ -149,6 +149,7 @@ class CustomRequest
 
         if (empty($this->requests)) {
             // Import config records
+            /** @var CustomrequestConfigs[] $configs */
             $configs = $this->modx->getCollection('CustomrequestConfigs');
             foreach ($configs as $config) {
                 // Fill additional urlParams if defined
