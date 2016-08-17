@@ -14,8 +14,8 @@ $_lang['customrequest_desc'] = 'Benutzerfreundliche URLs überall';
 $_lang['customrequest.menu_home'] = 'CustomRequest';
 $_lang['customrequest.menu_home_desc'] = 'Benutzerfreundliche URLs überall';
 
-$_lang['setting_customrequest.debug'] = 'Debug-Informationen';
-$_lang['setting_customrequest.debug_desc'] = 'Protokolliere Debug-Informationen im MODX Fehlerprotokoll';
+$_lang['setting_customrequest.debug'] = 'Debug';
+$_lang['setting_customrequest.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
 
 $_lang['customrequest.configs'] = 'Konfigurationen';
 $_lang['customrequest.configs_desc'] = 'Erstellen bzw. Bearbeiten Sie Ihre CustomRequest Konfigurationen.';
