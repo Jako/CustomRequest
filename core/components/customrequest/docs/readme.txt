@@ -1,5 +1,10 @@
 CustomRequest
+=============
+
 Use pretty URLs everywhere
+
+Features
+--------
 
 CustomRequest is an effective routing plugin for MODX Revolution to map pretty
 but not found URLs to a MODX resource and set the request parameters by
@@ -18,4 +23,14 @@ to identify the resource where the user is forwarded to later. At least the
 found pattern is removed from the not found URI and the remaining string is
 used to set the request parameters.
 
-For more information please read the documentation on http://jako.github.io/CustomRequest/
+Installation
+------------
+MODX Package Management
+
+Documentation
+-------------
+http://jako.github.io/CustomRequest/
+
+GitHub Repository
+-----------------
+https://github.com/Jako/CustomRequest
