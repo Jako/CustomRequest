@@ -16,12 +16,6 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
 
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
-        $id = $this->getProperty('id');
-        if (!empty($id)) {
-            $c->where(array(
-                'id' => $id
-            ));
-        }
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(
@@ -33,6 +27,17 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
             'published' => true
         ));
         $c->sortby('pagetitle', 'ASC');
+        return $c;
+    }
+
+    public function prepareQueryAfterCount(xPDOQuery $c)
+    {
+        $id = $this->getProperty('id');
+        if (!empty($id)) {
+            $c->where(array(
+                'id' => $id
+            ));
+        }
         return $c;
     }
 
