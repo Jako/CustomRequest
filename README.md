@@ -1,5 +1,5 @@
-#CustomRequest
-##Use pretty URLs everywhere
+# CustomRequest
+## Use pretty URLs everywhere
 
 CustomRequest is an effective routing plugin for MODX Revolution to map pretty 
 but not found URLs to a MODX resource and set the request parameters by 
