@@ -1,18 +1,20 @@
 <?php
 /**
- * CustomRequest
+ * CustomRequest plugin
  *
  * @package customrequest
  * @subpackage plugin
  *
- * CustomRequest plugin
+ * @var modX $modx
  */
 
 $customrequestCorePath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/');
+/** @var CustomRequest $customrequest */
+$customrequest = $modx->getService('customrequest', 'CustomRequest', $customrequestCorePath . 'model/customrequest/',array(
+    'core_path' => $corePath
+));
 
 $requestUri = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
-
-$customrequest = $modx->getService('customrequest', 'CustomRequest', $customrequestCorePath . 'model/customrequest/', $scriptProperties);
 
 $eventName = $modx->event->name;
 switch ($eventName) {
