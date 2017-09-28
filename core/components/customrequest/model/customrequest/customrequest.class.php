@@ -3,7 +3,7 @@
 /**
  * CustomRequest Classfile
  *
- * Copyright 2013-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2013-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package customrequest
  * @subpackage classfile
@@ -26,7 +26,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.2.6';
+    public $version = '1.2.7-rc2';
 
     /**
      * The class options
@@ -231,6 +231,7 @@ class CustomRequest
     public function reset()
     {
         $this->modx->cacheManager->delete($this->options['cacheKey'], $this->options['cacheOptions']);
+        $this->initialize();
     }
 
     /**

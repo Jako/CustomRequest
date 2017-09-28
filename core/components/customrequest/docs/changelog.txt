@@ -3,6 +3,7 @@ History
 
 - 1.2.7
     - Bugfix: The order of the configs was not regarded
+    - Cache the configuration after updating a config entry
 - 1.2.6
     - Automatic urldecode of the remaining URL parameter part
 - 1.2.5

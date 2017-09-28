@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Configs Controller Class
+ * Home controller class for SwitchTemplate
  *
  * @package customrequest
  * @subpackage controller
@@ -15,20 +14,10 @@ class CustomrequestHomeManagerController extends modExtraManagerController
     {
         $path = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
         $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . '/model/customrequest/');
+
+        parent::initialize();
     }
 
-    /**
-     * @return array
-     */
-    public function getLanguageTopics()
-    {
-        return array('customrequest:default');
-    }
-
-    /**
-     * Register custom CSS/JS for the page
-     * @return void
-     */
     public function loadCustomCssJs()
     {
         $assetsUrl = $this->customrequest->getOption('assetsUrl');
@@ -38,24 +27,26 @@ class CustomrequestHomeManagerController extends modExtraManagerController
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
         if ($this->customrequest->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/customrequest/')) {
-            $this->addCss($cssSourceUrl . 'customrequest.css');
-            $this->addJavascript($jsSourceUrl . 'customrequest.js');
-            $this->addJavascript($jsSourceUrl . 'widgets/configs.grid.js');
-            $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js');
-            $this->addLastJavascript($jsSourceUrl . 'sections/home.js');
+            $this->addCss($cssSourceUrl . 'customrequest.css?v=v' . $this->customrequest->version);
+            $this->addJavascript($jsSourceUrl . 'customrequest.js?v=v' . $this->customrequest->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/configs.grid.js?v=v' . $this->customrequest->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js?v=v' . $this->customrequest->version);
+            $this->addLastJavascript($jsSourceUrl . 'sections/home.js?v=v' . $this->customrequest->version);
         } else {
-            $this->addCss($cssUrl . 'customrequest.min.css');
-            $this->addJavascript($jsUrl . 'customrequest.min.js');
+            $this->addCss($cssUrl . 'customrequest.min.css?v=v' . $this->customrequest->version);
+            $this->addJavascript($jsUrl . 'customrequest.min.js?v=v' . $this->customrequest->version);
         }
-
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
-            CustomRequest.config = ' . $this->modx->toJSON($this->customrequest->options) . ';
-            MODx.load({ 
-                xtype: \'customrequest-page-home\'
-            });
+            CustomRequest.config = ' . json_encode($this->customrequest->options, JSON_PRETTY_PRINT) . ';
+            MODx.load({ xtype: "customrequest-page-home"});
         });
         </script>');
+    }
+
+    public function getLanguageTopics()
+    {
+        return array('customrequest:default');
     }
 
     public function process(array $scriptProperties = array())
@@ -71,5 +62,4 @@ class CustomrequestHomeManagerController extends modExtraManagerController
     {
         return $this->customrequest->getOption('templatesPath') . 'home.tpl';
     }
-
 }

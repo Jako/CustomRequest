@@ -1,3 +1,5 @@
+$treehillstudio-color: #a9ba2f;
+
 #customrequest-panel-configs-grid {
   margin-top: 15px;
 }
@@ -8,5 +10,27 @@
     line-height: .7;
     margin-right: 5px;
     font-size: 1.1em;
+  }
+}
+.treehillstudio_about {
+  cursor: pointer;
+  height: 40px;
+  opacity: 0.25;
+  transition: opacity 0.5s;
+  &:hover {
+    opacity: 1;
+  }
+  .x-panel-body {
+    text-align: right;
+  }
+}
+
+.treehillstudio_window {
+  a {
+    color: darken($treehillstudio-color, 10);
+    text-decoration: none;
+    &:hover {
+      color: darken($treehillstudio-color, 25);
+    }
   }
 }
