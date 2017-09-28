@@ -1,11 +1,11 @@
 <?php
-
 /**
- * Get list processor for CustomRequest CMP.
+ * Get list processor for CustomRequest
  *
  * @package customreqest
  * @subpackage processor
  */
+
 class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
 {
     public $classKey = 'modResource';
@@ -14,6 +14,10 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
     public $defaultSortDirection = 'DESC';
     public $objectType = 'customreqest.resources';
 
+    /**
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $query = $this->getProperty('query');
@@ -30,6 +34,10 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
         return $c;
     }
 
+    /**
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $id = $this->getProperty('id');
@@ -41,6 +49,10 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
         return $c;
     }
 
+    /**
+     * @param xPDOObject $object
+     * @return array
+     */
     public function prepareRow(xPDOObject $object)
     {
         $ta = $object->toArray('', false, true);

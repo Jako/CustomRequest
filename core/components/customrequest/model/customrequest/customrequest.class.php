@@ -29,10 +29,10 @@ class CustomRequest
     public $version = '1.2.6';
 
     /**
-     * The class config
-     * @var array $config
+     * The class options
+     * @var array $options
      */
-    public $config = array();
+    public $options = array();
 
     /**
      * The requests array
@@ -50,25 +50,21 @@ class CustomRequest
      * CustomRequest constructor
      *
      * @param modX $modx A reference to the modX instance.
-     * @param array $config An config array. Optional.
+     * @param array $options An options array. Optional.
      */
-    function __construct(modX &$modx, $config = array())
+    public function __construct(modX &$modx, $options = array())
     {
         $this->modx =& $modx;
+        $this->namespace = $this->getOption('namespace', $options, $this->namespace);
 
-        $corePath = $this->getOption('core_path', $config, $this->modx->getOption('core_path') . 'components/' . $this->namespace . '/');
-        $assetsPath = $this->getOption('assets_path', $config, $this->modx->getOption('assets_path') . 'components/' . $this->namespace . '/');
-        $assetsUrl = $this->getOption('assets_url', $config, $this->modx->getOption('assets_url') . 'components/' . $this->namespace . '/');
+        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/' . $this->namespace . '/');
+        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/' . $this->namespace . '/');
+        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/' . $this->namespace . '/');
 
         // Load some default paths for easier management
-        $this->config = array_merge(array(
+        $this->options = array_merge(array(
             'namespace' => $this->namespace,
             'version' => $this->version,
-            'assetsPath' => $assetsPath,
-            'assetsUrl' => $assetsUrl,
-            'cssUrl' => $assetsUrl . 'css/',
-            'jsUrl' => $assetsUrl . 'js/',
-            'imagesUrl' => $assetsUrl . 'images/',
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
             'vendorPath' => $corePath . 'vendor/',
@@ -79,11 +75,16 @@ class CustomRequest
             'controllersPath' => $corePath . 'controllers/',
             'processorsPath' => $corePath . 'processors/',
             'templatesPath' => $corePath . 'templates/',
+            'assetsPath' => $assetsPath,
+            'assetsUrl' => $assetsUrl,
+            'jsUrl' => $assetsUrl . 'js/',
+            'cssUrl' => $assetsUrl . 'css/',
+            'imagesUrl' => $assetsUrl . 'images/',
             'connectorUrl' => $assetsUrl . 'connector.php',
-        ), $config);
+        ), $options);
 
         // Load (system) properties
-        $this->config = array_merge($this->config, array(
+        $this->options = array_merge($this->options, array(
             'debug' => $this->getOption('debug', null, false),
             'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/'),
             'cachePath' => $this->modx->getOption('core_path') . 'cache/',
@@ -96,8 +97,8 @@ class CustomRequest
 
         $this->modx->addPackage('customrequest', $this->getOption('modelPath'));
 
-        if (isset($this->config['aliases'])) {
-            $this->requests = $this->modx->fromJSON($this->config['aliases'], true);
+        if (isset($this->options['aliases'])) {
+            $this->requests = $this->modx->fromJSON($this->options['aliases'], true);
         }
         if (!$this->requests) {
             $this->requests = array();
@@ -128,8 +129,8 @@ class CustomRequest
         if (!empty($key) && is_string($key)) {
             if ($options != null && array_key_exists($key, $options)) {
                 $option = $options[$key];
-            } elseif (array_key_exists($key, $this->config)) {
-                $option = $this->config[$key];
+            } elseif (array_key_exists($key, $this->options)) {
+                $option = $this->options[$key];
             } elseif (array_key_exists("{$this->namespace}.{$key}", $this->modx->config)) {
                 $option = $this->modx->getOption("{$this->namespace}.{$key}");
             }
@@ -145,12 +146,14 @@ class CustomRequest
      */
     public function initialize()
     {
-        $this->requests = $this->modx->cacheManager->get($this->config['cacheKey'], $this->config['cacheOptions']);
+        $this->requests = $this->modx->cacheManager->get($this->options['cacheKey'], $this->options['cacheOptions']);
 
         if (empty($this->requests)) {
             // Import config records
+            $c = $this->modx->newQuery('CustomrequestConfigs');
+            $c->sortby('menuindex', 'ASC');
             /** @var CustomrequestConfigs[] $configs */
-            $configs = $this->modx->getCollection('CustomrequestConfigs');
+            $configs = $this->modx->getCollection('CustomrequestConfigs', $c);
             foreach ($configs as $config) {
                 // Fill additional urlParams if defined
                 $urlParams = ($tmp = json_decode($config->get('urlparams'))) ? $tmp : array();
@@ -218,7 +221,7 @@ class CustomRequest
                     'regEx' => $regEx
                 );
             }
-            $this->modx->cacheManager->set($this->config['cacheKey'], $this->requests, 0, $this->config['cacheOptions']);
+            $this->modx->cacheManager->set($this->options['cacheKey'], $this->requests, 0, $this->options['cacheOptions']);
         }
     }
 
@@ -227,7 +230,7 @@ class CustomRequest
      */
     public function reset()
     {
-        $this->modx->cacheManager->delete($this->config['cacheKey'], $this->config['cacheOptions']);
+        $this->modx->cacheManager->delete($this->options['cacheKey'], $this->options['cacheOptions']);
     }
 
     /**

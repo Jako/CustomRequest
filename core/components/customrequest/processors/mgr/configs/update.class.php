@@ -1,16 +1,20 @@
 <?php
 /**
- * Update processor for CustomRequest CMP
+ * Update processor for CustomRequest
  *
  * @package customrequest
  * @subpackage processor
  */
+
 class CustomrequestConfigsUpdateProcessor extends modObjectUpdateProcessor
 {
     public $classKey = 'CustomrequestConfigs';
     public $languageTopics = array('customrequest:default');
     public $objectType = 'customrequest.configs';
 
+    /**
+     * @return bool
+     */
     public function beforeSave()
     {
         $name = $this->getProperty('name');

@@ -1,17 +1,20 @@
 <?php
 /**
- * Create processor for CustomRequest CMP
+ * Create processor for CustomRequest
  *
  * @package customrequest
  * @subpackage processor
- *
  */
+
 class CustomrequestConfigsCreateProcessor extends modObjectCreateProcessor
 {
     public $classKey = 'CustomrequestConfigs';
     public $languageTopics = array('customrequest:default');
     public $objectType = 'customrequest.configs';
 
+    /**
+     * @return bool
+     */
     public function beforeSave()
     {
         $name = $this->getProperty('name');

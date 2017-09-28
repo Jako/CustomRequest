@@ -246,8 +246,7 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
             }
         });
     },
-    buttonColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
-        var rec = record.data;
+    buttonColumnRenderer: function () {
         var values = {
             action_buttons: [
                 {
@@ -267,7 +266,7 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
     onClick: function (e) {
         var t = e.getTarget();
         var elm = t.className.split(' ')[0];
-        if (elm == 'icon') {
+        if (elm === 'icon') {
             var act = t.className.split(' ')[1];
             var record = this.getSelectionModel().getSelected();
             this.menu.record = record.data;

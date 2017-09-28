@@ -1,6 +1,8 @@
 History
 ================================================================================
 
+- 1.2.7
+    - Bugfix: The order of the configs was not regarded
 - 1.2.6
     - Automatic urldecode of the remaining URL parameter part
 - 1.2.5

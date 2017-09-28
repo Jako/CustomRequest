@@ -50,7 +50,7 @@ class CustomrequestHomeManagerController extends modExtraManagerController
 
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
-            CustomRequest.config = ' . $this->modx->toJSON($this->customrequest->config) . ';
+            CustomRequest.config = ' . $this->modx->toJSON($this->customrequest->options) . ';
             MODx.load({ 
                 xtype: \'customrequest-page-home\'
             });

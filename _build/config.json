@@ -3,7 +3,7 @@
   "lowCaseName": "customrequest",
   "description": "Use friendly URLs everywhere",
   "author": "Thomas Jakobi",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "package": {
     "menus": [
       {
@@ -35,7 +35,7 @@
         "key": "debug",
         "type": "combo-boolean",
         "area": "system",
-        "value": ""
+        "value": "0"
       }
     ]
   },
@@ -47,6 +47,11 @@
   "build": {
     "readme": "docs/readme.txt",
     "license": "docs/license.txt",
-    "changelog": "docs/changelog.txt"
+    "changelog": "docs/changelog.txt",
+    "resolver": {
+      "after": [
+        "resolve.synctables.php"
+      ]
+    }
   }
 }

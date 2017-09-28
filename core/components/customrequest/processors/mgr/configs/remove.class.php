@@ -1,16 +1,20 @@
 <?php
 /**
- * Remove processor for CustomRequest CMP
+ * Remove processor for CustomRequest
  *
  * @package customrequest
  * @subpackage processor
  */
+
 class CustomRequestConfigsRemoveProcessor extends modObjectRemoveProcessor
 {
     public $classKey = 'CustomrequestConfigs';
     public $languageTopics = array('customrequest:default');
     public $objectType = 'customrequest.configs';
 
+    /**
+     * @return bool
+     */
     public function afterRemove()
     {
         $customrequestCorePath = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');

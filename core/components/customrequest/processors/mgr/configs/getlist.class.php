@@ -1,10 +1,11 @@
 <?php
 /**
- * Get list processor for CustomRequest CMP
+ * Get list processor for CustomRequest
  *
  * @package customrequest
  * @subpackage processor
  */
+
 class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
 {
     public $classKey = 'CustomrequestConfigs';
@@ -13,6 +14,10 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
     public $defaultSortDirection = 'ASC';
     public $objectType = 'customrequest.configs';
 
+    /**
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $query = $this->getProperty('query');
@@ -26,6 +31,10 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
         return $c;
     }
 
+    /**
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $id = $this->getProperty('id');
@@ -37,14 +46,19 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
         return $c;
     }
 
+    /**
+     * @param xPDOObject $object
+     * @return array
+     */
     public function prepareRow(xPDOObject $object)
     {
         $ta = $object->toArray('', false, true);
+        /** @var modResource $resource */
         $resource = $this->modx->getObject('modResource', $ta['resourceid']);
         if ($resource) {
             // If the alias could be retrieved by a resource id or if the alias is a valid regular rexpression
             $ta['pagetitle'] = $resource->get('pagetitle') . ' (' . $ta['resourceid'] . ')';
-            $ta['alias_gen'] = ($ta['alias']) ? $ta['alias'] : '<span class="green" title="' . $this->modx->lexicon('customrequest.configs_alias_generated') . '">' . $this->makeUrl($ta['resourceid']) . '</span>';
+            $ta['alias_gen'] = ($ta['alias']) ? $ta['alias'] : '<span class="green" title="' . $this->modx->lexicon('customrequest.configs_alias_generated') . '">' . $this->makeUrl($ta['resourceid'], $resource->get('context_key')) . '</span>';
         } else {
             $ta['resourceid'] = '';
             if (@preg_match($ta['alias'], 'dummy') !== false) {
@@ -54,9 +68,14 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
         return $ta;
     }
 
-    private function makeUrl($id)
+    /**
+     * @param integer $id
+     * @param string $context
+     * @return string
+     */
+    private function makeUrl($id, $context)
     {
-        $url = $this->modx->makeUrl($id);
+        $url = $this->modx->makeUrl($id, $context);
         return str_replace($this->modx->getOption('site_url'), '', $url);
     }
 
