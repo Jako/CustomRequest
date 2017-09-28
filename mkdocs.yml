@@ -1,18 +1,36 @@
 site_name: CustomRequest
 docs_dir: core/components/customrequest/docs/mkdocs
 site_dir: _build/site
+edit_uri: tree/master/core/components/customrequest/docs/mkdocs
 
+repo_name: 'Jako/CustomRequest'
 repo_url: https://github.com/Jako/CustomRequest
 
+copyright: '&copy; 2013-2017 <a href="https://treehillstudio.com">Treehill Studio</a>'
+
 pages:
-- Home: 'index.md'
+- Description: 'index.md'
 - Installation: 'installation.md'
 - Usage: 'usage.md'
+- Examples: 'examples.md'
 - Contributors: 'contributors.md'
 - Donate: 'donate.md'
 
-theme: flatly
+extra:
+  font:
+    text: 'Dosis'
+    heading: 'Ubuntu'
+
+piwik_analytics:
+  site_id: 16
+  piwik_url: '//piwik.partout.info/'
+
+theme: 'material'
+theme_dir: '/Users/jako/Documents/MODx/MkDocs Material/material'
 
 markdown_extensions:
-    - footnotes
-    - tables
+  - footnotes
+  - tables
+  - admonition
+  - meta
+  - toc(permalink=true)
