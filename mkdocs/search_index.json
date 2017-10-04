@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "CustomRequest\n\n\nCustomRequest is an effective routing plugin for MODX Revolution to map pretty \nbut not found URLs to a MODX resource and set the request parameters by \nseparating the URI path at the URI separators or by a regular expression. \n\n\nRequirements\n\n\n\n\nMODX Revolution 2.4+\n\n\nPHP v5.4+\n\n\n\n\nFeatures\n\n\n\n\nUse pretty URLs everywhere in the MODX Revolution frontend.", 
+            "text": "CustomRequest\n\n\nCustomRequest is an effective routing plugin for MODX Revolution to map pretty\nbut not found URLs to a MODX resource and set the request parameters by\nseparating the URI path at the URI separators or by a regular expression.\n\n\nRequirements\n\n\n\n\nMODX Revolution 2.4+\n\n\nPHP v5.4+\n\n\n\n\nFeatures\n\n\n\n\nUse pretty URLs everywhere in the MODX Revolution frontend.", 
             "title": "Description"
         }, 
         {
             "location": "/#customrequest", 
-            "text": "CustomRequest is an effective routing plugin for MODX Revolution to map pretty \nbut not found URLs to a MODX resource and set the request parameters by \nseparating the URI path at the URI separators or by a regular expression.", 
+            "text": "CustomRequest is an effective routing plugin for MODX Revolution to map pretty\nbut not found URLs to a MODX resource and set the request parameters by\nseparating the URI path at the URI separators or by a regular expression.", 
             "title": "CustomRequest"
         }, 
         {
