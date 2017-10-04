@@ -8,9 +8,9 @@
  * @var modX $modx
  */
 
-$customrequestCorePath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/');
+$corePath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/');
 /** @var CustomRequest $customrequest */
-$customrequest = $modx->getService('customrequest', 'CustomRequest', $customrequestCorePath . 'model/customrequest/',array(
+$customrequest = $modx->getService('customrequest', 'CustomRequest', $corePath . 'model/customrequest/', array(
     'core_path' => $corePath
 ));
 

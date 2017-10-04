@@ -82,7 +82,9 @@ if (!function_exists('updateTableIndexes')) {
         $indexes = array_keys($meta);
 
         foreach ($indexes as $index) {
-            if ($index == 'PRIMARY') continue;
+            if ($index == 'PRIMARY') {
+                continue;
+            }
             $m->addIndex($table, $index);
             $modx->log(modX::LOG_LEVEL_INFO, ' -- added index: ' . $index);
         }
@@ -106,6 +108,7 @@ if (!function_exists('alterTable')) {
 
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
+        case xPDOTransport::ACTION_INSTALL:
         case xPDOTransport::ACTION_UPGRADE:
             /** @var modX $modx */
             $modx =& $object->xpdo;

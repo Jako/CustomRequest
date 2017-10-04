@@ -77,8 +77,10 @@ class CustomrequestConfigsSortmenuindexProcessor extends modObjectProcessor
         }
 
         if (!$this->hasErrors()) {
-            $customrequestCorePath = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
-            $customrequest = $this->modx->getService('customrequest', 'CustomRequest', $customrequestCorePath . 'model/customrequest/', array());
+            $path = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
+            $customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . 'model/customrequest/', array(
+                'core_path' => $path
+            ));
             $customrequest->reset();
         }
 

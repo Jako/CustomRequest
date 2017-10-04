@@ -13,7 +13,9 @@ class CustomrequestHomeManagerController extends modExtraManagerController
     public function initialize()
     {
         $path = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
-        $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . '/model/customrequest/');
+        $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . '/model/customrequest/', array(
+            'core_path' => $path
+        ));
 
         parent::initialize();
     }
@@ -34,7 +36,7 @@ class CustomrequestHomeManagerController extends modExtraManagerController
             $this->addLastJavascript($jsSourceUrl . 'sections/home.js?v=v' . $this->customrequest->version);
         } else {
             $this->addCss($cssUrl . 'customrequest.min.css?v=v' . $this->customrequest->version);
-            $this->addJavascript($jsUrl . 'customrequest.min.js?v=v' . $this->customrequest->version);
+            $this->addLastJavascript($jsUrl . 'customrequest.min.js?v=v' . $this->customrequest->version);
         }
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {

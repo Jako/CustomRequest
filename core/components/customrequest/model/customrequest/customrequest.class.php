@@ -189,10 +189,7 @@ class CustomRequest
                         } else {
                             $resource = $this->modx->getObject('modResource', $resourceId);
                             if ($resource) {
-                                $currentContext = $this->modx->context->get('key');
-                                $this->modx->switchContext($resource->get('context_key'));
-                                $alias = $this->modx->makeUrl($resourceId);
-                                $this->modx->switchContext($currentContext);
+                                $alias = $this->modx->makeUrl($resourceId, $resource->get('context_key'));
                                 if ($alias) {
                                     // Cutoff trailing .html or /
                                     $alias = trim(str_replace('.html', '', $alias), '/');
@@ -231,7 +228,6 @@ class CustomRequest
     public function reset()
     {
         $this->modx->cacheManager->delete($this->options['cacheKey'], $this->options['cacheOptions']);
-        $this->initialize();
     }
 
     /**
