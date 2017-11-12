@@ -126,7 +126,9 @@ module.exports = function (grunt) {
                 tasks: ['sass', 'postcss', 'cssmin', 'usebanner:css', 'sftp:css']
             },
             config: {
-                files: ['_build/config.json'],
+                files: [
+                    '_build/config.json'
+                ],
                 tasks: ['default']
             }
         },
