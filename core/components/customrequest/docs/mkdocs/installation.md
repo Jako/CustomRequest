@@ -8,7 +8,7 @@ install it in there.
 If you can't access the MODX Extras Repository in your MODX installation, you
 can manually install CustomRequest.
 
-* Download the transport package from [MODX Extras](http://modx.com/extras/package/customrequest) (or one of the pre built transport packages in [_packages](https://github.com/Jako/CustomRequest/tree/master/_packages))
+* Download the transport package from [MODX Extras](https://modx.com/extras/package/customrequest) (or one of the pre built transport packages in [_packages](https://github.com/Jako/CustomRequest/tree/master/_packages))
 * Upload the zip file to your MODX installation's `core/packages` folder or upload it manually in the MODX Package Manager.
 * In the Package Manager of your MODX installation select 'Search locally for packages' from the dropdown button.
 * CustomRequest should now show up in the list of available packages. Click the corresponding 'Install' button and follow the instructions to complete the installation.
