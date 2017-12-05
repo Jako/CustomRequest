@@ -5,8 +5,9 @@ $treehillstudio-color: #a9ba2f;
 }
 
 .action-buttons {
+  text-align: center;
   li {
-    float: left;
+    display: inline-block;
     line-height: .7;
     margin-right: 5px;
     font-size: 1.1em;
