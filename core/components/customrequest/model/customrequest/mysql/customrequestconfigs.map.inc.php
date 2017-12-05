@@ -4,9 +4,13 @@
  */
 $xpdo_meta_map['CustomrequestConfigs']= array (
   'package' => 'customrequest',
-  'version' => NULL,
+  'version' => '1.1',
   'table' => 'customrequest_configs',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => NULL,
