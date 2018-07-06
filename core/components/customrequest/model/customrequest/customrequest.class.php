@@ -3,7 +3,7 @@
 /**
  * CustomRequest Classfile
  *
- * Copyright 2013-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2013-2018 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package customrequest
  * @subpackage classfile
@@ -26,7 +26,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.2.7-rc2';
+    public $version = '1.3.0';
 
     /**
      * The class options
@@ -85,7 +85,7 @@ class CustomRequest
 
         // Load (system) properties
         $this->options = array_merge($this->options, array(
-            'debug' => $this->getOption('debug', null, false),
+            'debug' => (bool)$this->getOption('debug', null, false),
             'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/'),
             'cachePath' => $this->modx->getOption('core_path') . 'cache/',
             'cacheKey' => 'requests',
@@ -102,12 +102,6 @@ class CustomRequest
         }
         if (!$this->requests) {
             $this->requests = array();
-        }
-
-        // Import old config files if no configuration is set
-        $configFiles = glob($this->getOption('configsPath') . '*.config.inc.php');
-        if (!$this->modx->getCount('CustomrequestConfigs') && count($configFiles)) {
-            $this->importOldConfigs($configFiles);
         }
 
         $modx->getService('lexicon', 'modLexicon');
@@ -161,11 +155,11 @@ class CustomRequest
                 $alias = $config->get('alias');
                 $aliasRegEx = false;
                 $regEx = $config->get('regex');
+                $contextKey = '';
                 if ($alias) {
                     // If alias is defined, calculate the other values
                     if (!$resourceId) {
                         $resourceId = 0;
-                        /** @noinspection PhpUsageOfSilenceOperatorInspection */
                         if (@preg_match($alias, 'dummy') === false) {
                             // If alias is not a valid regular rexpression
                             $resourceId = $this->modx->findResource($alias);
@@ -180,6 +174,12 @@ class CustomRequest
                             $aliasRegEx = true;
                         }
                     }
+                    if ($resourceId) {
+                        $resource = $this->modx->getObject('modResource', $resourceId);
+                        if ($resource) {
+                            $contextKey = $resource->get('context_key');
+                        }
+                    }
                 } else {
                     $resourceId = $config->get('resourceid');
                     if ($resourceId) {
@@ -187,9 +187,14 @@ class CustomRequest
                         if ($config->get('alias')) {
                             $alias = $config->get('alias');
                         } else {
+                            /** @var modResource $resource */
                             $resource = $this->modx->getObject('modResource', $resourceId);
                             if ($resource) {
-                                $alias = $this->modx->makeUrl($resourceId, $resource->get('context_key'));
+                                $tmpKey = $this->modx->context->key;
+                                $contextKey = $resource->get('context_key');
+                                $this->modx->switchContext($contextKey);
+                                $alias = $this->modx->makeUrl($resourceId);
+                                $this->modx->switchContext($tmpKey);
                                 if ($alias) {
                                     // Cutoff trailing .html or /
                                     $alias = trim(str_replace('.html', '', $alias), '/');
@@ -210,12 +215,13 @@ class CustomRequest
                         }
                     }
                 }
-                $this->requests[$alias] = array(
+                $this->requests[$contextKey . $alias] = array(
                     'resourceId' => $resourceId,
                     'alias' => $alias,
                     'aliasRegEx' => $aliasRegEx,
                     'urlParams' => $urlParams,
-                    'regEx' => $regEx
+                    'regEx' => $regEx,
+                    'contextKey' => $contextKey
                 );
             }
             $this->modx->cacheManager->set($this->options['cacheKey'], $this->requests, 0, $this->options['cacheOptions']);
@@ -250,8 +256,8 @@ class CustomRequest
         if (is_array($this->requests) && count($this->requests)) {
             foreach ($this->requests as $request) {
                 if (!$request['aliasRegEx']) {
-                    // Check if searched string starts with the alias
-                    if ($request['alias'] && 0 === strpos($search, $request['alias'])) {
+                    // Check if searched string starts with the alias and for the contextKey
+                    if ($request['alias'] && 0 === strpos($search, $request['alias']) && $request['contextKey'] == $this->modx->context->key) {
                         $this->found = array(
                             // Strip alias from seached string and urldecode it
                             'urlParams' => urldecode(substr($search, strlen($request['alias']))),
@@ -259,8 +265,10 @@ class CustomRequest
                             'resourceId' => $request['resourceId'],
                             // Set the found alias
                             'alias' => $request['alias'],
-                            // And set the found regEx
-                            'regEx' => $request['regEx']
+                            // Set the found regEx
+                            'regEx' => $request['regEx'],
+                            // Set the found regEx
+                            'contextKey' => $request['contextKey']
                         );
                         $valid = true;
                         break;
@@ -268,7 +276,7 @@ class CustomRequest
                 } else {
                     if (preg_match($request['alias'], $search, $matches)) {
                         $alias = trim(str_replace($matches[1], '', $matches[0]), '/');
-                        $resourceId = $this->modx->findResource($alias . '/');
+                        $resourceId = $this->modx->findResource($alias . '/', $request['contextKey']);
                         if ($resourceId) {
                             $this->found = array(
                                 // Strip alias from seached string and urldecode it
@@ -277,8 +285,10 @@ class CustomRequest
                                 'resourceId' => $resourceId,
                                 // Set the found alias
                                 'alias' => $request['alias'],
-                                // And set the found regEx
-                                'regEx' => $request['regEx']
+                                // Set the found regEx
+                                'regEx' => $request['regEx'],
+                                // Set the found regEx
+                                'contextKey' => $request['contextKey']
                             );
                             $valid = true;
                             break;
@@ -315,7 +325,7 @@ class CustomRequest
             $params = explode('/', trim($params, '/'));
         }
         if (count($params) >= 1) {
-            $setting = $this->requests[$this->found['alias']];
+            $setting = $this->requests[$this->found['contextKey'] . $this->found['alias']];
             // Set the request parameters
             foreach ($params as $key => $value) {
                 if (isset($setting['urlParams'][$key])) {
@@ -327,65 +337,18 @@ class CustomRequest
                 }
             }
         }
-        $this->modx->sendForward($this->found['resourceId']);
-        return;
-    }
+        if ($resource = $this->modx->getObject('modResource', $this->found['resourceId'])) {
+            if ($this->modx->context->key != $resource->get('context_key')) {
+                $this->modx->switchContext($resource->get('context_key'));
 
-    /**
-     * Import old config files
-     *
-     * @param array $configFiles
-     */
-    private function importOldConfigs($configFiles)
-    {
-        $i = 0;
-        // Import old config files
-        foreach ($configFiles as $configFile) {
-            // $settings will be defined in each config file
-            $settings = array();
-            /** @noinspection PhpIncludeInspection */
-            include $configFile;
-            foreach ($settings as $key => $setting) {
-                // Fill urlParams if defined
-                $urlParams = (isset($setting['urlParams']) && is_array($setting['urlParams'])) ? $setting['urlParams'] : array();
-                $regEx = (isset($setting['regEx'])) ? $setting['regEx'] : '';
-                if (isset($setting['alias'])) {
-                    // If alias is defined, calculate the other values
-                    if (isset($setting['resourceId'])) {
-                        $resourceId = $setting['resourceId'];
-                    } else {
-                        $resourceId = $this->modx->findResource($setting['alias']);
-                        if (!$resourceId) {
-                            // If resourceId could not be calculated, don't use that setting
-                            if ($this->getOption('debug')) {
-                                $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the resourceId for the given alias "' . $setting['alias'] . '".', '', 'CustomRequest Plugin');
-                            }
-                            break;
-                        }
-                    }
-                    $alias = $setting['alias'];
-                } else {
-                    $alias = '';
-                    $resourceId = 0;
-                    if (isset($setting['resourceId'])) {
-                        $resourceId = $setting['resourceId'];
-                        if (isset($setting['alias'])) {
-                            $alias = $setting['alias'];
-                        }
-                    }
+                // Set locale after context switch since $this->modx->_initCulture is called before OnPageNotFound
+                if ($this->modx->context && $this->modx->getOption('setlocale', null, true)) {
+                    $locale = setlocale(LC_ALL, null);
+                    setlocale(LC_ALL, $this->modx->context->getOption('locale', null, $locale));
                 }
-                $config = $this->modx->newObject('CustomrequestConfigs');
-                $config->fromArray(array(
-                    'name' => ucfirst($key),
-                    'menuindex' => $i,
-                    'alias' => $alias,
-                    'resourceid' => $resourceId,
-                    'urlparams' => json_encode($urlParams),
-                    'regex' => $regEx
-                ));
-                $config->save();
-                $i++;
             }
         }
+        $this->modx->sendForward($this->found['resourceId']);
+        return;
     }
 }

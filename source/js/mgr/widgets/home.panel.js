@@ -1,13 +1,13 @@
 CustomRequest.panel.Home = function (config) {
     config = config || {};
     Ext.applyIf(config, {
-        cls: 'container',
+        cls: 'container home-panel'+ ((CustomRequest.config.debug) ? ' debug' : ''),
         defaults: {
             collapsible: false,
             autoHeight: true
         },
         items: [{
-            html: '<h2>' + _('customrequest') + '</h2>',
+            html: '<h2>' + _('customrequest') + '</h2>' + ((CustomRequest.config.debug) ? '<div class="ribbon top-right"><span>' + _('customrequest.debug_mode') + '</span></div>' : ''),
             border: false,
             cls: 'modx-page-header'
         }, {
@@ -15,6 +15,7 @@ CustomRequest.panel.Home = function (config) {
                 autoHeight: true
             },
             border: true,
+            style: 'margin-bottom: 20px',
             items: [{
                 xtype: 'modx-tabs',
                 deferredRender: false,
@@ -35,7 +36,7 @@ CustomRequest.panel.Home = function (config) {
                 afterrender: function (component) {
                     component.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + CustomRequest.config.assetsUrl + 'img/treehill-studio.png" srcset="' + CustomRequest.config.assetsUrl + 'img/treehill-studio@2x.png 2x" alt"Treehill Studio"><br>' +
-                            '© 2013-2017 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '© 2013-2018 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('customrequest') + ' ' + CustomRequest.config.version,
                             msg: msg,

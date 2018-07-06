@@ -23,7 +23,8 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(
-                'pagetitle:LIKE' => '%' . $query . '%'
+                'pagetitle:LIKE' => '%' . $query . '%',
+                'OR:id:=' => intval($query)
             ));
         }
         $c->where(array(
@@ -34,16 +35,12 @@ class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
         return $c;
     }
 
-    /**
-     * @param xPDOQuery $c
-     * @return xPDOQuery
-     */
     public function prepareQueryAfterCount(xPDOQuery $c)
     {
         $id = $this->getProperty('id');
         if (!empty($id)) {
             $c->where(array(
-                'id' => $id
+                'id:IN' => array_map('intval', explode('|', $id))
             ));
         }
         return $c;

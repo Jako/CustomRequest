@@ -1,12 +1,12 @@
 site_name: CustomRequest
-docs_dir: core/components/customrequest/docs/mkdocs
+docs_dir: docs
 site_dir: _build/site
-edit_uri: tree/master/core/components/customrequest/docs/mkdocs
+edit_uri: tree/master/docs
 
 repo_name: 'Jako/CustomRequest'
 repo_url: https://github.com/Jako/CustomRequest
 
-copyright: '&copy; 2013-2017 <a href="https://treehillstudio.com">Treehill Studio</a>'
+copyright: '&copy; 2013-2018 <a href="https://treehillstudio.com">Treehill Studio</a>'
 
 pages:
 - Description: 'index.md'
@@ -17,16 +17,39 @@ pages:
 - Donate: 'donate.md'
 
 extra:
+  matomo:
+    - //matomo.partout.info/
+    - 16
+
+theme:
+  name: null
+  custom_dir: ../../../mkdocs-material/material
+
+  # 404 page
+  static_templates:
+    - 404.html
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  feature:
+    tabs: false
+  palette:
+    primary: #40A0DF
+    accent: #0080D4
   font:
-    text: 'Dosis'
-    heading: 'Ubuntu'
-
-piwik_analytics:
-  site_id: 16
-  piwik_url: 'https://piwik.partout.info/'
-
-theme: 'material'
-theme_dir: '/Users/jako/Documents/MODx/MkDocs Material/material'
+    text: Dosis
+    text_weights: 300,400,700
+    code: Ubuntu Mono
+    code_weights: 400,700
+    head: Ubuntu
+    head_weights: 400,400i,700,700i
+  favicon: assets/images/favicon.png
+  logo:
+    icon: "\uE80C"
 
 markdown_extensions:
   - footnotes
@@ -34,3 +57,4 @@ markdown_extensions:
   - admonition
   - meta
   - toc(permalink=true)
+  - pymdownx.superfences

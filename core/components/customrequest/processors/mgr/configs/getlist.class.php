@@ -40,7 +40,7 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
         $id = $this->getProperty('id');
         if (!empty($id)) {
             $c->where(array(
-                'id' => $id
+                'id:IN' => array_map('intval', explode('|', $id))
             ));
         }
         return $c;
@@ -56,9 +56,11 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
         /** @var modResource $resource */
         $resource = $this->modx->getObject('modResource', $ta['resourceid']);
         if ($resource) {
+            $context = $this->modx->getContext($resource->get('context_key'));
             // If the alias could be retrieved by a resource id or if the alias is a valid regular rexpression
             $ta['pagetitle'] = $resource->get('pagetitle') . ' (' . $ta['resourceid'] . ')';
             $ta['alias_gen'] = ($ta['alias']) ? $ta['alias'] : '<span class="green" title="' . $this->modx->lexicon('customrequest.configs_alias_generated') . '">' . $this->makeUrl($ta['resourceid'], $resource->get('context_key')) . '</span>';
+            $ta['context'] = ($context->get('name')) ? $context->get('name') . ' (' . $resource->get('context_key') . ')' : $resource->get('context_key');
         } else {
             $ta['resourceid'] = '';
             if (@preg_match($ta['alias'], 'dummy') !== false) {
@@ -75,7 +77,12 @@ class CustomrequestConfigsGetListProcessor extends modObjectGetListProcessor
      */
     private function makeUrl($id, $context)
     {
+        $resource = $this->modx->getObject('modResource', $id);
+        $tmpKey = $this->modx->context->key;
+        $contextKey = $resource->get('context_key');
+        $this->modx->switchContext($contextKey);
         $url = $this->modx->makeUrl($id, $context);
+        $this->modx->switchContext($tmpKey);
         return str_replace($this->modx->getOption('site_url'), '', $url);
     }
 

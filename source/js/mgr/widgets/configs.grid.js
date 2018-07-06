@@ -43,9 +43,9 @@ CustomRequest.grid.Configs = function (config) {
         id: 'customrequest-grid-configs',
         url: CustomRequest.config.connectorUrl,
         baseParams: {
-            action: 'mgr/configs/getList'
+            action: 'mgr/configs/getlist'
         },
-        fields: ['id', 'name', 'menuindex', 'alias', 'alias_gen', 'pagetitle', 'resourceid', 'urlparams', 'regex'],
+        fields: ['id', 'name', 'menuindex', 'alias', 'alias_gen', 'pagetitle', 'resourceid', 'context', 'urlparams', 'regex'],
         autoHeight: true,
         paging: true,
         remoteSort: false,
@@ -68,6 +68,10 @@ CustomRequest.grid.Configs = function (config) {
         }, {
             header: _('customrequest.configs_resourceid'),
             dataIndex: 'pagetitle',
+            width: 80
+        }, {
+            header: _('customrequest.configs_context'),
+            dataIndex: 'context',
             width: 80
         }, {
             renderer: {

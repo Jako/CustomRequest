@@ -1,6 +1,12 @@
 History
 ================================================================================
 
+- 1.3.0
+    - New: Equal aliases in different contexts are now possible
+    - Bugfix: Calculate the alias on base of the resource context
+    - New: Switch the context to the requested resource context
+    - New: Change the default engine to InnoDB
+
 - 1.2.7
     - Bugfix: The order of the configs was not regarded
 - 1.2.6
@@ -18,6 +24,7 @@ History
 - 1.2.0
     - New: The configurations are cached
     - New: The alias of a configuration could contain a regular expression
+
 - 1.1.4
     - Bugfix: RegEx evaluation
 - 1.1.3
@@ -29,6 +36,7 @@ History
 - 1.1.0
     - New: Custom Manager Page that replaces the config files
     - New: Automatic Import for old config files
+
 - 1.0.3
     - Bugfix: Existing url parameters issue
     - Change: Build by Git-Package-Management

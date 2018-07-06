@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Sortmenuindex processor for CustomRequest
  *
  * @package customrequest
  * @subpackage processor
  */
-
 class CustomrequestConfigsSortmenuindexProcessor extends modObjectProcessor
 {
     public $classKey = 'CustomrequestConfigs';
@@ -19,15 +19,15 @@ class CustomrequestConfigsSortmenuindexProcessor extends modObjectProcessor
         $c = $this->modx->newQuery($this->classKey);
         $c->sortby($this->indexKey, 'ASC');
         $c->sortby('id', 'ASC');
-        /** @var CustomrequestConfigs[] $configs */
-        $configs = $this->modx->getIterator($this->classKey, $c);
-        if (!$configs) {
+        /** @var xPDOObject[] $objects */
+        $objects = $this->modx->getIterator($this->classKey, $c);
+        if (!$objects) {
             return $this->failure();
         }
         $i = 0;
-        foreach ($configs as $config) {
-            $config->set($this->indexKey, $i);
-            $config->save();
+        foreach ($objects as $object) {
+            $object->set($this->indexKey, $i);
+            $object->save();
             $i++;
         }
 
@@ -42,11 +42,11 @@ class CustomrequestConfigsSortmenuindexProcessor extends modObjectProcessor
         ));
         $c->sortby($this->indexKey, 'ASC');
         $c->sortby('id', 'ASC');
-        /** @var CustomrequestConfigs[] $movingRes */
-        $movingRes = $this->modx->getIterator($this->classKey, $c);
-        foreach ($movingRes as $res) {
+        /** @var xPDOObject[] $movingObjects */
+        $movingObjects = $this->modx->getIterator($this->classKey, $c);
+        foreach ($movingObjects as $movingObject) {
             $c = $this->modx->newQuery($this->classKey);
-            $movingIndex = $res->get($this->indexKey);
+            $movingIndex = $movingObject->get($this->indexKey);
             if ($movingIndex < $targetIndex) {
                 $c->where(array(
                     $this->indexKey . ':>' => $movingIndex,
@@ -60,20 +60,20 @@ class CustomrequestConfigsSortmenuindexProcessor extends modObjectProcessor
             }
             $c->sortby($this->indexKey, 'ASC');
             $c->sortby('id', 'ASC');
-            /** @var CustomrequestConfigs[] $affectedRes */
-            $affectedRes = $this->modx->getIterator($this->classKey, $c);
-            foreach ($affectedRes as $affected) {
-                $affectedIndex = $affected->get($this->indexKey);
+            /** @var xPDOObject[] $affectedObjects */
+            $affectedObjects = $this->modx->getIterator($this->classKey, $c);
+            foreach ($affectedObjects as $affectedObject) {
+                $affectedIndex = $affectedObject->get($this->indexKey);
                 if ($movingIndex < $targetIndex) {
                     $newIndex = $affectedIndex - 1;
                 } else {
                     $newIndex = $affectedIndex + 1;
                 }
-                $affected->set($this->indexKey, $newIndex);
-                $affected->save();
+                $affectedObject->set($this->indexKey, $newIndex);
+                $affectedObject->save();
             }
-            $res->set($this->indexKey, $targetIndex);
-            $res->save();
+            $movingObject->set($this->indexKey, $targetIndex);
+            $movingObject->save();
         }
 
         if (!$this->hasErrors()) {

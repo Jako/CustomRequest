@@ -56,7 +56,7 @@ The Alias Path field could be filled with a valid regular expression[^5] (the
 color of the grid field is changed to blue then[^4]) and the Resource field 
 could stay empty. Thay way you could use one pagination configuration for all 
 pagination calls on the page. The first subpattern part (`page/`) of the 
-expression is stripped from the found pattern and the remaining string is used 
+expression is stripped from the not found url and the remaining string is used 
 to identify the resource where the user is forwarded to later.
 
 Name | Alias Path | Resource | URI Parameter | Regular Expression
@@ -74,19 +74,3 @@ CustomRequest uses the following system settings in the namespace `customrequest
 Key | Description | Default
 ----|-------------|--------
 customrequest.debug | Log debug information in the MODX error log | No
-
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//piwik.partout.info/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 16]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=16" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->

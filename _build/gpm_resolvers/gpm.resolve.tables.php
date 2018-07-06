@@ -18,13 +18,15 @@ if ($object->xpdo) {
         case xPDOTransport::ACTION_INSTALL:
         case xPDOTransport::ACTION_UPGRADE:
             $modelPath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/') . 'model/';
-
+            
             $modx->addPackage('customrequest', $modelPath, null);
+
 
 
             $manager = $modx->getManager();
 
             $manager->createObjectContainer('CustomrequestConfigs');
+
 
             break;
     }

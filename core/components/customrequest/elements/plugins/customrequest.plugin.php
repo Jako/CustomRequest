@@ -8,6 +8,8 @@
  * @var modX $modx
  */
 
+$eventName = $modx->event->name;
+
 $corePath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/');
 /** @var CustomRequest $customrequest */
 $customrequest = $modx->getService('customrequest', 'CustomRequest', $corePath . 'model/customrequest/', array(
@@ -16,7 +18,6 @@ $customrequest = $modx->getService('customrequest', 'CustomRequest', $corePath .
 
 $requestUri = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
-$eventName = $modx->event->name;
 switch ($eventName) {
     case 'OnSiteRefresh':
     case 'OnDocFormSave':
@@ -26,8 +27,8 @@ switch ($eventName) {
         $customrequest->reset();
         break;
     case 'OnPageNotFound':
+        $customrequest->initialize();
         if ($modx->context->get('key') !== 'mgr') {
-            $customrequest->initialize();
             if ($customrequest->searchAliases($requestUri)) {
                 $customrequest->setRequest();
             }
