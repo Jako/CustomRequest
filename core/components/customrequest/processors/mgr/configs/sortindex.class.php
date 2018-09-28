@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Sortmenuindex processor for CustomRequest
+ * Sortindex configs
  *
  * @package customrequest
  * @subpackage processor
  */
-class CustomrequestConfigsSortmenuindexProcessor extends modObjectProcessor
+class CustomrequestConfigsSortindexProcessor extends modObjectProcessor
 {
     public $classKey = 'CustomrequestConfigs';
     public $languageTopics = array('customrequest:default');
@@ -15,27 +15,15 @@ class CustomrequestConfigsSortmenuindexProcessor extends modObjectProcessor
 
     public function process()
     {
-        // Clean up the sorting first
-        $c = $this->modx->newQuery($this->classKey);
-        $c->sortby($this->indexKey, 'ASC');
-        $c->sortby('id', 'ASC');
-        /** @var xPDOObject[] $objects */
-        $objects = $this->modx->getIterator($this->classKey, $c);
-        if (!$objects) {
+        if (!$this->cleanSorting()) {
             return $this->failure();
-        }
-        $i = 0;
-        foreach ($objects as $object) {
-            $object->set($this->indexKey, $i);
-            $object->save();
-            $i++;
         }
 
         $targetId = $this->getProperty('targetId');
         $targetIndex = $this->modx->getObject($this->classKey, $targetId)->get($this->indexKey);
 
         // Prepare the moving ids
-        $movingIds = @explode(',', $this->getProperty('movingIds'));
+        $movingIds = explode(',', $this->getProperty('movingIds', 0));
         $c = $this->modx->newQuery($this->classKey);
         $c->where(array(
             'id:IN' => $movingIds
@@ -86,6 +74,27 @@ class CustomrequestConfigsSortmenuindexProcessor extends modObjectProcessor
 
         return $this->success();
     }
+
+    private function cleanSorting()
+    {
+        $c = $this->modx->newQuery($this->classKey);
+        $c->sortby($this->indexKey, 'ASC');
+        $c->sortby('id', 'ASC');
+
+        /** @var xPDOObject[] $objects */
+        $objects = $this->modx->getIterator($this->classKey, $c);
+        if (!$objects) {
+            return false;
+        }
+
+        $i = 0;
+        foreach ($objects as $object) {
+            $object->set($this->indexKey, $i);
+            $object->save();
+            $i++;
+        }
+        return true;
+    }
 }
 
-return 'CustomrequestConfigsSortmenuindexProcessor';
+return 'CustomrequestConfigsSortindexProcessor';

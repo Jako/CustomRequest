@@ -8,9 +8,13 @@
 
 .action-buttons li {
   display: inline-block;
+  font-size: 1.1em;
   line-height: .7;
   margin-right: 5px;
-  font-size: 1.1em;
+}
+
+.action-buttons li:last-child {
+  margin-right: 0;
 }
 
 .treehillstudio_about {

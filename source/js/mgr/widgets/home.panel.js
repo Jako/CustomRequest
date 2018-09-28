@@ -76,7 +76,6 @@ CustomRequest.panel.Configs = function (config) {
                 layout: 'form',
                 id: 'customrequest-panel-configs-grid',
                 defaults: {
-                    border: false,
                     autoHeight: true
                 },
                 border: true,
@@ -88,7 +87,6 @@ CustomRequest.panel.Configs = function (config) {
         }]
     });
     CustomRequest.panel.Configs.superclass.constructor.call(this, config);
-}
-;
+};
 Ext.extend(CustomRequest.panel.Configs, MODx.Panel);
 Ext.reg('customrequest-panel-configs', CustomRequest.panel.Configs);

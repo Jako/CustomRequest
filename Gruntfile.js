@@ -35,6 +35,7 @@ module.exports = function (grunt) {
             mgr: {
                 src: [
                     'source/js/mgr/customrequest.js',
+                    'source/js/mgr/helper/combo.js',
                     'source/js/mgr/widgets/configs.grid.js',
                     'source/js/mgr/widgets/home.panel.js',
                     'source/js/mgr/sections/home.js'

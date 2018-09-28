@@ -1,31 +1,5 @@
-CustomRequest.combo.Resource = function (config) {
-    config = config || {};
-    this.ident = config.ident || 'customrequest-mecitem' + Ext.id();
-    Ext.applyIf(config, {
-        url: CustomRequest.config.connectorUrl,
-        baseParams: {
-            action: 'mgr/resources/getlist',
-            combo: true
-        },
-        pageSize: 10,
-        fields: ['id', 'pagetitle'],
-        displayField: 'pagetitle',
-        valueField: 'id',
-        lazyRender: true,
-        editable: true,
-        typeAhead: true,
-        minChars: 1,
-        forceSelection: true,
-        triggerAction: 'all'
-    });
-    CustomRequest.combo.Resource.superclass.constructor.call(this, config);
-};
-Ext.extend(CustomRequest.combo.Resource, MODx.combo.ComboBox);
-Ext.reg('customrequest-combo-resource', CustomRequest.combo.Resource);
-
 CustomRequest.grid.Configs = function (config) {
-
-    /* action button renderer */
+    config = config || {};
     this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
         + '<tpl if="action_buttons !== null">'
         + '<ul class="action-buttons">'
@@ -37,8 +11,7 @@ CustomRequest.grid.Configs = function (config) {
         + '</tpl>', {
         compiled: true
     });
-
-    config = config || {};
+    this.ident = config.ident || 'customrequest-configs' + Ext.id();
     Ext.applyIf(config, {
         id: 'customrequest-grid-configs',
         url: CustomRequest.config.connectorUrl,
@@ -53,11 +26,6 @@ CustomRequest.grid.Configs = function (config) {
         ddGroup: 'customrequest-grid-dd',
         autoExpandColumn: 'alias',
         columns: [{
-            header: _('id'),
-            dataIndex: 'id',
-            hidden: true,
-            width: 20
-        }, {
             header: _('customrequest.configs_name'),
             dataIndex: 'name',
             width: 100
@@ -74,6 +42,11 @@ CustomRequest.grid.Configs = function (config) {
             dataIndex: 'context',
             width: 80
         }, {
+            header: _('id'),
+            dataIndex: 'id',
+            hidden: true,
+            width: 20
+        }, {
             renderer: {
                 fn: this.buttonColumnRenderer,
                 scope: this
@@ -83,11 +56,10 @@ CustomRequest.grid.Configs = function (config) {
         tbar: [{
             text: _('customrequest.configs_create'),
             cls: 'primary-button',
-            handler: this.createConfig,
-            scope: this
+            handler: this.createConfig
         }, '->', {
             xtype: 'textfield',
-            id: 'customrequest-search-filter',
+            id: this.ident + '-filter-search',
             emptyText: _('search') + '…',
             submitValue: false,
             listeners: {
@@ -123,7 +95,7 @@ CustomRequest.grid.Configs = function (config) {
             }
         }],
         listeners: {
-            'render': {
+            render: {
                 fn: this.renderListener,
                 scope: this
             }
@@ -169,9 +141,7 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
             record: r,
             listeners: {
                 success: {
-                    fn: function () {
-                        this.refresh();
-                    },
+                    fn: this.refresh,
                     scope: this
                 }
             }
@@ -192,18 +162,23 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
                 id: this.menu.record.id
             },
             listeners: {
-                'success': {
-                    fn: function () {
-                        this.refresh();
-                    },
+                success: {
+                    fn: this.refresh,
                     scope: this
                 }
             }
-        })
+        });
     },
     search: function (tf) {
         var s = this.getStore();
         s.baseParams.query = tf.getValue();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    },
+    clearFilter: function () {
+        var s = this.getStore();
+        s.baseParams.query = '';
+        Ext.getCmp(this.ident + '-filter-search').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },
@@ -238,12 +213,12 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
         MODx.Ajax.request({
             url: CustomRequest.config.connectorUrl,
             params: {
-                action: 'mgr/configs/sortmenuindex',
+                action: 'mgr/configs/sortindex',
                 targetId: targetId,
                 movingIds: movingIds.join()
             },
             listeners: {
-                'success': {
+                success: {
                     fn: this.refresh,
                     scope: this
                 }
@@ -256,12 +231,12 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
                 {
                     className: 'update',
                     icon: 'pencil-square-o',
-                    text: _('delicart.order_update')
+                    text: _('customrequest.configs_update')
                 },
                 {
                     className: 'remove',
                     icon: 'trash-o',
-                    text: _('delicart.order_remove')
+                    text: _('customrequest.configs_remove')
                 }
             ]
         };
@@ -297,6 +272,8 @@ CustomRequest.window.CreateUpdateConfig = function (config) {
         url: CustomRequest.config.connectorUrl,
         action: (config.isUpdate) ? 'mgr/configs/update' : 'mgr/configs/create',
         autoHeight: true,
+        closeAction: 'close',
+        cls: 'modx-window customrequest-window',
         fields: [{
             xtype: 'textfield',
             fieldLabel: _('customrequest.configs_name'),
