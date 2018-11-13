@@ -35,8 +35,10 @@ switch ($eventName) {
         }
         break;
     case 'OnWebPagePrerender':
-        // TODO: replace not friendly URL parameter (for URLs with a valid CustomRequest config) with friendly ones
-        // A lot easier, if there would be an onMakeUrl event.
+        /**
+         * TODO: replace not friendly URL parameter (for URLs with a valid CustomRequest config) with friendly ones
+         * A lot easier, if there would be an onMakeUrl event
+         */
         break;
 }
 

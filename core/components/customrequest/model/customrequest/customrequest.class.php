@@ -26,7 +26,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.0';
+    public $version = '1.3.1';
 
     /**
      * The class options
@@ -142,7 +142,7 @@ class CustomRequest
     {
         $this->requests = $this->modx->cacheManager->get($this->options['cacheKey'], $this->options['cacheOptions']);
 
-        if (empty($this->requests)) {
+        if (empty($this->requests) || true) {
             // Import config records
             $c = $this->modx->newQuery('CustomrequestConfigs');
             $c->sortby('menuindex', 'ASC');
@@ -166,7 +166,7 @@ class CustomRequest
                             if (!$resourceId) {
                                 // If resourceId could not be calculated and alias is not a valid regular expression, don't use that setting
                                 if ($this->getOption('debug')) {
-                                    $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the resourceId for the given alias "' . $alias . '".', '', 'CustomRequest Plugin');
+                                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not calculate the resourceId for the given alias "' . $alias . '".', '', 'CustomRequest Plugin');
                                 }
                                 break;
                             }
@@ -201,16 +201,16 @@ class CustomRequest
                                 } else {
                                     // If alias could not be calculated, don't use that setting
                                     if ($this->getOption('debug')) {
-                                        $this->modx->log(modX::LOG_LEVEL_INFO, 'Could not calculate the alias for the given resourceId "' . $resourceId . '".', '', 'CustomRequest Plugin');
+                                        $this->modx->log(modX::LOG_LEVEL_ERROR, 'Could not calculate the alias for the given resourceId "' . $resourceId . '".', '', 'CustomRequest Plugin');
                                     }
-                                    break;
+                                    continue;
                                 }
                             } else {
                                 // If alias could not be calculated, don't use that setting
                                 if ($this->getOption('debug')) {
-                                    $this->modx->log(modX::LOG_LEVEL_INFO, 'No resource with ID "' . $resourceId . '"" found.', '', 'CustomRequest Plugin');
+                                    $this->modx->log(modX::LOG_LEVEL_ERROR, 'No resource with ID "' . $resourceId . '" found.', '', 'CustomRequest Plugin');
                                 }
-                                break;
+                                continue;
                             }
                         }
                     }
@@ -298,9 +298,10 @@ class CustomRequest
             }
         } else {
             if ($this->getOption('debug')) {
-                $this->modx->log(modX::LOG_LEVEL_INFO, 'No valid configs found.', '', 'CustomRequest Plugin');
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'No valid configs found.', '', 'CustomRequest Plugin');
             }
         }
+
         return $valid;
     }
 
@@ -326,15 +327,22 @@ class CustomRequest
         }
         if (count($params) >= 1) {
             $setting = $this->requests[$this->found['contextKey'] . $this->found['alias']];
+
+            $foundParams = array();
             // Set the request parameters
             foreach ($params as $key => $value) {
                 if (isset($setting['urlParams'][$key])) {
                     $_REQUEST[$setting['urlParams'][$key]] = $value;
                     $_GET[$setting['urlParams'][$key]] = $value;
+                    $foundParams[$setting['urlParams'][$key]] = $value;
                 } else {
                     $_REQUEST['p' . ($key + 1)] = $value;
                     $_GET['p' . ($key + 1)] = $value;
+                    $foundParams['p' . ($key + 1)] = $value;
                 }
+            }
+            if ($this->getOption('debug')) {
+                $this->modx->log(modX::LOG_LEVEL_ERROR, 'Used configuration:' . "\n" . print_r($setting, true) . "\n" . 'Set params:' . "\n" . print_r($foundParams, true), '', 'CustomRequest Plugin');
             }
         }
         if ($resource = $this->modx->getObject('modResource', $this->found['resourceId'])) {
