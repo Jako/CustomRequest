@@ -51,6 +51,9 @@
     "options": {
       "modx_version": "2.6"
     },
+    "setupOptions": {
+      "source": "setup.options.php"
+    },
     "resolver": {
       "after": [
         "resolve.synctables.php",
