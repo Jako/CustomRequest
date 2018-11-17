@@ -10,16 +10,13 @@ $output = '<style type="text/css">
     #modx-setupoptions-panel { display: none; }
     #modx-setupoptions-form p { margin-bottom: 10px; }
     #modx-setupoptions-form h2 { margin-bottom: 15px; }
-</style>';
+</style>
+';
 
 $values = array();
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
-        $output .= '<script>
-            document.getElementsByClassName("x-window-header-text")[0].innerHTML = "Install CustomRequest - a MODX extra by Treehill Studio";
-        </script>
-
-        <h2>Install CustomRequest</h2>
+        $output .= '<h2>Install CustomRequest</h2>
 
         <p>Thanks for installing CustomRequest. This open source extra was
         developped by Treehill Studio - MODX development in Münsterland.</p>
@@ -35,11 +32,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
 
         break;
     case xPDOTransport::ACTION_UPGRADE:
-        $output .= '<script>
-            document.getElementsByClassName("x-window-header-text")[0].innerHTML = "Upgrade CustomRequest - a MODX extra by Treehill Studio";
-        </script>
-        
-        <h2>Upgrade CustomRequest</h2>
+        $output .= '<h2>Upgrade CustomRequest</h2>
 
         <p>CustomRequest will be upgraded. This open source extra was developped by
         Treehill Studio - MODX development in Münsterland.</p>
