@@ -25,6 +25,7 @@ CustomRequest.panel.Home = function (config) {
                     autoHeight: true,
                     hideMode: 'offsets'
                 },
+                autoScroll: true,
                 items: [{
                     xtype: 'customrequest-panel-configs'
                 }]
