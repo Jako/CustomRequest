@@ -1,6 +1,6 @@
 # CustomRequest
 
-Use pretty URLs everywhere
+Use pretty URLs everywhere in the MODX Revolution frontend
 
 ## Features
 
