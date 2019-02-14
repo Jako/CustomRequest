@@ -6,39 +6,39 @@
  * @subpackage lexicon
  */
 $_lang['customrequest'] = 'CustomRequest';
-$_lang['customrequest_desc'] = 'Use friendly URLs everywhere';
+$_lang['customrequest_desc'] = 'Benutzerfreundliche URLs überall';
 
 $_lang['customrequest.menu_home'] = 'CustomRequest';
-$_lang['customrequest.menu_home_desc'] = 'Use friendly URLs everywhere';
+$_lang['customrequest.menu_home_desc'] = 'Benutzerfreundliche URLs überall';
 
-$_lang['customrequest.debug_mode'] = 'Debug Mode';
+$_lang['customrequest.debug_mode'] = 'Debug-Modus';
 
-$_lang['customrequest.configs'] = 'Configurations';
-$_lang['customrequest.configs_alias'] = 'Alias Path';
-$_lang['customrequest.configs_alias_desc'] = 'The first characters of a not found URI are compared with this string. If both paths are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.';
-$_lang['customrequest.configs_alias_generated'] = 'Generated';
-$_lang['customrequest.configs_alias_regex'] = 'Regular Expression';
-$_lang['customrequest.configs_context'] = 'Context';
-$_lang['customrequest.configs_create'] = 'New Configuration';
-$_lang['customrequest.configs_desc'] = 'Create and modify your CustomRequest configurations.';
-$_lang['customrequest.configs_desc_extended'] = "The configurations are executed in the order of the grid. If there are two configurations starting with the same alias path, the first configuration is used. You can change the order of the configurations by drag&amp;drop. The column 'Alias Path' is shown with green text, when it is generated from a Resource ID. It is shown with blue text, if it contains a valid regular expression.";
-$_lang['customrequest.configs_name'] = 'Configuration Name';
-$_lang['customrequest.configs_regex'] = 'Regular Expression';
-$_lang['customrequest.configs_regex_desc'] = 'This optional regular expression is used to divide the second parts of the not found URI. The search results are assigned to the request parameters in the order of occurrence.';
-$_lang['customrequest.configs_remove'] = 'Remove Configuration';
-$_lang['customrequest.configs_remove_confirm'] = 'Are you sure you want to delete this CustomRequest Configuration?';
-$_lang['customrequest.configs_resourceid'] = 'Resource';
-$_lang['customrequest.configs_resourceid_desc'] = 'A not found URI is forwarded to this resource, if the current configuration is used.';
-$_lang['customrequest.configs_update'] = 'Update Configuration';
-$_lang['customrequest.configs_urlparams'] = 'URI Parameter';
-$_lang['customrequest.configs_urlparams_desc'] = 'The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators \'/\'';
+$_lang['customrequest.configs'] = 'Konfigurationen';
+$_lang['customrequest.configs_alias'] = 'Alias-Pfad';
+$_lang['customrequest.configs_alias_desc'] = 'Mit diesem Pfad wird der Anfang einer nicht gefundenen URI verglichen. Wenn beide Pfade übereinstimmen, dann wird diese Konfiguration benutzt. Wenn der Alias-Pfad nicht gesetzt ist, wird der Alias-Pfad der angegegeben Ressource herangezogen.';
+$_lang['customrequest.configs_alias_generated'] = 'Generiert';
+$_lang['customrequest.configs_alias_regex'] = 'Regulärer Ausdruck';
+$_lang['customrequest.configs_context'] = 'Kontext';
+$_lang['customrequest.configs_create'] = 'Neue Konfiguration';
+$_lang['customrequest.configs_desc'] = 'Erstellen bzw. Bearbeiten Sie Ihre CustomRequest Konfigurationen.';
+$_lang['customrequest.configs_desc_extended'] = "Die Konfigurationen werden in der Reihenfolge ausgeführt, in der sie in der Tabelle aufgeführt sind. Falls zwei Konfigurationen mit dem gleichen Alias-Pfad beginnen, dann wird die erste Konfiguration benutzt. Sie können Reihenfolge der Konfigurationen per Drag&amp;Drop ändern.<br><br>Die Spalte 'Alias Pfad' wird grün markiert, wenn er aus einer Ressourcen ID generiert wird. Sie wird blau markiert, wenn sie einen gültigen Regulären Ausdruck enthält.";
+$_lang['customrequest.configs_name'] = 'Konfigurations-Name';
+$_lang['customrequest.configs_regex'] = 'Regulärer Ausdruck';
+$_lang['customrequest.configs_regex_desc'] = 'Dieser optionale reguläre Ausdruck wird benutzt, um den zweiten Teils der nicht gefundenen URI aufzuteilen. Die Fundstücke werden in der gefundenen Reihenfolge den einzelnen Request-Parametern zugewiesen.';
+$_lang['customrequest.configs_remove'] = 'Konfiguration Löschen';
+$_lang['customrequest.configs_remove_confirm'] = 'Sind Sie sicher, dass sie diese CustomRequest Konfiguration löschen wollen?';
+$_lang['customrequest.configs_resourceid'] = 'Ressource';
+$_lang['customrequest.configs_resourceid_desc'] = 'Auf diese Ressource wird eine nicht gefundene URI bei erfolgreichem Vergleich mit dem Alias-Pfad umgeleitet.';
+$_lang['customrequest.configs_update'] = 'Konfiguration Bearbeiten';
+$_lang['customrequest.configs_urlparams'] = 'Request-Parameter';
+$_lang['customrequest.configs_urlparams_desc'] = 'JSON kodiertes Array mit Request-/Get-/Post-Parameter Schlüsseln. Jedem Schlüssel wird ein Abschnitt des zweiten Teils (nach dem Alias-Pfad) der nicht gefundenen URI zugewiesen. Wenn kein regulärer Ausdruck angegeben ist, wird der zweite Teil am URI Trennzeichen \'/\' aufgeteilt';
 
-$_lang['customrequest.error_msg'] = 'Error: [[+msg]]';
+$_lang['customrequest.error_msg'] = 'Fehler: [[+msg]]';
 
-$_lang['customrequest.configs_err_invalid'] = 'Invalid config.';
-$_lang['customrequest.configs_err_nf'] = 'Config not found.';
-$_lang['customrequest.configs_err_ns'] = 'Config not specified.';
-$_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Please fill the alias and/or select a resource.';
-$_lang['customrequest.configs_err_nv_alias_regex'] = 'If no resource is selected, the alias has to be a valid regular expression containing delimiters.';
-$_lang['customrequest.configs_err_nv_regex'] = 'The regular expression has to contain delimiters and it to be valid.';
-$_lang['customrequest.configs_err_save'] = 'An error occurred while trying to save the config.';
+$_lang['customrequest.configs_err_invalid'] = 'Ungültige Konfiguration.';
+$_lang['customrequest.configs_err_nf'] = 'Konfiguration nicht gefunden.';
+$_lang['customrequest.configs_err_ns'] = 'Konfiguration nicht angegeben.';
+$_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Bitte einen Alias angegeben oder eine Ressource auswählen.';
+$_lang['customrequest.configs_err_nv_alias_regex'] = 'Wenn keine Ressource ausgewählt ist, muss der Alias ein gültiger Regulärer Ausdruck mit Trennzeichen sein.';
+$_lang['customrequest.configs_err_nv_regex'] = 'Der Reguläre Ausdruck muss Trennzeichen enthalten und gültig sein.';
+$_lang['customrequest.configs_err_save'] = 'Beim Speichern der Konfiguration ist ein Fehler aufgetreten.';
