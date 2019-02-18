@@ -1,0 +1,10 @@
+_build/build.config.php
+config.core.php
+
+_build/site
+
+_packages/*.*
+!_packages/.gitignore
+!_packages/*.zip
+
+node_modules/
