@@ -1,4 +1,3 @@
 files:
-  - source: core/components/customrequest/lexicon/en/*.inc.php
-    translation: >-
-      core/components/customrequest/lexicon/%two_letters_code%/%original_file_name%
+  - source: /core/components/customrequest/lexicon/en/*.php
+    translation: /core/components/customrequest/lexicon/%two_letters_code%/%original_file_name%
