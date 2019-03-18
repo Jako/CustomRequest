@@ -16,6 +16,7 @@ $treehillstudio-color: #a9ba2f;
     }
   }
 }
+
 .treehillstudio_about {
   cursor: pointer;
   height: 40px;
@@ -48,6 +49,7 @@ $treehillstudio-color: #a9ba2f;
 .ribbon {
   height: 180px;
   overflow: hidden;
+  pointer-events: none;
   position: absolute;
   width: 180px;
   z-index: 10;
