@@ -16,9 +16,6 @@ $customrequest = $modx->getService('customrequest', 'CustomRequest', $corePath .
     'core_path' => $corePath
 ));
 
-$requestParamAlias = $modx->getOption('request_param_alias', null, 'q');
-$requestUri = trim(strtok($_REQUEST[$requestParamAlias], '?'), '/');
-
 switch ($eventName) {
     case 'OnSiteRefresh':
     case 'OnDocFormSave':
@@ -30,6 +27,8 @@ switch ($eventName) {
     case 'OnPageNotFound':
         $customrequest->initialize();
         if ($modx->context->get('key') !== 'mgr') {
+            $requestParamAlias = $modx->getOption('request_param_alias', null, 'q');
+            $requestUri = trim(strtok($_REQUEST[$requestParamAlias], '?'), '/');
             if ($customrequest->searchAliases($requestUri)) {
                 $customrequest->setRequest();
             }
