@@ -16,7 +16,8 @@ $customrequest = $modx->getService('customrequest', 'CustomRequest', $corePath .
     'core_path' => $corePath
 ));
 
-$requestUri = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
+$requestParamAlias = $modx->getOption('request_param_alias', null, 'q');
+$requestUri = trim(strtok($_REQUEST[$requestParamAlias], '?'), '/');
 
 switch ($eventName) {
     case 'OnSiteRefresh':
