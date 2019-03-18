@@ -6,12 +6,9 @@
  * @subpackage lexicon
  */
 $_lang['customrequest'] = 'CustomRequest';
-$_lang['customrequest_desc'] = 'Benutzerfreundliche URLs überall';
 
 $_lang['customrequest.menu_home'] = 'CustomRequest';
 $_lang['customrequest.menu_home_desc'] = 'Benutzerfreundliche URLs überall';
-
-$_lang['customrequest.debug_mode'] = 'Debug-Modus';
 
 $_lang['customrequest.configs'] = 'Konfigurationen';
 $_lang['customrequest.configs_alias'] = 'Alias-Pfad';
@@ -33,12 +30,14 @@ $_lang['customrequest.configs_update'] = 'Konfiguration Bearbeiten';
 $_lang['customrequest.configs_urlparams'] = 'Request-Parameter';
 $_lang['customrequest.configs_urlparams_desc'] = 'JSON kodiertes Array mit Request-/Get-/Post-Parameter Schlüsseln. Jedem Schlüssel wird ein Abschnitt des zweiten Teils (nach dem Alias-Pfad) der nicht gefundenen URI zugewiesen. Wenn kein regulärer Ausdruck angegeben ist, wird der zweite Teil am URI Trennzeichen \'/\' aufgeteilt';
 
-$_lang['customrequest.error_msg'] = 'Fehler: [[+msg]]';
+$_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
+$_lang['customrequest.settings_desc'] = 'Edit the settings of Crosslinks. You can edit the value of a system setting by double-clicking on the \'Value\' table cell or by right-clicking in the table cell.';
 
-$_lang['customrequest.configs_err_invalid'] = 'Ungültige Konfiguration.';
-$_lang['customrequest.configs_err_nf'] = 'Konfiguration nicht gefunden.';
-$_lang['customrequest.configs_err_ns'] = 'Konfiguration nicht angegeben.';
+$_lang['customrequest.debug_mode'] = 'Debug-Modus';
+
+$_lang['customrequest.systemsetting_key_err_nv'] = 'You could only edit settings with the prefix customrequest.';
+$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a settings_customrequest permission are allowed to change settings.';
+
 $_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Bitte einen Alias angegeben oder eine Ressource auswählen.';
 $_lang['customrequest.configs_err_nv_alias_regex'] = 'Wenn keine Ressource ausgewählt ist, muss der Alias ein gültiger Regulärer Ausdruck mit Trennzeichen sein.';
 $_lang['customrequest.configs_err_nv_regex'] = 'Der Reguläre Ausdruck muss Trennzeichen enthalten und gültig sein.';
-$_lang['customrequest.configs_err_save'] = 'Beim Speichern der Konfiguration ist ein Fehler aufgetreten.';
