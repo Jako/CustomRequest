@@ -1,7 +1,7 @@
 CustomRequest.panel.Home = function (config) {
     config = config || {};
     Ext.applyIf(config, {
-        cls: 'container home-panel'+ ((CustomRequest.config.debug) ? ' debug' : ''),
+        cls: 'container home-panel' + ((CustomRequest.config.debug) ? ' debug' : ''),
         defaults: {
             collapsible: false,
             autoHeight: true
@@ -15,20 +15,8 @@ CustomRequest.panel.Home = function (config) {
                 autoHeight: true
             },
             border: true,
-            style: 'margin-bottom: 20px',
             items: [{
-                xtype: 'modx-tabs',
-                deferredRender: false,
-                forceLayout: true,
-                defaults: {
-                    layout: 'form',
-                    autoHeight: true,
-                    hideMode: 'offsets'
-                },
-                autoScroll: true,
-                items: [{
-                    xtype: 'customrequest-panel-configs'
-                }]
+                xtype: 'customrequest-panel-overview'
             }]
         }, {
             cls: "treehillstudio_about",
@@ -37,7 +25,7 @@ CustomRequest.panel.Home = function (config) {
                 afterrender: function (component) {
                     component.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + CustomRequest.config.assetsUrl + 'img/treehill-studio.png" srcset="' + CustomRequest.config.assetsUrl + 'img/treehill-studio@2x.png 2x" alt"Treehill Studio"><br>' +
-                            '© 2013-2018 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '© 2013-2019 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('customrequest') + ' ' + CustomRequest.config.version,
                             msg: msg,
@@ -91,3 +79,87 @@ CustomRequest.panel.Configs = function (config) {
 };
 Ext.extend(CustomRequest.panel.Configs, MODx.Panel);
 Ext.reg('customrequest-panel-configs', CustomRequest.panel.Configs);
+
+CustomRequest.panel.HomeTab = function (config) {
+    config = config || {};
+    Ext.applyIf(config, {
+        id: 'customrequest-panel-' + config.tabtype,
+        title: config.title,
+        items: [{
+            html: '<p>' + config.description + '</p>',
+            border: false,
+            cls: 'panel-desc'
+        }, {
+            layout: 'form',
+            cls: 'x-form-label-left main-wrapper',
+            defaults: {
+                autoHeight: true
+            },
+            border: true,
+            items: [{
+                id: 'customrequest-panel-' + config.tabtype + '-grid',
+                xtype: 'customrequest-grid-' + config.tabtype,
+                preventRender: true
+            }]
+        }]
+    });
+    CustomRequest.panel.HomeTab.superclass.constructor.call(this, config);
+};
+Ext.extend(CustomRequest.panel.HomeTab, MODx.Panel);
+Ext.reg('customrequest-panel-hometab', CustomRequest.panel.HomeTab);
+
+CustomRequest.panel.Overview = function (config) {
+    config = config || {};
+    this.ident = 'customrequest-panel-overview' + Ext.id();
+    this.panelOverviewTabs = [{
+        xtype: 'customrequest-panel-hometab',
+        title: _('customrequest.configs'),
+        description: _('customrequest.configs_desc'),
+        tabtype: 'configs'
+    }];
+    if (CustomRequest.config.is_admin) {
+        this.panelOverviewTabs.push({
+            xtype: 'customrequest-panel-settings',
+            title: _('customrequest.settings'),
+            description: _('customrequest.settings_desc'),
+            tabtype: 'settings'
+        })
+    }
+    Ext.applyIf(config, {
+        id: this.ident,
+        items: [{
+            xtype: 'modx-tabs',
+            stateful: true,
+            stateId: 'customrequest-panel-overview',
+            stateEvents: ['tabchange'],
+            getState: function () {
+                return {
+                    activeTab: this.items.indexOf(this.getActiveTab())
+                };
+            },
+            autoScroll: true,
+            deferredRender: false,
+            forceLayout: true,
+            defaults: {
+                layout: 'form',
+                autoHeight: true,
+                hideMode: 'offsets'
+            },
+            items: this.panelOverviewTabs,
+            listeners: {
+                tabchange: function (o, t) {
+                    if (t.tabtype === 'settings') {
+                        Ext.getCmp('customrequest-grid-system-settings').getStore().reload();
+                    } else if (t.xtype === 'customrequest-panel-hometab') {
+                        if (Ext.getCmp('customrequest-panel-' + t.tabtype + '-grid')) {
+                            Ext.getCmp('customrequest-panel-' + t.tabtype + '-grid').getStore().reload();
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    CustomRequest.panel.Overview.superclass.constructor.call(this, config);
+};
+Ext.extend(CustomRequest.panel.Overview, MODx.Panel);
+Ext.reg('customrequest-panel-overview', CustomRequest.panel.Overview);

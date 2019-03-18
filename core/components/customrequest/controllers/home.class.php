@@ -1,9 +1,13 @@
 <?php
 /**
- * Home controller class for SwitchTemplate
+ * Home controller class for CustomRequest
  *
  * @package customrequest
  * @subpackage controller
+ */
+
+/**
+ * Class CustomrequestHomeManagerController
  */
 class CustomrequestHomeManagerController extends modExtraManagerController
 {
@@ -32,24 +36,27 @@ class CustomrequestHomeManagerController extends modExtraManagerController
             $this->addCss($cssSourceUrl . 'customrequest.css?v=v' . $this->customrequest->version);
             $this->addJavascript($jsSourceUrl . 'customrequest.js?v=v' . $this->customrequest->version);
             $this->addJavascript($jsSourceUrl . 'helper/combo.js?v=v' . $this->customrequest->version);
-            $this->addJavascript($jsSourceUrl . 'widgets/configs.grid.js?v=v' . $this->customrequest->version);
             $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js?v=v' . $this->customrequest->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/configs.grid.js?v=v' . $this->customrequest->version);
+            $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js');
+            $this->addJavascript($jsSourceUrl . 'widgets/settings.panel.js?v=v' . $this->crosslinks->version);
             $this->addLastJavascript($jsSourceUrl . 'sections/home.js?v=v' . $this->customrequest->version);
         } else {
             $this->addCss($cssUrl . 'customrequest.min.css?v=v' . $this->customrequest->version);
+            $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js');
             $this->addLastJavascript($jsUrl . 'customrequest.min.js?v=v' . $this->customrequest->version);
         }
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
             CustomRequest.config = ' . json_encode($this->customrequest->options, JSON_PRETTY_PRINT) . ';
-            MODx.load({ xtype: "customrequest-page-home"});
+            MODx.load({xtype: "customrequest-page-home"});
         });
         </script>');
     }
 
     public function getLanguageTopics()
     {
-        return array('customrequest:default');
+        return array('core:setting', 'customrequest:default');
     }
 
     public function process(array $scriptProperties = array())

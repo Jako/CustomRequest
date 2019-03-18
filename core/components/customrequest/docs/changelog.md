@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - TBA
+### Added
+- Edit CustomRequest system settings in the custom manager page
+### Changed
+- Use $_REQUEST variable instead of $_SERVER variable to avoid subfolder installation issues
+- Retrieve $requestUri only during OnPageNotFound
+
 ## [1.3.1] - 2018-11-13
 ### Added
 - Log found configuration and the set request parameters
@@ -70,7 +77,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.0] - 2015-03-03
 ### Added
-- Custom Manager Page that replaces the config files
+- Custom manager page that replaces the config files
 - Automatic Import for old config files
 
 ## [1.0.3] - 2015-01-29

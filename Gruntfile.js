@@ -36,8 +36,9 @@ module.exports = function (grunt) {
                 src: [
                     'source/js/mgr/customrequest.js',
                     'source/js/mgr/helper/combo.js',
-                    'source/js/mgr/widgets/configs.grid.js',
                     'source/js/mgr/widgets/home.panel.js',
+                    'source/js/mgr/widgets/configs.grid.js',
+                    'source/js/mgr/widgets/settings.panel.js',
                     'source/js/mgr/sections/home.js'
                 ],
                 dest: 'assets/components/customrequest/js/mgr/customrequest.min.js'
@@ -71,11 +72,27 @@ module.exports = function (grunt) {
             }
         },
         cssmin: {
-            customrequest: {
+            mgr: {
                 src: [
                     'source/css/mgr/customrequest.css'
                 ],
                 dest: 'assets/components/customrequest/css/mgr/customrequest.min.css'
+            }
+        },
+        imagemin: {
+            png: {
+                options: {
+                    optimizationLevel: 7
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'source/img/',
+                        src: ['**/*.png'],
+                        dest: 'assets/components/customrequest/img/',
+                        ext: '.png'
+                    }
+                ]
             }
         },
         watch: {
@@ -85,7 +102,7 @@ module.exports = function (grunt) {
                 ],
                 tasks: ['uglify', 'usebanner:js']
             },
-            scss: {
+            css: {
                 files: [
                     'source/**/*.scss'
                 ],
@@ -153,6 +170,7 @@ module.exports = function (grunt) {
     //load the packages
     grunt.loadNpmTasks('grunt-banner');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');

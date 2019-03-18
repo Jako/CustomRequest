@@ -3,10 +3,14 @@
 /**
  * CustomRequest Classfile
  *
- * Copyright 2013-2018 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2013-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package customrequest
  * @subpackage classfile
+ */
+
+/**
+ * class CustomRequest
  */
 class CustomRequest
 {
@@ -26,7 +30,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.1';
+    public $version = '1.3.2-rc';
 
     /**
      * The class options
@@ -50,7 +54,7 @@ class CustomRequest
      * CustomRequest constructor
      *
      * @param modX $modx A reference to the modX instance.
-     * @param array $options An options array. Optional.
+     * @param array $options An array of options. Optional.
      */
     public function __construct(modX &$modx, $options = array())
     {
@@ -80,10 +84,10 @@ class CustomRequest
             'jsUrl' => $assetsUrl . 'js/',
             'cssUrl' => $assetsUrl . 'css/',
             'imagesUrl' => $assetsUrl . 'images/',
-            'connectorUrl' => $assetsUrl . 'connector.php',
+            'connectorUrl' => $assetsUrl . 'connector.php'
         ), $options);
 
-        // Load (system) properties
+        // Add default options
         $this->options = array_merge($this->options, array(
             'debug' => (bool)$this->getOption('debug', null, false),
             'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/'),
@@ -92,7 +96,8 @@ class CustomRequest
             'cacheOptions' => array(
                 xPDO::OPT_CACHE_KEY => 'customrequest',
                 xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_resource_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
-            )
+            ),
+            'is_admin' => ($this->modx->user) ? $modx->hasPermission('settings') : false
         ));
 
         $this->modx->addPackage('customrequest', $this->getOption('modelPath'));

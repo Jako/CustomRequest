@@ -1,11 +1,14 @@
 {
-  "name": "CustomRequest",
+  "name": "customrequest",
   "description": "Use friendly URLs everywhere",
+  "author": "Thomas Jakobi <thomas.jakobi@partout.info>",
+  "private": true,
   "devDependencies": {
     "autoprefixer": "^9.4.7",
     "grunt": "^1.0.3",
     "grunt-banner": "^0.6.0",
     "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-imagemin": "^3.1.0",
     "grunt-contrib-uglify": "^4.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-postcss": "^0.9.0",

@@ -22,11 +22,9 @@ if ($object->xpdo) {
             $modx->addPackage('customrequest', $modelPath, null);
 
 
-
             $manager = $modx->getManager();
 
             $manager->createObjectContainer('CustomrequestConfigs');
-
 
             break;
     }

@@ -50,6 +50,7 @@
 .ribbon {
   height: 180px;
   overflow: hidden;
+  pointer-events: none;
   position: absolute;
   width: 180px;
   z-index: 10;
