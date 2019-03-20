@@ -31,7 +31,7 @@ $_lang['customrequest.configs_urlparams'] = 'URI Parameter';
 $_lang['customrequest.configs_urlparams_desc'] = 'The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators \'/\'';
 
 $_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
-$_lang['customrequest.settings_desc'] = 'Edit the settings of Crosslinks. You can edit the value of a system setting by double-clicking on the \'Value\' table cell or by right-clicking in the table cell.';
+$_lang['customrequest.settings_desc'] = 'Edit the settings of CustomRequest. You can edit the value of a system setting by double-clicking on the \'Value\' table cell or by right-clicking in the table cell.';
 
 $_lang['customrequest.debug_mode'] = 'Debug Mode';
 
