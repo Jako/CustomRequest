@@ -30,7 +30,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.2-rc';
+    public $version = '1.3.2';
 
     /**
      * The class options
