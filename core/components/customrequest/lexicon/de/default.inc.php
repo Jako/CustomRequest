@@ -31,7 +31,7 @@ $_lang['customrequest.configs_urlparams'] = 'Request-Parameter';
 $_lang['customrequest.configs_urlparams_desc'] = 'JSON kodiertes Array mit Request-/Get-/Post-Parameter Schlüsseln. Jedem Schlüssel wird ein Abschnitt des zweiten Teils (nach dem Alias-Pfad) der nicht gefundenen URI zugewiesen. Wenn kein regulärer Ausdruck angegeben ist, wird der zweite Teil am URI Trennzeichen \'/\' aufgeteilt';
 
 $_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
-$_lang['customrequest.settings_desc'] = 'Edit the settings of CustomRequest. You can edit the value of a system setting by double-clicking on the \'Value\' table cell or by right-clicking in the table cell.';
+$_lang['customrequest.settings_desc'] = 'Bearbeiten Sie die Einstellungen von CustomRequest. Sie können den Wert einer Systemeinstellung mit einem Doppelklick auf die ‚Wert‘-Tabellenzelle oder die Systemeinstellung mit einem Rechtsklick in der Tabellenzelle bearbeiten.';
 
 $_lang['customrequest.debug_mode'] = 'Debug-Modus';
 
