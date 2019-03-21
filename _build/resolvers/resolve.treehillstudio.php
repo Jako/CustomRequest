@@ -93,16 +93,18 @@ $params = array(
  * Curl POST.
  */
 $curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, $url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 120);
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-curl_setopt($curl, CURLOPT_TIMEOUT, 120);
+if ($curl) {
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 120);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+    curl_setopt($curl, CURLOPT_TIMEOUT, 120);
 
-$response = curl_exec($curl);
-$responseInfo = curl_getinfo($curl);
-$curlError = curl_error($curl);
-curl_close($curl);
+    $response = curl_exec($curl);
+    $responseInfo = curl_getinfo($curl);
+    $curlError = curl_error($curl);
+    curl_close($curl);
+}
 
 return true;
