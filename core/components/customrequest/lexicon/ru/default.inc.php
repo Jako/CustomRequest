@@ -11,33 +11,33 @@ $_lang['customrequest.menu_home'] = 'CustomRequest';
 $_lang['customrequest.menu_home_desc'] = 'Использовать дружественные URL везде';
 
 $_lang['customrequest.configs'] = 'Настройки';
-$_lang['customrequest.configs_alias'] = 'Alias Path';
-$_lang['customrequest.configs_alias_desc'] = 'The first characters of a not found URI are compared with this string. If both paths are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.';
+$_lang['customrequest.configs_alias'] = 'Путь псевдонима';
+$_lang['customrequest.configs_alias_desc'] = 'Первые символы не найденного URI сравниваются с этой строкой. Если оба пути совпадают, то используется эта конфигурация. Если поле пути псевдонима не установлено, используется путь к псевдонимам выбранного ресурса в этой форме.';
 $_lang['customrequest.configs_alias_generated'] = 'Сгенерировать';
 $_lang['customrequest.configs_alias_regex'] = 'Регулярное выражение';
 $_lang['customrequest.configs_context'] = 'Контекст';
 $_lang['customrequest.configs_create'] = 'Новая конфигурация';
 $_lang['customrequest.configs_desc'] = 'Создание и изменение конфигураций CustomRequest.';
-$_lang['customrequest.configs_desc_extended'] = "The configurations are executed in the order of the grid. If there are two configurations starting with the same alias path, the first configuration is used. You can change the order of the configurations by drag&amp;drop. The column 'Alias Path' is shown with green text, when it is generated from a Resource ID. It is shown with blue text, if it contains a valid regular expression.";
+$_lang['customrequest.configs_desc_extended'] = "Конфигурации выполняются в порядке таблицы. Если есть две конфигурации, начиная с одного и того же псевдонима, используется первая конфигурация. Вы можете изменить порядок конфигурации, перетащите&amp;падение. Столбец 'Путь Алиаса' отображается с зеленым текстом, когда он генерируется из идентификатора ресурса. Он отображается с синим текстом, если он содержит правильное регулярное выражение.";
 $_lang['customrequest.configs_name'] = 'Имя конфигурации';
 $_lang['customrequest.configs_regex'] = 'Регулярное выражение';
-$_lang['customrequest.configs_regex_desc'] = 'This optional regular expression is used to divide the second parts of the not found URI. The search results are assigned to the request parameters in the order of occurrence.';
+$_lang['customrequest.configs_regex_desc'] = 'Это необязательное регулярное выражение используется для разделения второй части не найденного URI. Результаты поиска назначаются для параметров запроса в порядке появления.';
 $_lang['customrequest.configs_remove'] = 'Удалить конфигурацию';
-$_lang['customrequest.configs_remove_confirm'] = 'Are you sure you want to delete this CustomRequest Configuration?';
+$_lang['customrequest.configs_remove_confirm'] = 'Вы уверены, что хотите удалить эту конфигурацию CustomRequest?';
 $_lang['customrequest.configs_resourceid'] = 'Ресурс';
-$_lang['customrequest.configs_resourceid_desc'] = 'A not found URI is forwarded to this resource, if the current configuration is used.';
+$_lang['customrequest.configs_resourceid_desc'] = 'Не найденный URI перенаправлен на этот ресурс, если используется текущая конфигурация.';
 $_lang['customrequest.configs_update'] = 'Обновить конфигурацию';
 $_lang['customrequest.configs_urlparams'] = 'Параметр URI';
-$_lang['customrequest.configs_urlparams_desc'] = 'The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators \'/\'';
+$_lang['customrequest.configs_urlparams_desc'] = 'Ключи параметра request/get/post, разделенные на вторую часть не найденного URI, назначаются. Если поле Регулярное выражение не установлено, вторая часть делится на разделители URI';
 
 $_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
-$_lang['customrequest.settings_desc'] = 'Edit the settings of CustomRequest. You can edit the value of a system setting by double-clicking on the \'Value\' table cell or by right-clicking in the table cell.';
+$_lang['customrequest.settings_desc'] = 'Редактировать настройки CustomRequest. Вы можете изменить значение системного параметра дважды нажав на кнопку \'Value\' таблицы или правой кнопкой мыши в ячейке таблицы.';
 
 $_lang['customrequest.debug_mode'] = 'Режим отладки';
 
-$_lang['customrequest.systemsetting_key_err_nv'] = 'You could only edit settings with the prefix customrequest.';
-$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a settings_customrequest permission are allowed to change settings.';
+$_lang['customrequest.systemsetting_key_err_nv'] = 'Вы можете редактировать настройки только с помощью обычного запроса префикса.';
+$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Разрешается изменять настройки только пользователям с разрешением настроек или разрешением settings_glossary.';
 
-$_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Please fill the alias and/or select a resource.';
-$_lang['customrequest.configs_err_nv_alias_regex'] = 'If no resource is selected, the alias has to be a valid regular expression containing delimiters.';
-$_lang['customrequest.configs_err_nv_regex'] = 'The regular expression has to contain delimiters and it to be valid.';
+$_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Пожалуйста, заполните псевдоним и/или выберите ресурс.';
+$_lang['customrequest.configs_err_nv_alias_regex'] = 'Если не выбран ресурс, псевдоним должен быть действительным регулярным выражением, содержащим разделители.';
+$_lang['customrequest.configs_err_nv_regex'] = 'Регулярное выражение должно содержать разделители и быть действительным.';
