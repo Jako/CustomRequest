@@ -18,7 +18,7 @@ Install via package manager and create your routings with the custom manager pag
 
 ## Documentation
 
-For more information please read the [documentation](http://jako.github.io/CustomRequest/).
+For more information please read the [documentation](https://jako.github.io/CustomRequest/).
 
 ## Translations
 

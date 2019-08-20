@@ -29,7 +29,7 @@ MODX Package Management
 
 Documentation
 -------------
-http://jako.github.io/CustomRequest/
+https://jako.github.io/CustomRequest/
 
 GitHub Repository
 -----------------

@@ -63,7 +63,7 @@ Name | Alias Path | Resource | URI Parameter | Regular Expression
 --------------|------------|----------|---------------|-------------------
 Pagination | #.*?(page/)# | | ["page"] | #(\d+)#
 
-[^4]: The regular expression[^5] has to be valid and it should contain [delimiters](http://php.net/manual/en/regexp.reference.delimiters.php)
+[^4]: The regular expression[^5] has to be valid and it should contain [delimiters](https://www.php.net/manual/en/regexp.reference.delimiters.php)
 
 [^5]: To build and check regular expressions you could i.e. use the [regex101](https://regex101.com/) website.
 
