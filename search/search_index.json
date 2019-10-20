@@ -1,0 +1,109 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "CustomRequest\n\n\nCustomRequest is an effective routing plugin for MODX Revolution to map pretty\nbut not found URLs to a MODX resource and set the request parameters by\nseparating the URI path at the URI separators or by a regular expression.\n\n\nRequirements\n\n\n\n\nMODX Revolution 2.4+\n\n\nPHP v5.4+\n\n\n\n\nFeatures\n\n\n\n\nUse pretty URLs everywhere in the MODX Revolution frontend.", 
+            "title": "Description"
+        }, 
+        {
+            "location": "/#customrequest", 
+            "text": "CustomRequest is an effective routing plugin for MODX Revolution to map pretty\nbut not found URLs to a MODX resource and set the request parameters by\nseparating the URI path at the URI separators or by a regular expression.", 
+            "title": "CustomRequest"
+        }, 
+        {
+            "location": "/#requirements", 
+            "text": "MODX Revolution 2.4+  PHP v5.4+", 
+            "title": "Requirements"
+        }, 
+        {
+            "location": "/#features", 
+            "text": "Use pretty URLs everywhere in the MODX Revolution frontend.", 
+            "title": "Features"
+        }, 
+        {
+            "location": "/installation/", 
+            "text": "Install from MODX Extras\n\n\nSearch for CustomRequest in the Package Manager of your MODX installation and\ninstall it in there.\n\n\nManual installation\n\n\nIf you can't access the MODX Extras Repository in your MODX installation, you\ncan manually install CustomRequest.\n\n\n\n\nDownload the transport package from \nMODX Extras\n (or one of the pre built transport packages in \n_packages\n)\n\n\nUpload the zip file to your MODX installation's \ncore/packages\n folder or upload it manually in the MODX Package Manager.\n\n\nIn the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown button.\n\n\nCustomRequest should now show up in the list of available packages. Click the corresponding 'Install' button and follow the instructions to complete the installation.\n\n\n\n\nBuild it from source\n\n\nTo build and install the package from source you could use \nGit Package\nManagement\n. The GitHub\nrepository of CustomRequest contains a\n\nconfig.json\n\nto build that package locally. Use this option, if you want to debug\nCustomRequest and/or contribute bugfixes and enhancements.", 
+            "title": "Installation"
+        }, 
+        {
+            "location": "/installation/#install-from-modx-extras", 
+            "text": "Search for CustomRequest in the Package Manager of your MODX installation and\ninstall it in there.", 
+            "title": "Install from MODX Extras"
+        }, 
+        {
+            "location": "/installation/#manual-installation", 
+            "text": "If you can't access the MODX Extras Repository in your MODX installation, you\ncan manually install CustomRequest.   Download the transport package from  MODX Extras  (or one of the pre built transport packages in  _packages )  Upload the zip file to your MODX installation's  core/packages  folder or upload it manually in the MODX Package Manager.  In the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown button.  CustomRequest should now show up in the list of available packages. Click the corresponding 'Install' button and follow the instructions to complete the installation.", 
+            "title": "Manual installation"
+        }, 
+        {
+            "location": "/installation/#build-it-from-source", 
+            "text": "To build and install the package from source you could use  Git Package\nManagement . The GitHub\nrepository of CustomRequest contains a config.json \nto build that package locally. Use this option, if you want to debug\nCustomRequest and/or contribute bugfixes and enhancements.", 
+            "title": "Build it from source"
+        }, 
+        {
+            "location": "/usage/", 
+            "text": "How it works\n\n\nCustomRequest works as routing plugin and maps not found URLs to a MODX resource\nand set additional request parameters by separating the URI path at the URI\nseparators or by a regular expression.\n\n\nAs standard option the first characters of the not found URI will be compared \nwith the alias value of each config entry. If found, this config entry is used. \nThe alias path is stripped from the not found URI and the remaining string is \nused to set the request parameters.\n\n\nAs a second option, the alias value of a config entry could contain a valid \nregular expression and the not found URI will be matched with that expression. \nIf matched, this config entry is used. The first subpattern part of the \nexpression is stripped from the found pattern and the remaining  string is used \nto identify the resource where the user is forwarded to later. At least the \nfound pattern is removed from the not found URI and the remaining string is \nused to set the request parameters.\n\n\nCustom Manager Page\n\n\nYou could configure CustomRequest in a custom manager page in the extras menu. \nThe CustomRequest configurations could be created on that page.\n\n\nThe configurations are executed in the order of the grid on this page. If there \nare two configurations starting with the same alias path, the first \nconfiguration is used. You can change the order of the configurations by \ndrag and drop.\n\n\nThe following settings could be set in each configuration:\n\n\n\n\n\n\n\n\nKey\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nName\n\n\nA name to identify this configuration.\n\n\n\n\n\n\nAlias Path\n\n\nNormally the first characters of a not found URI are compared with this string. If both strings are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used \n(The grid value is shown with green text then)\n. The alias path is stripped from the not found URI and the remaining string is used to set the request parameters.\nAs a second option, this field could contain a valid regular expression\n1\n \n(The grid value is shown with blue text then)\n. The regular expression has to contain \ndelimiters\n. The not found URI will be matched with that expression. If matched, this config entry is used. The first subpattern part of the expression is stripped from the found pattern and the remaining string is used to identify the resource where the user is forwarded to. At least the found pattern is removed from the not found URI and the remaining string is used to set the request parameters.\n\n\n\n\n\n\nResource\n\n\nA not found URI is forwarded to this resource, if the current configuration is used and if the alias path does not contain a regular expression.\n\n\n\n\n\n\nURI Parameter\n\n\nThe request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators \n/\n\n\n\n\n\n\nRegular Expression\n\n\nThis optional regular expression\n1\n is used to divide the second parts of the not found URI. The regular expression has to contain \ndelimiters\n. The search results are assigned to the request parameters in the order of occurrence.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTo build and check regular expressions you could i.e. use the \nregex101\n website.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/usage/#how-it-works", 
+            "text": "CustomRequest works as routing plugin and maps not found URLs to a MODX resource\nand set additional request parameters by separating the URI path at the URI\nseparators or by a regular expression.  As standard option the first characters of the not found URI will be compared \nwith the alias value of each config entry. If found, this config entry is used. \nThe alias path is stripped from the not found URI and the remaining string is \nused to set the request parameters.  As a second option, the alias value of a config entry could contain a valid \nregular expression and the not found URI will be matched with that expression. \nIf matched, this config entry is used. The first subpattern part of the \nexpression is stripped from the found pattern and the remaining  string is used \nto identify the resource where the user is forwarded to later. At least the \nfound pattern is removed from the not found URI and the remaining string is \nused to set the request parameters.", 
+            "title": "How it works"
+        }, 
+        {
+            "location": "/usage/#custom-manager-page", 
+            "text": "You could configure CustomRequest in a custom manager page in the extras menu. \nThe CustomRequest configurations could be created on that page.  The configurations are executed in the order of the grid on this page. If there \nare two configurations starting with the same alias path, the first \nconfiguration is used. You can change the order of the configurations by \ndrag and drop.  The following settings could be set in each configuration:     Key  Description      Name  A name to identify this configuration.    Alias Path  Normally the first characters of a not found URI are compared with this string. If both strings are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used  (The grid value is shown with green text then) . The alias path is stripped from the not found URI and the remaining string is used to set the request parameters. As a second option, this field could contain a valid regular expression 1   (The grid value is shown with blue text then) . The regular expression has to contain  delimiters . The not found URI will be matched with that expression. If matched, this config entry is used. The first subpattern part of the expression is stripped from the found pattern and the remaining string is used to identify the resource where the user is forwarded to. At least the found pattern is removed from the not found URI and the remaining string is used to set the request parameters.    Resource  A not found URI is forwarded to this resource, if the current configuration is used and if the alias path does not contain a regular expression.    URI Parameter  The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators  /    Regular Expression  This optional regular expression 1  is used to divide the second parts of the not found URI. The regular expression has to contain  delimiters . The search results are assigned to the request parameters in the order of occurrence.         To build and check regular expressions you could i.e. use the  regex101  website.", 
+            "title": "Custom Manager Page"
+        }, 
+        {
+            "location": "/examples/", 
+            "text": "Calendar\n\n\nWith the \nDate\n configuration you could use an calendar snippet on the \nresource with the URI \ncalendar/date/\n. The snippet on that resource would \nuse the request parameters \nyear\n, \nmonth\n, \nday\n, \ntitle\n to identify the \nevent. An example URI triggering this configuration: \n\n/calendar/date/2015/09/01/eventname.html\n\n\nThe \nCalendar\n configuration sends the request parameters \nyear\n, \nmonth\n, \n\nday\n to another snippet on the resource with the URI \ncalendar/\n. Example \ntriggering URI: \n/calendar/2015/09/01/\n \n1\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nDate\n\n\ncalendar/date/\n\n\n\n\n[\"year\", \"month\", \"day\", \"title\"]\n\n\n\n\n\n\n\n\nCalendar\n\n\ncalendar/\n\n\n\n\n[\"year\", \"month\", \"day\"]\n\n\n\n\n\n\n\n\n\n\nGallery\n\n\nWith the \nGallery\n configuration you could use the Gallery snippet on the \nselected resource \nGallery Folder\n. The Gallery snippet on that resource would \nuse the request parameters \ngalAlbum\n, \ngalItem\n to identify the gallery and \nthe image. An example URI triggering this configuration: \n/gallery/01/02/\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nGallery\n\n\n\n\nGallery Folder\n\n\n[\"galAlbum\", \"galItem\"]\n\n\n\n\n\n\n\n\n\n\nDifferent URI\n\n\nWith the \nDifferent URI\n configuration you could call the resource \nTest\n \nwith a complete different URI using the request parameters \nparameter1\n, \n\nparameter2\n. \n2\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nDifferent URI\n\n\ncomplete/different/uri/\n\n\nTest\n\n\n[\"parameter1\", \"parameter2\"]\n\n\n\n\n\n\n\n\n\n\nRegular Expression\n\n\nYou could even use regular expressions\n5\n to set the request parameters \n3\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nExpression\n\n\n\n\nExpression\n\n\n[\"string\", \"numeric\"]\n\n\n#(.*?)-(\\d+)#\n\n\n\n\n\n\n\n\nPagination\n\n\nThe Alias Path field could be filled with a valid regular expression\n5\n (the \ncolor of the grid field is changed to blue then\n4\n) and the Resource field \ncould stay empty. Thay way you could use one pagination configuration for all \npagination calls on the page. The first subpattern part (\npage/\n) of the \nexpression is stripped from the not found url and the remaining string is used \nto identify the resource where the user is forwarded to later.\n\n\n\n\n\n\n\n\nName\n\n\nAlias Path\n\n\nResource\n\n\nURI Parameter\n\n\nRegular Expression\n\n\n\n\n\n\n\n\n\n\nPagination\n\n\n#.*?(page/)#\n\n\n\n\n[\"page\"]\n\n\n#(\\d+)#\n\n\n\n\n\n\n\n\nSystem Settings\n\n\nCustomRequest uses the following system settings in the namespace \ncustomrequest\n:\n\n\n\n\n\n\n\n\nKey\n\n\nDescription\n\n\nDefault\n\n\n\n\n\n\n\n\n\n\ncustomrequest.debug\n\n\nLog debug information in the MODX error log\n\n\nNo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIf you are using two or more nested aliases in your configs, the deeper alias should be defined before the narrower alias in the configs. You could drag and drop the configurations in the grid of the custom manager page.\n\n\n\n\n\n\nThe Alias Path does not have to match the alias of the Resource.\n\n\n\n\n\n\nThis rule does not make much sense. If you have a real world example, please ...\n\n\n\n\n\n\nThe regular expression\n5\n has to be valid and it should contain \ndelimiters\n\n\n\n\n\n\nTo build and check regular expressions you could i.e. use the \nregex101\n website.", 
+            "title": "Examples"
+        }, 
+        {
+            "location": "/examples/#calendar", 
+            "text": "With the  Date  configuration you could use an calendar snippet on the \nresource with the URI  calendar/date/ . The snippet on that resource would \nuse the request parameters  year ,  month ,  day ,  title  to identify the \nevent. An example URI triggering this configuration:  /calendar/date/2015/09/01/eventname.html  The  Calendar  configuration sends the request parameters  year ,  month ,  day  to another snippet on the resource with the URI  calendar/ . Example \ntriggering URI:  /calendar/2015/09/01/   1     Name  Alias Path  Resource  URI Parameter  Regular Expression      Date  calendar/date/   [\"year\", \"month\", \"day\", \"title\"]     Calendar  calendar/   [\"year\", \"month\", \"day\"]", 
+            "title": "Calendar"
+        }, 
+        {
+            "location": "/examples/#gallery", 
+            "text": "With the  Gallery  configuration you could use the Gallery snippet on the \nselected resource  Gallery Folder . The Gallery snippet on that resource would \nuse the request parameters  galAlbum ,  galItem  to identify the gallery and \nthe image. An example URI triggering this configuration:  /gallery/01/02/     Name  Alias Path  Resource  URI Parameter  Regular Expression      Gallery   Gallery Folder  [\"galAlbum\", \"galItem\"]", 
+            "title": "Gallery"
+        }, 
+        {
+            "location": "/examples/#different-uri", 
+            "text": "With the  Different URI  configuration you could call the resource  Test  \nwith a complete different URI using the request parameters  parameter1 ,  parameter2 .  2     Name  Alias Path  Resource  URI Parameter  Regular Expression      Different URI  complete/different/uri/  Test  [\"parameter1\", \"parameter2\"]", 
+            "title": "Different URI"
+        }, 
+        {
+            "location": "/examples/#regular-expression", 
+            "text": "You could even use regular expressions 5  to set the request parameters  3     Name  Alias Path  Resource  URI Parameter  Regular Expression      Expression   Expression  [\"string\", \"numeric\"]  #(.*?)-(\\d+)#", 
+            "title": "Regular Expression"
+        }, 
+        {
+            "location": "/examples/#pagination", 
+            "text": "The Alias Path field could be filled with a valid regular expression 5  (the \ncolor of the grid field is changed to blue then 4 ) and the Resource field \ncould stay empty. Thay way you could use one pagination configuration for all \npagination calls on the page. The first subpattern part ( page/ ) of the \nexpression is stripped from the not found url and the remaining string is used \nto identify the resource where the user is forwarded to later.     Name  Alias Path  Resource  URI Parameter  Regular Expression      Pagination  #.*?(page/)#   [\"page\"]  #(\\d+)#", 
+            "title": "Pagination"
+        }, 
+        {
+            "location": "/examples/#system-settings", 
+            "text": "CustomRequest uses the following system settings in the namespace  customrequest :     Key  Description  Default      customrequest.debug  Log debug information in the MODX error log  No         If you are using two or more nested aliases in your configs, the deeper alias should be defined before the narrower alias in the configs. You could drag and drop the configurations in the grid of the custom manager page.    The Alias Path does not have to match the alias of the Resource.    This rule does not make much sense. If you have a real world example, please ...    The regular expression 5  has to be valid and it should contain  delimiters    To build and check regular expressions you could i.e. use the  regex101  website.", 
+            "title": "System Settings"
+        }, 
+        {
+            "location": "/contributors/", 
+            "text": "The CustomRequest project was started in 2013 by \nThomas Jakobi\n.\n\n\nMany thanks to everyone, who has contributed to this project:\n\n\n\n\n@benjamindean\n\n\n@Boddlnagg", 
+            "title": "Contributors"
+        }, 
+        {
+            "location": "/donate/", 
+            "text": "Support CustomRequest\n\n\nCustomRequest\n is and always will be free and open-source, but it still\nrequires many man-hours of development, bug-fixing, support in MODX forums and\non GitHub between the releases.\n\n\nPlease support the ongoing and past development of \nCustomRequest\n by making a\ndonation below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCustomRequest\n development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
+            "title": "Donate"
+        }, 
+        {
+            "location": "/donate/#support-customrequest", 
+            "text": "CustomRequest  is and always will be free and open-source, but it still\nrequires many man-hours of development, bug-fixing, support in MODX forums and\non GitHub between the releases.  Please support the ongoing and past development of  CustomRequest  by making a\ndonation below.            CustomRequest  development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
+            "title": "Support CustomRequest"
+        }
+    ]
+}
