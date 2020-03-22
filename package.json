@@ -4,8 +4,8 @@
   "author": "Thomas Jakobi <thomas.jakobi@partout.info>",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^9.6.1",
-    "grunt": "^1.0.4",
+    "autoprefixer": "^9.7.4",
+    "grunt": "^1.1.0",
     "grunt-banner": "^0.6.0",
     "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-imagemin": "^3.1.0",
@@ -14,7 +14,7 @@
     "grunt-postcss": "^0.9.0",
     "grunt-sass": "^3.1.0",
     "grunt-string-replace": "^1.3.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "pixrem": "^5.0.0"
   },
   "browserslist": [
