@@ -23,7 +23,7 @@ extra:
 
 theme:
   name: null
-  custom_dir: ../../../mkdocs-material/material
+  custom_dir: ../../mkdocs-material/material
 
   # 404 page
   static_templates:
