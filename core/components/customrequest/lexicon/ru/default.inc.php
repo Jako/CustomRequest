@@ -5,6 +5,7 @@
  * @package customrequest
  * @subpackage lexicon
  */
+
 $_lang['customrequest'] = 'CustomRequest';
 
 $_lang['customrequest.menu_home'] = 'CustomRequest';
