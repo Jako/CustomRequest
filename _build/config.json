@@ -44,13 +44,16 @@
       "CustomrequestConfigs"
     ]
   },
+  "dependencies": [
+    {
+      "name": "modx",
+      "version": ">=2.6"
+    }
+  ],
   "build": {
     "readme": "docs/readme.md",
     "license": "docs/license.md",
     "changelog": "docs/changelog.md",
-    "options": {
-      "modx_version": "2.6"
-    },
     "setupOptions": {
       "source": "setup.options.php"
     },

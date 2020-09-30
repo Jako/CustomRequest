@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CustomRequest Classfile
  *
@@ -58,12 +57,12 @@ class CustomRequest
      */
     public function __construct(modX &$modx, $options = array())
     {
-        $this->modx =& $modx;
+        $this->modx = &$modx;
         $this->namespace = $this->getOption('namespace', $options, $this->namespace);
 
-        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/' . $this->namespace . '/');
-        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/' . $this->namespace . '/');
-        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/' . $this->namespace . '/');
+        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'components/' . $this->namespace . '/');
+        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path', null, MODX_ASSETS_PATH) . 'components/' . $this->namespace . '/');
+        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url', null, MODX_ASSETS_URL) . 'components/' . $this->namespace . '/');
 
         // Load some default paths for easier management
         $this->options = array_merge(array(
@@ -89,7 +88,8 @@ class CustomRequest
 
         // Add default options
         $this->options = array_merge($this->options, array(
-            'debug' => (bool)$this->getOption('debug', null, false),
+            'debug' => (bool)$this->modx->getOption($this->namespace . '.debug', null, '0') == 1,
+            'is_admin' => ($this->modx->user) ? $modx->hasPermission('settings') || $modx->hasPermission($this->namespace . '_settings') : false,
             'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/'),
             'cachePath' => $this->modx->getOption('core_path') . 'cache/',
             'cacheKey' => 'requests',
@@ -97,10 +97,9 @@ class CustomRequest
                 xPDO::OPT_CACHE_KEY => 'customrequest',
                 xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_resource_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
             ),
-            'is_admin' => ($this->modx->user) ? $modx->hasPermission('settings') : false
         ));
 
-        $this->modx->addPackage('customrequest', $this->getOption('modelPath'));
+        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
 
         if (isset($this->options['aliases'])) {
             $this->requests = $this->modx->fromJSON($this->options['aliases'], true);
@@ -109,7 +108,6 @@ class CustomRequest
             $this->requests = array();
         }
 
-        $modx->getService('lexicon', 'modLexicon');
         $this->modx->lexicon->load($this->namespace . ':default');
     }
 
