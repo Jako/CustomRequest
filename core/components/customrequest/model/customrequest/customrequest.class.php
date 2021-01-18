@@ -193,11 +193,8 @@ class CustomRequest
                             /** @var modResource $resource */
                             $resource = $this->modx->getObject('modResource', $resourceId);
                             if ($resource) {
-                                $tmpKey = $this->modx->context->key;
                                 $contextKey = $resource->get('context_key');
-                                $this->modx->switchContext($contextKey);
-                                $alias = $this->modx->makeUrl($resourceId);
-                                $this->modx->switchContext($tmpKey);
+                                $alias = $this->modx->makeUrl($resourceId, $contextKey);
                                 if ($alias) {
                                     // Cutoff trailing .html or /
                                     $alias = trim(str_replace('.html', '', $alias), '/');
