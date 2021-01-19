@@ -2,7 +2,7 @@
 /**
  * CustomRequest Classfile
  *
- * Copyright 2013-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2013-2021 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package customrequest
  * @subpackage classfile
@@ -29,7 +29,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.2';
+    public $version = '1.3.3';
 
     /**
      * The class options
@@ -95,7 +95,7 @@ class CustomRequest
             'cacheKey' => 'requests',
             'cacheOptions' => array(
                 xPDO::OPT_CACHE_KEY => 'customrequest',
-                xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_resource_handler', null, $modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
+                xPDO::OPT_CACHE_HANDLER => $modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
             ),
         ));
 
@@ -145,7 +145,10 @@ class CustomRequest
     {
         $this->requests = $this->modx->cacheManager->get($this->options['cacheKey'], $this->options['cacheOptions']);
 
-        if (empty($this->requests) || true) {
+        if (empty($this->requests) || $this->getOption('debug') == true) {
+            // Clear the requests in debug mode
+            $this->requests = array();
+
             // Import config records
             $c = $this->modx->newQuery('CustomrequestConfigs');
             $c->sortby('menuindex', 'ASC');
@@ -193,8 +196,11 @@ class CustomRequest
                             /** @var modResource $resource */
                             $resource = $this->modx->getObject('modResource', $resourceId);
                             if ($resource) {
+                                $tmpKey = $this->modx->context->key;
                                 $contextKey = $resource->get('context_key');
-                                $alias = $this->modx->makeUrl($resourceId, $contextKey);
+                                $this->modx->switchContext($contextKey);
+                                $alias = $this->modx->makeUrl($resourceId);
+                                $this->modx->switchContext($tmpKey);
                                 if ($alias) {
                                     // Cutoff trailing .html or /
                                     $alias = trim(str_replace('.html', '', $alias), '/');
@@ -215,7 +221,7 @@ class CustomRequest
                         }
                     }
                 }
-                $this->requests[$contextKey . $alias] = array(
+                $this->requests[$contextKey . ':' . $alias] = array(
                     'resourceId' => $resourceId,
                     'alias' => $alias,
                     'aliasRegEx' => $aliasRegEx,

@@ -21,8 +21,8 @@
   cursor: pointer;
   height: 40px;
   opacity: 0.25;
-  -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
+  margin-top: 20px;
 }
 
 .treehillstudio_about:hover {
@@ -43,7 +43,6 @@
 }
 
 .home-panel.debug {
-  background: -webkit-gradient(linear, left bottom, right top, from(transparent), color-stop(transparent), color-stop(transparent), to(#fff));
   background: linear-gradient(to top right, transparent, transparent, transparent, #fff);
 }
 
@@ -87,15 +86,12 @@
 .ribbon.top-right span {
   left: -46px;
   top: 46px;
-  -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .ribbon span {
   background-color: #be0000;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
   display: block;
   font: 700 18px/1 'Lato', sans-serif;
