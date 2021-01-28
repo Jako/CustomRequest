@@ -29,7 +29,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.3';
+    public $version = '1.3.3-pl2';
 
     /**
      * The class options
@@ -332,7 +332,7 @@ class CustomRequest
             $params = explode('/', trim($params, '/'));
         }
         if (count($params) >= 1) {
-            $setting = $this->requests[$this->found['contextKey'] . ":" . $this->found['alias']];
+            $setting = $this->requests[$this->found['contextKey'] . ':' . $this->found['alias']];
 
             $foundParams = array();
             // Set the request parameters
