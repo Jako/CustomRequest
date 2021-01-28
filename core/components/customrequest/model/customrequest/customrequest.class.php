@@ -332,7 +332,7 @@ class CustomRequest
             $params = explode('/', trim($params, '/'));
         }
         if (count($params) >= 1) {
-            $setting = $this->requests[$this->found['contextKey'] . $this->found['alias']];
+            $setting = $this->requests[$this->found['contextKey'] . ":" . $this->found['alias']];
 
             $foundParams = array();
             // Set the request parameters
