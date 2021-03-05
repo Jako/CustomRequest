@@ -14,16 +14,22 @@ class CustomrequestHomeManagerController extends modExtraManagerController
     /** @var CustomRequest $customrequest */
     public $customrequest;
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize()
     {
         $path = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
-        $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . '/model/customrequest/', array(
+        $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . 'model/customrequest/', array(
             'core_path' => $path
         ));
 
         parent::initialize();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function loadCustomCssJs()
     {
         $assetsUrl = $this->customrequest->getOption('assetsUrl');
@@ -54,21 +60,37 @@ class CustomrequestHomeManagerController extends modExtraManagerController
         </script>');
     }
 
-    public function getLanguageTopics()
+    /**
+     * {@inheritDoc}
+     * @return string[]
+     */
+    public function getLanguageTopics(): array
     {
         return array('core:setting', 'customrequest:default');
     }
 
+    /**
+     * {@inheritDoc}
+     * @param array $scriptProperties
+     */
     public function process(array $scriptProperties = array())
     {
     }
 
-    public function getPageTitle()
+    /**
+     * {@inheritDoc}
+     * @return string|null
+     */
+    public function getPageTitle(): ?string
     {
         return $this->modx->lexicon('customrequest');
     }
 
-    public function getTemplateFile()
+    /**
+     * {@inheritDoc}
+     * @return string
+     */
+    public function getTemplateFile(): string
     {
         return $this->customrequest->getOption('templatesPath') . 'home.tpl';
     }

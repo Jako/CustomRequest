@@ -14,7 +14,8 @@ MODX Package Management
 
 ## Usage
 
-Install via package manager and create your routings with the custom manager page that could be found in the extras menu.
+Install via package manager and create your routings with the custom manager
+page that could be found in the extras menu.
 
 ## Documentation
 
