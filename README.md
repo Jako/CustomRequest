@@ -1,3 +1,5 @@
+[![Weblate](https://hosted.weblate.org/widgets/modx-customrequest/-/svg-badge.svg)](https://hosted.weblate.org/engage/modx-customrequest/)
+
 # CustomRequest
 
 Use pretty URLs everywhere in the MODX Revolution frontend
@@ -23,4 +25,4 @@ For more information please read the [documentation](https://jako.github.io/Cust
 
 ## Translations
 
-Translations of the package could be done on [Crowdin](https://crowdin.com/project/modx-customrequest)
+Translations of the package could be done on [Weblate](https://hosted.weblate.org/engage/modx-customrequest/)
