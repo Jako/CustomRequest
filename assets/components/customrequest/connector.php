@@ -30,8 +30,10 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
     $_SERVER['HTTP_MODAUTH'] = $modx->user->getUserToken($modx->context->get('key'));
 }
 
+$processorsPath = $customrequest->getOption('processorsPath');
+
 // Handle request
 $modx->request->handleRequest(array(
-    'processors_path' => $customrequest->getOption('processorsPath'),
+    'processors_path' => $processorsPath,
     'location' => ''
 ));
