@@ -51,6 +51,7 @@ CustomRequest.grid.Configs = function (config) {
                 fn: this.buttonColumnRenderer,
                 scope: this
             },
+            menuDisabled: true,
             width: 20
         }],
         tbar: [{
