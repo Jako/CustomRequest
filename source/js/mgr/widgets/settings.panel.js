@@ -1,5 +1,6 @@
 CustomRequest.panel.Settings = function (config) {
     config = config || {};
+    MODx.request.ns = 'customrequest';
     Ext.applyIf(config, {
         id: 'customrequest-panel-settings',
         title: _('customrequest.settings'),
