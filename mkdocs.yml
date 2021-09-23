@@ -8,7 +8,7 @@ repo_url: https://github.com/Jako/CustomRequest
 
 copyright: '&copy; 2013-2021 <a href="https://treehillstudio.com">Treehill Studio</a>'
 
-pages:
+nav:
 - Description: 'index.md'
 - Installation: 'installation.md'
 - Usage: 'usage.md'
@@ -17,12 +17,13 @@ pages:
 - Donate: 'donate.md'
 
 extra:
-  matomo:
-    - //matomo.partout.info/
-    - 16
+  analytics:
+    provider: matomo
+    url: matomo.treehillstudio.com
+    site: 40
 
 theme:
-  name: null
+  name: material
   custom_dir: ../../mkdocs-material/material
 
   # 404 page
@@ -37,24 +38,14 @@ theme:
   language: en
   feature:
     tabs: false
-  palette:
-    primary: #40A0DF
-    accent: #0080D4
   font:
-    text: Dosis
-    text_weights: 300,400,700
-    code: Ubuntu Mono
-    code_weights: 400,700
-    head: Ubuntu
-    head_weights: 400,400i,700,700i
-  favicon: assets/images/favicon.png
-  logo:
-    icon: "\uE80C"
+    text: Sora
+    code: JetBrains Mono
 
 markdown_extensions:
   - footnotes
   - tables
   - admonition
   - meta
-  - toc(permalink=true)
+  - toc
   - pymdownx.superfences

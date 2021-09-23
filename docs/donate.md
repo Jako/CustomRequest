@@ -20,4 +20,4 @@ donation below.
 
 *CustomRequest* development is sponsored by Treehillstudio – MODX Development in Münsterland.
 
-<a href="https://treehillstudio.com"><img alt="Treehillstudio – MODX Development in Münsterland" border="0" src="../assets/images/treehillstudio_logo_color.svg" width="188" height="56"></a>
+<a href="https://treehillstudio.com"><img alt="Treehillstudio – MODX Development in Münsterland" border="0" src="../assets/images/treehill-studio-logo.svg" width="188" height="52"></a>
