@@ -37,7 +37,7 @@ $_lang['customrequest.settings_desc'] = 'Редактировать настро
 $_lang['customrequest.debug_mode'] = 'Режим отладки';
 
 $_lang['customrequest.systemsetting_key_err_nv'] = 'Вы можете редактировать настройки только с помощью обычного запроса префикса.';
-$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Разрешается изменять настройки только пользователям с разрешением настроек или разрешением settings_glossary.';
+$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Разрешается изменять настройки только пользователям с разрешением настроек или разрешением settings_customrequest.';
 
 $_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Пожалуйста, заполните псевдоним и/или выберите ресурс.';
 $_lang['customrequest.configs_err_nv_alias_regex'] = 'Если не выбран ресурс, псевдоним должен быть действительным регулярным выражением, содержащим разделители.';

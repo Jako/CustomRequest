@@ -45,7 +45,7 @@ class CustomrequestHomeManagerController extends modExtraManagerController
             $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js?v=v' . $this->customrequest->version);
             $this->addJavascript($jsSourceUrl . 'widgets/configs.grid.js?v=v' . $this->customrequest->version);
             $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js');
-            $this->addJavascript($jsSourceUrl . 'widgets/settings.panel.js?v=v' . $this->crosslinks->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/settings.panel.js?v=v' . $this->customrequest->version);
             $this->addLastJavascript($jsSourceUrl . 'sections/home.js?v=v' . $this->customrequest->version);
         } else {
             $this->addCss($cssUrl . 'customrequest.min.css?v=v' . $this->customrequest->version);
