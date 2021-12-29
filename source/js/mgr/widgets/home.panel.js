@@ -25,7 +25,7 @@ CustomRequest.panel.Home = function (config) {
                 afterrender: function (component) {
                     component.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + CustomRequest.config.assetsUrl + 'img/treehill-studio.png" srcset="' + CustomRequest.config.assetsUrl + 'img/treehill-studio@2x.png 2x" alt="Treehill Studio"><br>' +
-                            '© 2013-2021 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '&copy; 2013-2021 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('customrequest') + ' ' + CustomRequest.config.version,
                             msg: msg,

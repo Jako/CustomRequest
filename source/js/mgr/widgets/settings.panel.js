@@ -44,7 +44,7 @@ Ext.extend(CustomRequest.grid.SystemSettings, MODx.grid.SettingsGrid, {
             m = this.menu.record.menu;
         } else {
             m.push({
-                text: _('setting_update'),
+                text: _('setting_update') || _('edit'),
                 handler: this.updateSetting
             });
         }
