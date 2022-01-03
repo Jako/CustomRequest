@@ -3,7 +3,7 @@
  * Remove processor for CustomRequest
  *
  * @package customrequest
- * @subpackage processor
+ * @subpackage processors
  */
 
 class CustomRequestConfigsRemoveProcessor extends modObjectRemoveProcessor

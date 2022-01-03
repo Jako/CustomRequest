@@ -4,7 +4,7 @@
  * Sortindex configs
  *
  * @package customrequest
- * @subpackage processor
+ * @subpackage processors
  */
 class CustomrequestConfigsSortindexProcessor extends modObjectProcessor
 {

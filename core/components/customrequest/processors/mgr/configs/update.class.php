@@ -3,7 +3,7 @@
  * Update processor for CustomRequest
  *
  * @package customrequest
- * @subpackage processor
+ * @subpackage processors
  */
 
 class CustomrequestConfigsUpdateProcessor extends modObjectUpdateProcessor

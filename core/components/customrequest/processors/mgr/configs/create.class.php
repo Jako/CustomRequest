@@ -3,7 +3,7 @@
  * Create processor for CustomRequest
  *
  * @package customrequest
- * @subpackage processor
+ * @subpackage processors
  */
 
 class CustomrequestConfigsCreateProcessor extends modObjectCreateProcessor

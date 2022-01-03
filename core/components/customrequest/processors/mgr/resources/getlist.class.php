@@ -3,7 +3,7 @@
  * Get list processor for CustomRequest
  *
  * @package customreqest
- * @subpackage processor
+ * @subpackage processors
  */
 
 class CustomrequestResourcesGetListProcessor extends modObjectGetListProcessor
