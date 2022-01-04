@@ -5,19 +5,19 @@
  * @package customrequest
  * @subpackage build
  *
- * @var mixed $object
  * @var array $options
+ * @var xPDOObject $object
  * @var xPDOTransport $transport
  */
 
 $url = 'https://treehillstudio.com/extras/package/statistics';
-$params = array();
+$params = [];
 
 /** @var xPDO $modx */
 $modx =& $object->xpdo;
 $c = $modx->newQuery('transport.modTransportPackage');
 $c->where(
-    array(
+    [
         'workspace' => 1,
         "(SELECT
             `signature`
@@ -30,15 +30,13 @@ $c->where(
                 IF(`release` = '' OR `release` = 'ga' OR `release` = 'pl','z',`release`) DESC,
                 `latestPackage`.`release_index` DESC
                 LIMIT 1,1) = `modTransportPackage`.`signature`",
-    )
+    ]
 );
 $c->where(
-    array(
-        array(
-            'modTransportPackage.signature:LIKE' => $options['namespace'] . '-%',
-        ),
-        'installed:IS NOT' => null
-    )
+    [
+        'modTransportPackage.signature:LIKE' => $options['namespace'] . '-%',
+        'modTransportPackage.installed:IS NOT' => null
+    ]
 );
 $c->limit(1);
 
@@ -58,7 +56,7 @@ if ($transport->version) {
     $version = $transport->version;
 }
 
-$modxVersionObj = $modx->getObject('modSystemSetting', array('key' => 'settings_version'));
+$modxVersionObj = $modx->getObject('modSystemSetting', ['key' => 'settings_version']);
 $modxVersion = ($modxVersionObj) ? $modxVersionObj->get('value') : '';
 $managerLang = $modx->getOption('manager_language');
 
@@ -75,7 +73,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         break;
 }
 
-$params = array(
+$params = [
     'name' => $options['namespace'],
     'url' => $modx->getOption('SERVER_NAME', $_SERVER, 'unknown'),
     'ip' => $modx->getOption('SERVER_ADDR', $_SERVER, 'unknown'),
@@ -87,7 +85,7 @@ $params = array(
     'package_version_from' => $oldVersion,
     'package_version' => $version,
     'date' => time()
-);
+];
 
 /**
  * Curl POST.
