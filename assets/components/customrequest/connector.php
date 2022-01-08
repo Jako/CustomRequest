@@ -1,6 +1,6 @@
 <?php
 /**
- * CustomRequest Connector
+ * CustomRequest connector
  *
  * @package customrequest
  * @subpackage connector
