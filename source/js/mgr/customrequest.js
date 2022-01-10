@@ -1,11 +1,14 @@
 var customRequest = function (config) {
     config = config || {};
-    Ext.applyIf(config, {});
     customRequest.superclass.constructor.call(this, config);
-    return this;
 };
 Ext.extend(customRequest, Ext.Component, {
-    page: {}, window: {}, grid: {}, tree: {}, panel: {}, combo: {}, config: {}, util: {}
+    initComponent: function () {
+        this.stores = {};
+        this.ajax = new Ext.data.Connection({
+            disableCaching: true,
+        });
+    }, page: {}, window: {}, grid: {}, tree: {}, panel: {}, combo: {}, config: {}, util: {}, form: {}
 });
 Ext.reg('customrequest', customRequest);
 

@@ -1,6 +1,5 @@
 CustomRequest.panel.Settings = function (config) {
     config = config || {};
-    MODx.request.ns = 'customrequest';
     Ext.applyIf(config, {
         id: 'customrequest-panel-settings',
         title: _('customrequest.settings'),
@@ -22,12 +21,17 @@ Ext.reg('customrequest-panel-settings', CustomRequest.panel.Settings);
 
 CustomRequest.grid.SystemSettings = function (config) {
     config = config || {};
-    config.baseParams = {
-        action: 'system/settings/getList',
-        namespace: 'customrequest',
-        area: MODx.request['area']
-    };
-    config.tbar = [];
+    Ext.applyIf(config, {
+        id: 'customrequest-grid-systemsettings',
+        url: CustomRequest.config.connectorUrl,
+        baseParams: {
+            action: 'mgr/settings/getlist',
+            area: MODx.request.area || ''
+        },
+        save_action: 'mgr/settings/updatefromgrid',
+        tbar: [],
+        queryParam: (CustomRequest.config.modxversion >= 3) ? 'query' : 'key'
+    });
     CustomRequest.grid.SystemSettings.superclass.constructor.call(this, config);
 };
 Ext.extend(CustomRequest.grid.SystemSettings, MODx.grid.SettingsGrid, {
@@ -76,36 +80,29 @@ Ext.extend(CustomRequest.grid.SystemSettings, MODx.grid.SettingsGrid, {
         uss.show(e.target);
     },
     clearFilter: function () {
-        var ns = 'customrequest';
-        var area = MODx.request['area'] ? MODx.request['area'] : '';
+        var area = MODx.request.area || '';
         this.getStore().baseParams = this.initialConfig.baseParams;
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
-            acb.store.baseParams['namespace'] = ns;
             acb.store.load();
             acb.reset();
         }
-        Ext.getCmp('modx-filter-namespace').setValue(ns);
-        Ext.getCmp('modx-filter-key').reset();
-        this.getStore().baseParams.namespace = ns;
+        Ext.getCmp('modx-filter-' + this.config.queryParam).reset();
         this.getStore().baseParams.area = area;
-        this.getStore().baseParams.key = '';
+        this.getStore().baseParams[this.config.queryParam] = '';
         this.getBottomToolbar().changePage(1);
     },
-    filterByKey: function (tf, newValue, oldValue) {
-        this.getStore().baseParams.key = newValue;
-        this.getStore().baseParams.namespace = 'customrequest';
+    filterByKey: function (tf, newValue) {
+        this.getStore().baseParams[this.config.queryParam] = newValue;
         this.getBottomToolbar().changePage(1);
         return true;
     },
-    filterByNamespace: function (cb, rec, ri) {
-        this.getStore().baseParams['namespace'] = 'customrequest';
-        this.getStore().baseParams['area'] = '';
+    filterByNamespace: function () {
+        this.getStore().baseParams.area = '';
         this.getBottomToolbar().changePage(1);
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
             var s = acb.store;
-            s.baseParams['namespace'] = 'customrequest';
             s.removeAll();
             s.load();
             acb.setValue('');

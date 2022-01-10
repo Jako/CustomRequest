@@ -1,8 +1,5 @@
 $treehillstudio-color: #cbd842;
-
-#customrequest-panel-configs-grid {
-  margin-top: 15px;
-}
+$red: #be0000;
 
 .action-buttons {
   text-align: center;
@@ -43,7 +40,7 @@ $treehillstudio-color: #cbd842;
 
 .home-panel {
   &.debug {
-    background: linear-gradient(to top right, transparent, transparent, transparent, #fff);
+    background: linear-gradient(to top right, transparent, transparent, transparent, #ffffff);
   }
 }
 
@@ -53,10 +50,10 @@ $treehillstudio-color: #cbd842;
   pointer-events: none;
   position: absolute;
   width: 180px;
-  z-index: 10;
+  z-index: 15;
   &:before,
   &:after {
-    border: 5px solid mix(#000, #be0000, 15);
+    border: 5px solid mix(#000000, $red, 15);
     content: '';
     display: block;
     position: absolute;
@@ -85,9 +82,9 @@ $treehillstudio-color: #cbd842;
     }
   }
   span {
-    background-color: #be0000;
+    background-color: $red;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
-    color: #fff;
+    color: #ffffff;
     display: block;
     font: 700 18px/1 'Lato', sans-serif;
     padding: 15px 0;
@@ -98,3 +95,5 @@ $treehillstudio-color: #cbd842;
     width: 300px;
   }
 }
+
+@import 'modx3';

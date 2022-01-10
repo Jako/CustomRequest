@@ -6,8 +6,8 @@ separating the URI path at the URI separators or by a regular expression.
 
 ### Requirements
 
-* MODX Revolution 2.4+
-* PHP v5.4+
+* MODX Revolution 2.6+
+* PHP 7.2+
 
 ### Features
 

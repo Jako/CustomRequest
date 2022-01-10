@@ -1,56 +1,58 @@
 <?php
 /**
- * Create processor for CustomRequest
+ * Create a Config
  *
  * @package customrequest
  * @subpackage processors
  */
 
-class CustomrequestConfigsCreateProcessor extends modObjectCreateProcessor
+use TreehillStudio\CustomRequest\Processors\ObjectCreateProcessor;
+
+class CustomrequestConfigsCreateProcessor extends ObjectCreateProcessor
 {
     public $classKey = 'CustomrequestConfigs';
-    public $languageTopics = array('customrequest:default');
     public $objectType = 'customrequest.configs';
 
+    protected $required = ['name'];
+
     /**
+     * {@inheritDoc}
      * @return bool
      */
     public function beforeSave()
     {
-        $name = $this->getProperty('name');
         $alias = $this->getProperty('alias');
         $regex = $this->getProperty('regex');
         $resourceid = $this->getProperty('resourceid');
-
-        if (empty($name)) {
-            $this->addFieldError('name', $this->modx->lexicon('field_required'));
-        }
 
         if (empty($alias) && empty($resourceid)) {
             $this->addFieldError('alias', $this->modx->lexicon('customrequest.configs_err_ns_alias_resourceid'));
             $this->addFieldError('resourceid', $this->modx->lexicon('customrequest.configs_err_ns_alias_resourceid'));
         }
 
-        if (empty($resourceid) && (@preg_match($alias, 'dummy') === false)) {
-            $this->addFieldError('alias',$this->modx->lexicon('customrequest.configs_err_nv_alias_regex'));
+        if (empty($resourceid) && !$this->customrequest->isRegularExpression($alias)) {
+            $this->addFieldError('alias', $this->modx->lexicon('customrequest.configs_err_nv_alias_regex'));
         }
 
-        if (!empty($regex) && (@preg_match($regex, 'dummy') === false)) {
-            $this->addFieldError('regex',$this->modx->lexicon('customrequest.configs_err_nv_regex'));
+        if (!empty($regex) && !$this->customrequest->isRegularExpression($regex)) {
+            $this->addFieldError('regex', $this->modx->lexicon('customrequest.configs_err_nv_regex'));
         }
 
-        $count = $this->modx->getCount('CustomrequestConfigs');
+        $count = $this->modx->getCount($this->classKey);
         $this->object->set('menuindex', $count);
 
-        if (!$this->hasErrors()) {
-            $path = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
-            $customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . 'model/customrequest/', array(
-                'core_path' => $path
-            ));
-            $customrequest->reset();
-        }
-
         return parent::beforeSave();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
+    public function afterSave()
+    {
+        $this->customrequest->reset();
+
+        return parent::afterSave();
     }
 }
 

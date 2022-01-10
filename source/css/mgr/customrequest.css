@@ -1,18 +1,12 @@
-#customrequest-panel-configs-grid {
-  margin-top: 15px;
-}
-
 .action-buttons {
   text-align: center;
 }
-
 .action-buttons li {
   display: inline-block;
   font-size: 1.1em;
-  line-height: .7;
+  line-height: 0.7;
   margin-right: 5px;
 }
-
 .action-buttons li:last-child {
   margin-right: 0;
 }
@@ -24,26 +18,23 @@
   transition: opacity 0.5s;
   margin-top: 20px;
 }
-
 .treehillstudio_about:hover {
   opacity: 1;
 }
-
 .treehillstudio_about .x-panel-body {
   text-align: right;
 }
 
 .treehillstudio_window a {
-  color: #849125;
+  color: #b2bf28;
   text-decoration: none;
 }
-
 .treehillstudio_window a:hover {
-  color: #4d5415;
+  color: #77801a;
 }
 
 .home-panel.debug {
-  background: linear-gradient(to top right, transparent, transparent, transparent, #fff);
+  background: linear-gradient(to top right, transparent, transparent, transparent, #ffffff);
 }
 
 .ribbon {
@@ -52,53 +43,61 @@
   pointer-events: none;
   position: absolute;
   width: 180px;
-  z-index: 10;
+  z-index: 15;
 }
-
 .ribbon:before, .ribbon:after {
   border: 5px solid #a20000;
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   z-index: -1;
 }
-
 .ribbon.top-right {
   right: -10px;
   top: -10px;
 }
-
 .ribbon.top-right:before, .ribbon.top-right:after {
   border-right-color: transparent;
   border-top-color: transparent;
 }
-
 .ribbon.top-right:before {
   left: 0;
   top: 0;
 }
-
 .ribbon.top-right:after {
   bottom: 0;
   right: 0;
 }
-
 .ribbon.top-right span {
   left: -46px;
   top: 46px;
   transform: rotate(45deg);
 }
-
 .ribbon span {
   background-color: #be0000;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  color: #fff;
+  color: #ffffff;
   display: block;
-  font: 700 18px/1 'Lato', sans-serif;
+  font: 700 18px/1 "Lato", sans-serif;
   padding: 15px 0;
   position: absolute;
   text-align: center;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
   width: 300px;
+}
+
+@media screen and (min-width: 961px) {
+  #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel.modx3.debug {
+    margin-right: 15px;
+  }
+  #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel.modx3.debug .modx-page-header {
+    padding-right: 0;
+  }
+  #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel.modx3.debug .modx-page-header ~ .x-panel {
+    margin-right: 0;
+  }
+  #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel.modx3 .treehillstudio_about {
+    margin: 0 15px;
+  }
 }

@@ -25,6 +25,7 @@ CustomRequest.grid.Configs = function (config) {
         enableDragDrop: true,
         ddGroup: 'customrequest-grid-dd',
         autoExpandColumn: 'alias',
+        showActionsColumn: false,
         columns: [{
             header: _('customrequest.configs_name'),
             dataIndex: 'name',
@@ -32,6 +33,7 @@ CustomRequest.grid.Configs = function (config) {
         }, {
             header: _('customrequest.configs_alias'),
             dataIndex: 'alias_gen',
+            renderer: CustomRequest.util.renderHtml,
             width: 150
         }, {
             header: _('customrequest.configs_resourceid'),
@@ -60,7 +62,7 @@ CustomRequest.grid.Configs = function (config) {
             handler: this.createConfig
         }, '->', {
             xtype: 'textfield',
-            id: this.ident + '-filter-search',
+            id: this.ident + '-config-filter-search',
             emptyText: _('search') + '…',
             submitValue: false,
             listeners: {
@@ -85,7 +87,7 @@ CustomRequest.grid.Configs = function (config) {
             }
         }, {
             xtype: 'button',
-            id: this.ident + '-filter-clear',
+            id: this.ident + '-config-filter-clear',
             cls: 'x-form-filter-clear',
             text: _('filter_clear'),
             listeners: {
@@ -179,12 +181,12 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
     clearFilter: function () {
         var s = this.getStore();
         s.baseParams.query = '';
-        Ext.getCmp(this.ident + '-filter-search').reset();
+        Ext.getCmp(this.ident + '-config-filter-search').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },
     renderListener: function (grid) {
-        var ddrow = new Ext.dd.DropTarget(grid.container, {
+        new Ext.dd.DropTarget(grid.container, {
             ddGroup: 'customrequest-grid-dd',
             notifyDrop: function (dd, e, data) {
                 var ds = grid.store;
@@ -193,7 +195,7 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
                 var dragData = dd.getDragData(e);
                 if (dragData) {
                     var cindex = dragData.rowIndex;
-                    if (typeof (cindex) !== "undefined") {
+                    if (typeof (cindex) !== 'undefined') {
                         var target = ds.getAt(cindex);
                         var dragIds = [];
                         for (var i = 0; i < rows.length; i++) {
@@ -202,7 +204,7 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
                         }
                         ds.insert(cindex, data.selections);
                         sm.clearSelections();
-                        grid.sortMenuIndex(target.id, dragIds);
+                        grid.sortIndex(target.id, dragIds);
                         return true;
                     }
                 }
@@ -210,7 +212,7 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
             }
         })
     },
-    sortMenuIndex: function (targetId, movingIds) {
+    sortIndex: function (targetId, movingIds) {
         MODx.Ajax.request({
             url: CustomRequest.config.connectorUrl,
             params: {
@@ -274,7 +276,7 @@ CustomRequest.window.CreateUpdateConfig = function (config) {
         action: (config.isUpdate) ? 'mgr/configs/update' : 'mgr/configs/create',
         autoHeight: true,
         closeAction: 'close',
-        cls: 'modx-window customrequest-window',
+        cls: 'modx-window customrequest-window modx' + ConsentFriend.config.modxversion,
         fields: [{
             xtype: 'textfield',
             fieldLabel: _('customrequest.configs_name'),
@@ -311,10 +313,9 @@ CustomRequest.window.CreateUpdateConfig = function (config) {
             id: this.ident + '-regex',
             anchor: '100%'
         }, {
-            xtype: 'textfield',
+            xtype: 'hidden',
             name: 'id',
             id: this.ident + '-id',
-            hidden: true
         }],
         listeners: {
             render: function (form) {

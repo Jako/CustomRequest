@@ -1,6 +1,6 @@
 <?php
 /**
- * Home controller class for CustomRequest
+ * Home controller
  *
  * @package customrequest
  * @subpackage controller
@@ -20,9 +20,9 @@ class CustomrequestHomeManagerController extends modExtraManagerController
     public function initialize()
     {
         $path = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
-        $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . 'model/customrequest/', array(
+        $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $path . 'model/customrequest/', [
             'core_path' => $path
-        ));
+        ]);
 
         parent::initialize();
     }
@@ -42,6 +42,7 @@ class CustomrequestHomeManagerController extends modExtraManagerController
             $this->addCss($cssSourceUrl . 'customrequest.css?v=v' . $this->customrequest->version);
             $this->addJavascript($jsSourceUrl . 'customrequest.js?v=v' . $this->customrequest->version);
             $this->addJavascript($jsSourceUrl . 'helper/combo.js?v=v' . $this->customrequest->version);
+            $this->addJavascript($jsSourceUrl . 'helper/util.js?v=v' . $this->customrequest->version);
             $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js?v=v' . $this->customrequest->version);
             $this->addJavascript($jsSourceUrl . 'widgets/configs.grid.js?v=v' . $this->customrequest->version);
             $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js');
@@ -64,16 +65,16 @@ class CustomrequestHomeManagerController extends modExtraManagerController
      * {@inheritDoc}
      * @return string[]
      */
-    public function getLanguageTopics(): array
+    public function getLanguageTopics()
     {
-        return array('core:setting', 'customrequest:default');
+        return ['core:setting', 'customrequest:default'];
     }
 
     /**
      * {@inheritDoc}
      * @param array $scriptProperties
      */
-    public function process(array $scriptProperties = array())
+    public function process(array $scriptProperties = [])
     {
     }
 
@@ -81,7 +82,7 @@ class CustomrequestHomeManagerController extends modExtraManagerController
      * {@inheritDoc}
      * @return string|null
      */
-    public function getPageTitle(): ?string
+    public function getPageTitle()
     {
         return $this->modx->lexicon('customrequest');
     }
@@ -90,7 +91,7 @@ class CustomrequestHomeManagerController extends modExtraManagerController
      * {@inheritDoc}
      * @return string
      */
-    public function getTemplateFile(): string
+    public function getTemplateFile()
     {
         return $this->customrequest->getOption('templatesPath') . 'home.tpl';
     }

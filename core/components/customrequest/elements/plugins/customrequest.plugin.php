@@ -6,40 +6,28 @@
  * @subpackage plugin
  *
  * @var modX $modx
+ * @var array $scriptProperties
  */
 
-$eventName = $modx->event->name;
+$className = 'TreehillStudio\CustomRequest\Plugins\Events\\' . $modx->event->name;
 
 $corePath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/');
 /** @var CustomRequest $customrequest */
-$customrequest = $modx->getService('customrequest', 'CustomRequest', $corePath . 'model/customrequest/', array(
+$customrequest = $modx->getService('customrequest', 'CustomRequest', $corePath . 'model/customrequest/', [
     'core_path' => $corePath
-));
+]);
 
-switch ($eventName) {
-    case 'OnSiteRefresh':
-    case 'OnDocFormSave':
-    case 'OnDocFormDelete':
-    case 'OnDocPublished':
-    case 'OnDocUnPublished':
-        $customrequest->reset();
-        break;
-    case 'OnPageNotFound':
-        $customrequest->initialize();
-        if ($modx->context->get('key') !== 'mgr') {
-            $requestParamAlias = $modx->getOption('request_param_alias', null, 'q');
-            $requestUri = trim(strtok($_REQUEST[$requestParamAlias], '?'), '/');
-            if ($customrequest->searchAliases($requestUri)) {
-                $customrequest->setRequest();
-            }
+if ($customrequest) {
+    if (class_exists($className)) {
+        $handler = new $className($modx, $scriptProperties);
+        if (get_class($handler) == $className) {
+            $handler->run();
+        } else {
+            $modx->log(xPDO::LOG_LEVEL_ERROR, $className. ' could not be initialized!', '', 'CustomRequest Plugin');
         }
-        break;
-    case 'OnWebPagePrerender':
-        /**
-         * TODO: replace not friendly URL parameter (for URLs with a valid CustomRequest config) with friendly ones
-         * A lot easier, if there would be an onMakeUrl event
-         */
-        break;
+    } else {
+        $modx->log(xPDO::LOG_LEVEL_ERROR, $className. ' was not found!', '', 'CustomRequest Plugin');
+    }
 }
 
 return;

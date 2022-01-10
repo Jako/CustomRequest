@@ -5,11 +5,9 @@
  * @package customrequest
  * @subpackage build
  *
- * @var mixed $object
  * @var array $options
+ * @var xPDOObject $object
  */
-
-set_time_limit(0);
 
 if (!function_exists('updateTableColumns')) {
     /**
@@ -22,7 +20,7 @@ if (!function_exists('updateTableColumns')) {
         $tableName = str_replace('`', '', $tableName);
         $dbname = $modx->getOption('dbname');
 
-        $c = $modx->prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = :dbName AND table_name = :tableName");
+        $c = $modx->prepare('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = :dbName AND table_name = :tableName');
         $c->bindParam(':dbName', $dbname);
         $c->bindParam(':tableName', $tableName);
         $c->execute();
@@ -38,17 +36,17 @@ if (!function_exists('updateTableColumns')) {
         foreach ($columns as $column) {
             if (isset($unusedColumns[$column])) {
                 $m->alterField($table, $column);
-                $modx->log(modX::LOG_LEVEL_INFO, ' -- altered column: ' . $column);
+                $modx->log(xPDO::LOG_LEVEL_INFO, ' -- altered column: ' . $column);
                 unset($unusedColumns[$column]);
             } else {
                 $m->addField($table, $column);
-                $modx->log(modX::LOG_LEVEL_INFO, ' -- added column: ' . $column);
+                $modx->log(xPDO::LOG_LEVEL_INFO, ' -- added column: ' . $column);
             }
         }
 
         foreach ($unusedColumns as $column => $v) {
             $m->removeField($table, $column);
-            $modx->log(modX::LOG_LEVEL_INFO, ' -- removed column: ' . $column);
+            $modx->log(xPDO::LOG_LEVEL_INFO, ' -- removed column: ' . $column);
         }
     }
 }
@@ -75,18 +73,16 @@ if (!function_exists('updateTableIndexes')) {
 
         foreach ($oldIndexes as $oldIndex) {
             $m->removeIndex($table, $oldIndex);
-            $modx->log(modX::LOG_LEVEL_INFO, ' -- removed index: ' . $oldIndex);
+            $modx->log(xPDO::LOG_LEVEL_INFO, ' -- removed index: ' . $oldIndex);
         }
 
         $meta = $modx->getIndexMeta($table);
         $indexes = array_keys($meta);
 
         foreach ($indexes as $index) {
-            if ($index == 'PRIMARY') {
-                continue;
-            }
+            if ($index == 'PRIMARY') continue;
             $m->addIndex($table, $index);
-            $modx->log(modX::LOG_LEVEL_INFO, ' -- added index: ' . $index);
+            $modx->log(xPDO::LOG_LEVEL_INFO, ' -- added index: ' . $index);
         }
     }
 }
@@ -98,10 +94,10 @@ if (!function_exists('alterTable')) {
      */
     function alterTable($modx, $table)
     {
-        $modx->log(modX::LOG_LEVEL_INFO, ' - Updating columns');
+        $modx->log(xPDO::LOG_LEVEL_INFO, ' - Updating columns');
         updateTableColumns($modx, $table);
 
-        $modx->log(modX::LOG_LEVEL_INFO, ' - Updating indexes');
+        $modx->log(xPDO::LOG_LEVEL_INFO, ' - Updating indexes');
         updateTableIndexes($modx, $table);
     }
 }
@@ -113,15 +109,15 @@ if ($object->xpdo) {
             /** @var modX $modx */
             $modx =& $object->xpdo;
 
-            $tables = array(
+            $tables = [
                 'CustomrequestConfigs'
-            );
+            ];
 
             $modelPath = $modx->getOption('customrequest.core_path', null, $modx->getOption('core_path') . 'components/customrequest/') . 'model/';
             $modx->addPackage('customrequest', $modelPath);
 
             foreach ($tables as $table) {
-                $modx->log(modX::LOG_LEVEL_INFO, 'Altering table: ' . $table);
+                $modx->log(xPDO::LOG_LEVEL_INFO, 'Altering table: ' . $table);
                 alterTable($modx, $table);
             }
 

@@ -1,6 +1,5 @@
 CustomRequest.combo.Resource = function (config) {
     config = config || {};
-    this.ident = config.ident || 'customrequest-mecitem' + Ext.id();
     Ext.applyIf(config, {
         url: CustomRequest.config.connectorUrl,
         baseParams: {

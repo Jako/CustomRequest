@@ -1,0 +1,20 @@
+$modx3-green: #6cb24a;
+$modx3-green-darken: #528738;
+$modx3-blue: #234368;
+
+@media screen and (min-width: 961px) {
+  #modx-content > .x-panel-bwrap > .x-panel-body > .x-panel.modx3 {
+    &.debug {
+      margin-right: 15px;
+      .modx-page-header {
+        padding-right: 0;
+        ~ .x-panel {
+          margin-right: 0;
+        }
+      }
+    }
+    .treehillstudio_about {
+      margin: 0 15px;
+    }
+  }
+}

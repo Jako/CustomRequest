@@ -14,7 +14,7 @@ $output = '<style type="text/css">
     #modx-setupoptions-form h2 { margin-bottom: 15px; }
 </style>';
 
-$values = array();
+$values = [];
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
         $output .= '<h2>Install CustomRequest</h2>
