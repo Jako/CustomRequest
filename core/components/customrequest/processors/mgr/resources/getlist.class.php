@@ -43,7 +43,6 @@ class CustomrequestResourcesGetListProcessor extends ObjectGetListProcessor
         $ta['pagetitle'] = $ta['pagetitle'] . ' (' . $ta['id'] . ')';
         return $ta;
     }
-
 }
 
 return 'CustomrequestResourcesGetListProcessor';

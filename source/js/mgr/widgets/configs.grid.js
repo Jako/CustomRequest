@@ -1,5 +1,6 @@
 CustomRequest.grid.Configs = function (config) {
     config = config || {};
+    this.ident = 'customrequest-configs-' + Ext.id();
     this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
         + '<tpl if="action_buttons !== null">'
         + '<ul class="action-buttons">'
@@ -11,7 +12,6 @@ CustomRequest.grid.Configs = function (config) {
         + '</tpl>', {
         compiled: true
     });
-    this.ident = config.ident || 'customrequest-configs' + Ext.id();
     Ext.applyIf(config, {
         id: 'customrequest-grid-configs',
         url: CustomRequest.config.connectorUrl,
@@ -276,7 +276,7 @@ CustomRequest.window.CreateUpdateConfig = function (config) {
         action: (config.isUpdate) ? 'mgr/configs/update' : 'mgr/configs/create',
         autoHeight: true,
         closeAction: 'close',
-        cls: 'modx-window customrequest-window modx' + ConsentFriend.config.modxversion,
+        cls: 'modx-window customrequest-window modx' + CustomRequest.config.modxversion,
         fields: [{
             xtype: 'textfield',
             fieldLabel: _('customrequest.configs_name'),

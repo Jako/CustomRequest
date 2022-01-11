@@ -13,3 +13,5 @@ Ext.extend(customRequest, Ext.Component, {
 Ext.reg('customrequest', customRequest);
 
 CustomRequest = new customRequest();
+
+MODx.config.help_url = 'https://jako.github.io/CustomRequest/usage/';
