@@ -32,7 +32,7 @@ abstract class Plugin
     public function __construct($modx, &$scriptProperties)
     {
         $this->scriptProperties = &$scriptProperties;
-        $this->modx = &$modx;
+        $this->modx =& $modx;
         $corePath = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
         $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $corePath . 'model/customrequest/', [
             'core_path' => $corePath

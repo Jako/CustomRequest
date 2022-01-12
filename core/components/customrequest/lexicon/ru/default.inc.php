@@ -1,6 +1,6 @@
 <?php
 /**
- * Default lexicon entries for CustomRequest
+ * Default Lexicon Entries for CustomRequest
  *
  * @package customrequest
  * @subpackage lexicon
