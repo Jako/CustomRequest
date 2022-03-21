@@ -1,4 +1,4 @@
-[![Weblate](https://hosted.weblate.org/widgets/modx-customrequest/-/svg-badge.svg)](https://hosted.weblate.org/engage/modx-customrequest/)
+[![Weblate](https://hosted.weblate.org/widgets/modx-extras/-/modx-customrequest-standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/modx-customrequest-standard/)
 
 # CustomRequest
 
@@ -25,4 +25,4 @@ For more information please read the [documentation](https://jako.github.io/Cust
 
 ## Translations
 
-Translations of the package could be done on [Weblate](https://hosted.weblate.org/engage/modx-customrequest/)
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-customrequest-standard/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-customrequest-system-settings/)
