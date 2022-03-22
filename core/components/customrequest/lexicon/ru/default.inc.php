@@ -32,6 +32,6 @@ $_lang['customrequest.debug_mode'] = 'Режим отладки';
 $_lang['customrequest.menu_home'] = 'CustomRequest';
 $_lang['customrequest.menu_home_desc'] = 'Использовать дружественные URL везде';
 $_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
-$_lang['customrequest.settings_desc'] = 'Редактировать настройки CustomRequest. Вы можете изменить значение системного параметра дважды нажав на кнопку \'Value\' таблицы или правой кнопкой мыши в ячейке таблицы.';
+$_lang['customrequest.settings_desc'] = 'Редактировать настройки CustomRequest. Вы можете редактировать значение системной настройки, дважды щелкнув по ячейке таблицы «значений» или щелкнув правой кнопкой мыши по ячейке таблицы.';
 $_lang['customrequest.systemsetting_key_err_nv'] = 'Вы можете редактировать настройки только с помощью обычного запроса префикса.';
 $_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Разрешается изменять настройки только пользователям с разрешением настроек или разрешением settings_customrequest.';
