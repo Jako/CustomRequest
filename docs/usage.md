@@ -37,4 +37,4 @@ Resource | A not found URI is forwarded to this resource, if the current configu
 URI Parameter | The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators `/`
 Regular Expression | This optional regular expression[^1] is used to divide the second parts of the not found URI. The regular expression has to contain [delimiters](https://www.php.net/manual/en/regexp.reference.delimiters.php). The search results are assigned to the request parameters in the order of occurrence.
 
-[^1]: To build and check regular expressions you could i.e. use the [regex101](https://regex101.com/) website.
+[^1]: To build and check regular expressions you could i.e. use the [regex101](https://regex101.com/) website. Please use the code generator, since this generator creates the regular expression with delimiters.
