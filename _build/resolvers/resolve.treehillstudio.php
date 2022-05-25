@@ -94,10 +94,10 @@ $curl = curl_init();
 if ($curl) {
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 120);
+    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-    curl_setopt($curl, CURLOPT_TIMEOUT, 120);
+    curl_setopt($curl, CURLOPT_TIMEOUT, 5);
 
     $response = curl_exec($curl);
     $responseInfo = curl_getinfo($curl);
