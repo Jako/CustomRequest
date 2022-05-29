@@ -6,7 +6,7 @@
  * @subpackage processors
  */
 
-use TreehillStudio\Agenda\Processors\ObjectRemoveProcessor;
+use TreehillStudio\CustomRequest\Processors\ObjectRemoveProcessor;
 
 class CustomRequestConfigsRemoveProcessor extends ObjectRemoveProcessor
 {
