@@ -74,7 +74,7 @@ Ext.reg('customrequest-panel-hometab', CustomRequest.panel.HomeTab);
 
 CustomRequest.panel.Overview = function (config) {
     config = config || {};
-    this.ident = 'customrequest-panel-overview' + Ext.id();
+    this.ident = 'customrequest-panel-overview-' + Ext.id();
     this.panelOverviewTabs = [{
         xtype: 'customrequest-panel-hometab',
         title: _('customrequest.configs'),

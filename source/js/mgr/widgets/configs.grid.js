@@ -269,7 +269,7 @@ Ext.reg('customrequest-grid-configs', CustomRequest.grid.Configs);
 
 CustomRequest.window.CreateUpdateConfig = function (config) {
     config = config || {};
-    this.ident = config.ident || 'customrequest-mecitem' + Ext.id();
+    this.ident = 'customrequest-config-create-update-' + Ext.id();
     Ext.applyIf(config, {
         id: this.ident,
         url: CustomRequest.config.connectorUrl,
