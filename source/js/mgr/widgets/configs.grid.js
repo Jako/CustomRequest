@@ -33,7 +33,7 @@ CustomRequest.grid.Configs = function (config) {
         }, {
             header: _('customrequest.configs_alias'),
             dataIndex: 'alias_gen',
-            renderer: CustomRequest.util.renderHtml,
+            renderer: CustomRequest.util.htmlRenderer,
             width: 150
         }, {
             header: _('customrequest.configs_resourceid'),
