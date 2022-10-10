@@ -20,6 +20,9 @@ extra:
     provider: matomo
     url: matomo.treehillstudio.com
     site: 40
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Jako
 
 theme:
   name: material
@@ -45,4 +48,12 @@ markdown_extensions:
   - admonition
   - meta
   - toc
+  - pymdownx.details
   - pymdownx.superfences
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+  - glightbox
