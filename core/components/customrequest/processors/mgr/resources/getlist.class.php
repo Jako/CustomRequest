@@ -15,7 +15,7 @@ class CustomrequestResourcesGetListProcessor extends ObjectGetListProcessor
     public $defaultSortDirection = 'DESC';
     public $objectType = 'customreqest.resources';
 
-    protected $search = ['name', 'alias'];
+    protected $search = ['pagetitle', 'alias'];
 
     /**
      * (@inheritDoc}

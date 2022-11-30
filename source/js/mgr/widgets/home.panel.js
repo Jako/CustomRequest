@@ -78,7 +78,7 @@ CustomRequest.panel.Overview = function (config) {
     this.panelOverviewTabs = [{
         xtype: 'customrequest-panel-hometab',
         title: _('customrequest.configs'),
-        description: _('customrequest.configs_desc'),
+        description: _('customrequest.configs_desc') + '<div style="margin-top: 15px;font-style: italic">' + _('customrequest.configs_desc_extended') + '</div>',
         tabtype: 'configs'
     }];
     if (CustomRequest.config.is_admin) {
