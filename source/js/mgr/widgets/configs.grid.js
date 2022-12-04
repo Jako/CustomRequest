@@ -104,7 +104,7 @@ CustomRequest.grid.Configs = function (config) {
             }
         }
     });
-    CustomRequest.grid.Configs.superclass.constructor.call(this, config)
+    CustomRequest.grid.Configs.superclass.constructor.call(this, config);
 };
 Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
     windows: {},
