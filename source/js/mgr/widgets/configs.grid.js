@@ -54,7 +54,7 @@ CustomRequest.grid.Configs = function (config) {
                 scope: this
             },
             menuDisabled: true,
-            width: 20
+            width: 40
         }],
         tbar: [{
             text: _('customrequest.configs_create'),
@@ -116,6 +116,11 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
         });
         m.push('-');
         m.push({
+            text: _('customrequest.configs_duplicate'),
+            handler: this.duplicateConfig
+        });
+        m.push('-');
+        m.push({
             text: _('customrequest.configs_remove'),
             handler: this.removeConfig
         });
@@ -151,6 +156,33 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
         });
         createUpdateConfig.fp.getForm().setValues(r);
         createUpdateConfig.show(e.target);
+    },
+    duplicateConfig: function (btn, e) {
+        if (!this.menu.record) {
+            return false;
+        }
+        var r = Ext.apply({}, this.menu.record);
+        r.name = _('customrequest.duplicate') + ' ' + r.name;
+        r.original_id = r.id;
+        r.id = null;
+        r.repeat_on = (r.repeat_on) ? r.repeat_on : [];
+        var duplicateConfig = MODx.load({
+            xtype: 'customrequest-window-config-create-update',
+            isUpdate: false,
+            title: _('customrequest.configs_duplicate'),
+            record: r,
+            listeners: {
+                success: {
+                    fn: this.refresh,
+                    scope: this
+                },
+                beforeSubmit: function (values) {
+                    duplicateConfig.beforeSubmit(values);
+                }
+            }
+        });
+        duplicateConfig.fp.getForm().setValues(r);
+        duplicateConfig.show(e.target);
     },
     removeConfig: function () {
         if (!this.menu.record) {
@@ -235,8 +267,11 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
                     className: 'update',
                     icon: 'pencil-square-o',
                     text: _('customrequest.configs_update')
-                },
-                {
+                }, {
+                    className: 'duplicate',
+                    icon: 'clone',
+                    text: _('customrequest.configs_duplicate')
+                }, {
                     className: 'remove',
                     icon: 'trash-o',
                     text: _('customrequest.configs_remove')
@@ -255,6 +290,9 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
             switch (act) {
                 case 'remove':
                     this.removeConfig(record, e);
+                    break;
+                case 'duplicate':
+                    this.duplicateConfig(record, e);
                     break;
                 case 'update':
                     this.updateConfig(record, e);
