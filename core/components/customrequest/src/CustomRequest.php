@@ -213,11 +213,15 @@ class CustomRequest
                             /** @var modResource $resource */
                             $resource = $this->modx->getObject('modResource', $resourceId);
                             if ($resource) {
-                                $tmpKey = $this->modx->context->key;
                                 $contextKey = $resource->get('context_key');
-                                $this->modx->switchContext($contextKey);
-                                $alias = $this->modx->makeUrl($resourceId);
-                                $this->modx->switchContext($tmpKey);
+                                $alias = $resource->get('uri');
+                                // If the resource uri field is empty try to get it with make url
+                                if (!$alias) {
+                                    $tmpKey = $this->modx->context->key;
+                                    $this->modx->switchContext($contextKey);
+                                    $alias = $this->modx->makeUrl($resourceId);
+                                    $this->modx->switchContext($tmpKey);
+                                }
                                 if ($alias) {
                                     // Cutoff trailing .html or /
                                     $alias = trim(str_replace('.html', '', $alias), '/');
