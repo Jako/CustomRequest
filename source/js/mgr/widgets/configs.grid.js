@@ -175,9 +175,6 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
                 success: {
                     fn: this.refresh,
                     scope: this
-                },
-                beforeSubmit: function (values) {
-                    duplicateConfig.beforeSubmit(values);
                 }
             }
         });
