@@ -13,7 +13,7 @@ CustomRequest.grid.Configs = function (config) {
         compiled: true
     });
     Ext.applyIf(config, {
-        id: 'customrequest-grid-configs',
+        id: this.ident,
         url: CustomRequest.config.connectorUrl,
         baseParams: {
             action: 'mgr/configs/getlist'
