@@ -100,6 +100,13 @@ class CustomRequest
             'connectorUrl' => $assetsUrl . 'connector.php',
         ], $options);
 
+        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
+        $lexicon->load($this->namespace . ':default');
+
+        $this->packageName = $this->modx->lexicon('customrequest');
+
+        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
+
         // Add default options
         $this->options = array_merge($this->options, [
             'debug' => (bool)$this->getOption('debug', $options, false),
@@ -114,19 +121,12 @@ class CustomRequest
             ],
         ]);
 
-        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
-
         if ($this->getOption('aliases')) {
             $this->requests = json_decode($this->getOption('aliases'), true);
         }
         if (!$this->requests) {
             $this->requests = [];
         }
-
-        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
-        $lexicon->load($this->namespace . ':default');
-
-        $this->packageName = $this->modx->lexicon('customrequest');
     }
 
     /**
