@@ -386,7 +386,13 @@ class CustomRequest
         $this->modx->sendForward($this->found['resourceId']);
     }
 
-    function isRegularExpression($string) {
+    /**
+     * Check for a valid regular expression
+     *
+     * @param $string
+     * @return bool
+     */
+    public function isRegularExpression($string) {
         set_error_handler(function() {}, E_WARNING);
         $isRegularExpression = preg_match($string, '') !== FALSE;
         restore_error_handler();
