@@ -111,7 +111,7 @@ class CustomRequest
         $this->options = array_merge($this->options, [
             'debug' => (bool)$this->getOption('debug', $options, false),
             'modxversion' => $modxversion['version'],
-            'is_admin' => $this->modx->user && ($modx->hasPermission('settings') || $modx->hasPermission($this->namespace . '_settings')),
+            'is_admin' => $this->modx->user && $this->modx->context && ($modx->hasPermission('settings') || $modx->hasPermission($this->namespace . '_settings')),
             'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/'),
             'cachePath' => $this->modx->getOption('core_path') . 'cache/',
             'cacheKey' => 'requests',
