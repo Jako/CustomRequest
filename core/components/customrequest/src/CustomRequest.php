@@ -2,7 +2,7 @@
 /**
  * CustomRequest
  *
- * Copyright 2013-2022 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2013-2023 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package customrequest
  * @subpackage classfile
@@ -42,7 +42,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.8';
+    public $version = '1.3.9';
 
     /**
      * The class options
