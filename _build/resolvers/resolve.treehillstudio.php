@@ -75,9 +75,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
 
 $params = [
     'name' => $options['namespace'],
-    'url' => $modx->getOption('SERVER_NAME', $_SERVER, 'unknown'),
-    'ip' => $modx->getOption('SERVER_ADDR', $_SERVER, 'unknown'),
-    'host' => $modx->getOption('HTTP_HOST', $_SERVER, 'unknown'),
+    'uuid' => $modx->uuid ?? 'unknown',
+    'host' => $modx->getOption('http_host', null, 'unknown'),
     'php_version' => phpversion(),
     'modx_version' => $modxVersion,
     'manager_lang' => $managerLang,
