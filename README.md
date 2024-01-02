@@ -1,4 +1,4 @@
-[![Weblate](https://hosted.weblate.org/widgets/modx-extras/customrequest/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/customrequest/standard/)
+[![Weblate](https://hosted.weblate.org/widget/modx-extras/customrequest/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/customrequest/standard/)
 
 # CustomRequest
 
