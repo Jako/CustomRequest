@@ -257,7 +257,8 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
             }
         });
     },
-    buttonColumnRenderer: function () {
+    buttonColumnRenderer: function (value, metaData) {
+    metaData.css = 'x-grid-cell-icons';
         var values = {
             action_buttons: [
                 {
