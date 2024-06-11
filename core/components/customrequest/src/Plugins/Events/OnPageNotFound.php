@@ -15,7 +15,7 @@ class OnPageNotFound extends Plugin
         $this->customrequest->initialize();
         if ($this->modx->context->get('key') !== 'mgr') {
             $requestParamAlias = $this->modx->getOption('request_param_alias', null, 'q');
-            $requestUri = trim(strtok($_REQUEST[$requestParamAlias], '?'), '/');
+            $requestUri = trim(strtok($_REQUEST[$requestParamAlias] ?? '', '?'), '/');
             if ($this->customrequest->searchAliases($requestUri)) {
                 $this->customrequest->setRequest();
             }
