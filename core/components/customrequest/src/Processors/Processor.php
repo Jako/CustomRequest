@@ -19,7 +19,7 @@ abstract class Processor extends modProcessor
 {
     public $languageTopics = ['customrequest:default'];
 
-    /** @var CustomRequest */
+    /** @var CustomRequest $customrequest */
     public $customrequest;
 
     /**
@@ -27,12 +27,21 @@ abstract class Processor extends modProcessor
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    function __construct(modX &$modx, array $properties = [])
+    public function __construct(modX &$modx, array $properties = [])
     {
         parent::__construct($modx, $properties);
 
         $corePath = $this->modx->getOption('customrequest.core_path', null, $this->modx->getOption('core_path') . 'components/customrequest/');
         $this->customrequest = $this->modx->getService('customrequest', 'CustomRequest', $corePath . 'model/customrequest/');
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
+    public function checkPermissions()
+    {
+        return !empty($this->permission) ? $this->modx->hasPermission($this->permission) : true;
     }
 
     abstract public function process();

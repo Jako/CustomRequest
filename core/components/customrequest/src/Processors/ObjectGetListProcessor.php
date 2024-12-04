@@ -52,6 +52,18 @@ class ObjectGetListProcessor extends modObjectGetListProcessor
 
     /**
      * {@inheritDoc}
+     * @return string[]
+     */
+    public function getLanguageTopics()
+    {
+        if (file_exists($this->customrequest->getOption('corePath') . 'lexicon/' . $this->modx->getOption('manager_language', [], 'en') . '/custom.inc.php')) {
+            $this->languageTopics[] = 'customrequest:custom';
+        }
+        return $this->languageTopics;
+    }
+
+    /**
+     * {@inheritDoc}
      * @return bool
      */
     public function beforeQuery()
