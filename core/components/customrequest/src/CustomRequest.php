@@ -163,7 +163,7 @@ class CustomRequest
     {
         $this->requests = $this->modx->cacheManager->get($this->getOption('cacheKey'), $this->getOption('cacheOptions'));
 
-        if (empty($this->requests) || $this->getOption('debug') == true) {
+        if (empty($this->requests) || $this->getOption('debug')) {
             // Clear the requests in debug mode
             $this->requests = [];
 
@@ -174,7 +174,7 @@ class CustomRequest
             $configs = $this->modx->getCollection('CustomrequestConfigs', $c);
             foreach ($configs as $config) {
                 // Fill additional urlParams if defined
-                $urlParams = ($tmp = json_decode($config->get('urlparams'))) ? $tmp : [];
+                $urlParams = json_decode($config->get('urlparams')) ? json_decode($config->get('urlparams')) : [];
                 $resourceId = $config->get('resourceid');
                 $alias = $config->get('alias');
                 $aliasRegEx = false;
