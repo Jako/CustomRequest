@@ -37,3 +37,4 @@ $_lang['customrequest.systemsetting_key_err_nv'] = 'Sie dürfen nur Einstellunge
 $_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Nur Benutzer mit einer settings Berechtigung oder einer settings_customrequest Berechtigung können die Einstellungen ändern.';
 $_lang['customrequest.configs_duplicate'] = 'Konfiguration Duplizieren';
 $_lang['customrequest.duplicate'] = 'Duplikat von';
+$_lang['customrequest.refresh_cache'] = 'Löschen des [[+packagename]]-Caches';
