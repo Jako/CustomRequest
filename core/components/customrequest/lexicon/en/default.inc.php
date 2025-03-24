@@ -33,6 +33,7 @@ $_lang['customrequest.debug_mode'] = 'Debug Mode';
 $_lang['customrequest.duplicate'] = 'Duplicate of';
 $_lang['customrequest.menu_home'] = 'CustomRequest';
 $_lang['customrequest.menu_home_desc'] = 'Use friendly URLs everywhere';
+$_lang['customrequest.refresh_cache'] = 'Clearing the [[+packagename]] cache';
 $_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
 $_lang['customrequest.settings_desc'] = 'Edit the settings of CustomRequest. You can edit the value of a system setting by double-clicking on the ‘Value’ table cell or by right-clicking in the table cell.';
 $_lang['customrequest.systemsetting_key_err_nv'] = 'You could only edit settings with the prefix customrequest.';
