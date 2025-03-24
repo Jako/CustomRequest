@@ -37,3 +37,4 @@ $_lang['customrequest.systemsetting_key_err_nv'] = 'Вы можете редак
 $_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Разрешается изменять настройки только пользователям с разрешением настроек или разрешением settings_customrequest.';
 $_lang['customrequest.configs_duplicate'] = 'Дублирование конфигурации';
 $_lang['customrequest.duplicate'] = 'Дубликат';
+$_lang['customrequest.refresh_cache'] = 'Очистка кэша [[+packagename]]';
