@@ -13,10 +13,22 @@ if (file_exists(MODX_PROCESSORS_PATH . 'system/settings/update.class.php')) {
     class_alias(\MODX\Revolution\Processors\System\Settings\Update::class, \modSystemSettingsUpdateProcessor::class);
 }
 
+/**
+ * Class CustomRequestSystemSettingsUpdateProcessor
+ */
 class CustomRequestSystemSettingsUpdateProcessor extends modSystemSettingsUpdateProcessor
 {
     public $checkSavePermission = false;
     public $languageTopics = ['setting', 'namespace', 'customrequest:setting'];
+
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
+    public function checkPermissions()
+    {
+        return !empty($this->permission) ? $this->modx->hasPermission($this->permission) || $this->modx->hasPermission('customrequest_' . $this->permission) : true;
+    }
 
     /**
      * {@inheritDoc}
@@ -50,7 +62,7 @@ class CustomRequestSystemSettingsUpdateProcessor extends modSystemSettingsUpdate
         if (strpos($key, 'customrequest.') !== 0) {
             $this->addFieldError('key', $this->modx->lexicon('customrequest.systemsetting_key_err_nv'));
         }
-        if (!$this->modx->hasPermission('settings') && !$this->modx->hasPermission('customrequest_settings')) {
+        if (!$this->modx->hasPermission($this->permission) && !$this->modx->hasPermission('customrequest_' . $this->permission)) {
             $this->addFieldError('usergroup', $this->modx->lexicon('customrequest.systemsetting_usergroup_err_nv'));
         }
     }
