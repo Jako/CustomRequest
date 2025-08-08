@@ -2,7 +2,7 @@
 /**
  * CustomRequest
  *
- * Copyright 2013-2024 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2013-2025 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package customrequest
  * @subpackage classfile
@@ -42,7 +42,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.10';
+    public $version = '1.3.11';
 
     /**
      * The class options
@@ -301,7 +301,11 @@ class CustomRequest
                     }
                 } else {
                     if (preg_match($request['alias'], $search, $matches)) {
-                        $alias = trim(str_replace($matches[1], '', $matches[0]), '/');
+                        if(isset($matches[1])) {
+                            $alias = trim(str_replace($matches[1], '', $matches[0]), '/');
+                        } else {
+                            $alias = trim($matches[0], '/');
+                        }
                         $resourceId = $this->modx->findResource($alias . '/', $request['contextKey']);
                         if ($resourceId) {
                             $this->found = [

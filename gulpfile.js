@@ -121,7 +121,14 @@ const bumpRequirements = function () {
         .pipe(replace(/[*-] PHP (v)?\d.\d.*/g, '* PHP ' + phpversion + '+'))
         .pipe(gulp.dest('.'));
 };
-gulp.task('bump', gulp.series(bumpCopyright, bumpVersion, bumpHomepanel, bumpDocs, bumpRequirements));
+const bumpComposer = function () {
+    return gulp.src([
+        'core/components/customrequest/composer.json',
+    ], {base: './'})
+        .pipe(replace(/"version": "\d+\.\d+\.\d+-?[0-9a-z]*"/ig, '"version": "' + pkg.version + '"'))
+        .pipe(gulp.dest('.'));
+};
+gulp.task('bump', gulp.series(bumpCopyright, bumpVersion, bumpHomepanel, bumpDocs, bumpRequirements, bumpComposer));
 
 gulp.task('watch', function () {
     // Watch .js files

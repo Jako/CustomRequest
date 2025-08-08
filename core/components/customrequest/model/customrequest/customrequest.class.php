@@ -2,7 +2,7 @@
 /**
  * CustomRequest
  *
- * Copyright 2013-2024 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2013-2025 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package customrequest
  * @subpackage classfile

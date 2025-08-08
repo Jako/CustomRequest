@@ -26,7 +26,7 @@ CustomRequest.panel.Home = function (config) {
                 afterrender: function () {
                     this.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + CustomRequest.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + CustomRequest.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt="Treehill Studio"><br>' +
-                            '&copy; 2013-2024 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '&copy; 2013-2025 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('customrequest') + ' ' + CustomRequest.config.version,
                             msg: msg,

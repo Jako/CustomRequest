@@ -50,7 +50,7 @@
   z-index: 15;
 }
 .ribbon:before, .ribbon:after {
-  border: 5px solid #a20000;
+  border: 5px solid #720000;
   content: "";
   display: block;
   position: absolute;
