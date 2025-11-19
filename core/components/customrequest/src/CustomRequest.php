@@ -42,7 +42,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.11';
+    public $version = '1.3.12';
 
     /**
      * The class options
@@ -154,9 +154,6 @@ class CustomRequest
 
     /**
      * Load all config files and prepare the values.
-     *
-     * @access public
-     * @return void
      */
     public function initialize()
     {
@@ -223,7 +220,7 @@ class CustomRequest
                                 }
                                 if ($alias) {
                                     // Cutoff trailing .html or /
-                                    $alias = trim(str_replace('.html', '', $alias), '/');
+                                    $alias = rtrim(str_replace('.html', '', $alias), '/');
                                 } else {
                                     // If alias could not be calculated, don't use that setting
                                     if ($this->getOption('debug')) {
@@ -266,7 +263,6 @@ class CustomRequest
      * Check if the search string starts with one of the allowed aliases and
      * prepare the url param string if successful.
      *
-     * @access public
      * @param string $search A string to search the allowed aliases in
      * @return boolean
      */
@@ -301,12 +297,13 @@ class CustomRequest
                     }
                 } else {
                     if (preg_match($request['alias'], $search, $matches)) {
-                        if(isset($matches[1])) {
-                            $alias = trim(str_replace($matches[1], '', $matches[0]), '/');
+                        if (isset($matches[1])) {
+                            $alias = rtrim(str_replace($matches[1], '', $matches[0]), '/');
                         } else {
-                            $alias = trim($matches[0], '/');
+                            $alias = rtrim($matches[0], '/');
                         }
-                        $resourceId = $this->modx->findResource($alias . '/', $request['contextKey']);
+                        $resourceId = $this->modx->findResource($alias . $this->modx->getOption('container_suffix'), $request['contextKey']);
+                        $resourceId = ($resourceId) ?: $this->modx->findResource($alias . $this->getHtmlExtension(), $request['contextKey']);
                         if ($resourceId) {
                             $this->found = [
                                 // Strip alias from seached string and urldecode it
@@ -337,9 +334,6 @@ class CustomRequest
 
     /**
      * Prepare the request parameters.
-     *
-     * @access public
-     * @return void
      */
     public function setRequest()
     {
@@ -353,7 +347,7 @@ class CustomRequest
             array_shift($matches);
             $params = $matches;
         } else {
-            $params = explode('/', trim($params, '/'));
+            $params = explode('/', rtrim($params, '/'));
         }
         if (count($params) >= 1) {
             $setting = $this->requests[$this->found['contextKey'] . ':' . $this->found['alias']];
@@ -395,10 +389,23 @@ class CustomRequest
      * @param $string
      * @return bool
      */
-    public function isRegularExpression($string) {
-        set_error_handler(function() {}, E_WARNING);
+    public function isRegularExpression($string)
+    {
+        set_error_handler(function () {
+        }, E_WARNING);
         $isRegularExpression = preg_match($string, '') !== FALSE;
         restore_error_handler();
         return $isRegularExpression;
+    }
+
+    /**
+     * Get the extension for the MODX HTML content type
+     *
+     * @return string
+     */
+    public function getHtmlExtension()
+    {
+        $htmlContentType = $this->modx->getObject('modContentType', ['name' => 'HTML']);
+        return ($htmlContentType) ? $htmlContentType->get('file_extensions') : '.html';
     }
 }

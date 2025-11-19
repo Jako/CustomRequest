@@ -35,7 +35,7 @@ class CustomrequestConfigsGetListProcessor extends ObjectGetListProcessor
             $ta['context'] = ($context->get('name')) ? $context->get('name') . ' (' . $resource->get('context_key') . ')' : $resource->get('context_key');
         } else {
             $ta['resourceid'] = '';
-            if (!$this->customrequest->isRegularExpression($ta['alias'])) {
+            if ($this->customrequest->isRegularExpression($ta['alias'])) {
                 $ta['alias_gen'] = '<span class="blue" title="' . $this->modx->lexicon('customrequest.configs_alias_regex') . '">' . $ta['alias'] . '</span>';
             }
         }
