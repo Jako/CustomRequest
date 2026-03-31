@@ -2,7 +2,7 @@
 
 # CustomRequest
 
-Use pretty URLs everywhere in the MODX Revolution frontend
+The effective routing plugin for MODX
 
 ## Features
 
