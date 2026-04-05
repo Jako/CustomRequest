@@ -47,7 +47,7 @@ const scriptsMgr = function () {
         .pipe(concat('customrequest.min.js'))
         .pipe(uglify())
         .pipe(header(banner + '\n', {pkg: pkg}))
-        .pipe(gulp.dest('assets/components/customrequest/js/mgr/'))
+        .pipe(gulp.dest('assets/components/customrequest/js/mgr/'));
 };
 gulp.task('scripts', gulp.series(scriptsMgr));
 
@@ -74,7 +74,7 @@ const sassMgr = function () {
             suffix: '.min'
         }))
         .pipe(footer('\n' + banner, {pkg: pkg}))
-        .pipe(gulp.dest('assets/components/customrequest/css/mgr/'))
+        .pipe(gulp.dest('assets/components/customrequest/css/mgr/'));
 };
 gulp.task('sass', gulp.series(sassMgr));
 
