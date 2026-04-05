@@ -70,6 +70,8 @@ link = "https://github.com/Jako"
 emoji_index = "zensical.extensions.emoji.twemoji"
 emoji_generator = "zensical.extensions.emoji.to_svg"
 
+[project.markdown_extensions.footnotes]
+
 [project.markdown_extensions.pymdownx.highlight]
 anchor_linenums = true
 line_spans = "__span"
