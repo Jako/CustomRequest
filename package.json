@@ -24,10 +24,8 @@
     "terser": "^5.51.2"
   },
   "browserslist": [
-    "last 2 version",
     "> 1%",
-    "maintained node versions",
-    "not dead"
+    "defaults"
   ],
   "allowScripts": {
     "@parcel/watcher@2.6.0": true,
