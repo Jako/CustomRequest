@@ -34,7 +34,7 @@ $_lang['customrequest.menu_home_desc'] = 'Benutzerfreundliche URLs überall';
 $_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
 $_lang['customrequest.settings_desc'] = 'Bearbeiten Sie die Einstellungen von CustomRequest. Sie können den Wert einer Systemeinstellung mit einem Doppelklick auf die ‚Wert‘-Tabellenzelle oder die Systemeinstellung mit einem Rechtsklick in der Tabellenzelle bearbeiten.';
 $_lang['customrequest.systemsetting_key_err_nv'] = 'Sie dürfen nur Einstellungen mit dem Prefix customrequest bearbeiten.';
-$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Nur Benutzer mit einer settings Berechtigung oder einer settings_customrequest Berechtigung können die Einstellungen ändern.';
+$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Nur Benutzer mit einer settings Berechtigung oder einer customrequest_settings Berechtigung können die Einstellungen ändern.';
 $_lang['customrequest.configs_duplicate'] = 'Konfiguration Duplizieren';
 $_lang['customrequest.duplicate'] = 'Duplikat von';
 $_lang['customrequest.refresh_cache'] = 'Leeren des [[+packagename]]-Caches';

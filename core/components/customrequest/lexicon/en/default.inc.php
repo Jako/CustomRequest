@@ -37,4 +37,4 @@ $_lang['customrequest.refresh_cache'] = 'Clearing the [[+packagename]] cache';
 $_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
 $_lang['customrequest.settings_desc'] = 'Edit the settings of CustomRequest. You can edit the value of a system setting by double-clicking on the ‘Value’ table cell or by right-clicking in the table cell.';
 $_lang['customrequest.systemsetting_key_err_nv'] = 'You could only edit settings with the prefix customrequest.';
-$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a settings_customrequest permission are allowed to change settings.';
+$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a customrequest_settings permission are allowed to change settings.';

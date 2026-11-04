@@ -34,7 +34,7 @@ $_lang['customrequest.menu_home_desc'] = 'Использовать дружес�
 $_lang['customrequest.settings'] = '<i class="icon icon-cog"></i>';
 $_lang['customrequest.settings_desc'] = 'Редактировать настройки CustomRequest. Вы можете редактировать значение системной настройки, дважды щелкнув по ячейке таблицы «значений» или щелкнув правой кнопкой мыши по ячейке таблицы.';
 $_lang['customrequest.systemsetting_key_err_nv'] = 'Вы можете редактировать настройки только с помощью обычного запроса префикса.';
-$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Разрешается изменять настройки только пользователям с разрешением настроек или разрешением settings_customrequest.';
+$_lang['customrequest.systemsetting_usergroup_err_nv'] = 'Разрешается изменять настройки только пользователям с разрешением настроек или разрешением customrequest_settings.';
 $_lang['customrequest.configs_duplicate'] = 'Дублирование конфигурации';
 $_lang['customrequest.duplicate'] = 'Дубликат';
 $_lang['customrequest.refresh_cache'] = 'Очистка кэша [[+packagename]]';
