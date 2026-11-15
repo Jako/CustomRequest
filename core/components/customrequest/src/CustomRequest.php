@@ -339,6 +339,8 @@ class CustomRequest
     {
         $params = str_replace('.html', '', $this->found['urlParams']);
         if ($this->found['regEx']) {
+            // The remaining URI part starts with a slash, if the alias path is set without a trailing slash
+            $params = ltrim($params, '/');
             if (!preg_match($this->found['regEx'], $params, $matches)) {
                 // Return without redirecting
                 return;
