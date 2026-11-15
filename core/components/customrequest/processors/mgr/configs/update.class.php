@@ -38,6 +38,10 @@ class CustomrequestConfigsUpdateProcessor extends ObjectUpdateProcessor
             $this->addFieldError('regex', $this->modx->lexicon('customrequest.configs_err_nv_regex'));
         }
 
+        if (!$this->customrequest->isUrlParams($this->getProperty('urlparams'))) {
+            $this->addFieldError('urlparams', $this->modx->lexicon('customrequest.configs_err_nv_urlparams'));
+        }
+
         return parent::beforeSave();
     }
 

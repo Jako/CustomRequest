@@ -2,7 +2,7 @@
 /**
  * CustomRequest
  *
- * Copyright 2013-2025 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2013-2026 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package customrequest
  * @subpackage classfile
@@ -42,7 +42,7 @@ class CustomRequest
      * The version
      * @var string $version
      */
-    public $version = '1.3.13';
+    public $version = '1.3.14';
 
     /**
      * The class options
@@ -170,7 +170,7 @@ class CustomRequest
             $configs = $this->modx->getCollection('CustomrequestConfigs', $c);
             foreach ($configs as $config) {
                 // Fill additional urlParams if defined
-                $urlParams = json_decode($config->get('urlparams')) ? json_decode($config->get('urlparams')) : [];
+                $urlParams = $this->getUrlParams($config->get('urlparams'));
                 $resourceId = $config->get('resourceid');
                 $alias = $config->get('alias');
                 $aliasRegEx = false;
@@ -187,7 +187,7 @@ class CustomRequest
                                 if ($this->getOption('debug')) {
                                     $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Could not calculate the resourceId for the given alias "' . $alias . '".', '', 'CustomRequest Plugin');
                                 }
-                                break;
+                                continue;
                             }
                         } else {
                             $aliasRegEx = true;
@@ -347,7 +347,8 @@ class CustomRequest
             array_shift($matches);
             $params = $matches;
         } else {
-            $params = explode('/', trim($params, '/'));
+            $params = trim($params, '/');
+            $params = ($params !== '') ? explode('/', $params) : [];
         }
         if (count($params) >= 1) {
             $setting = $this->requests[$this->found['contextKey'] . ':' . $this->found['alias']];
@@ -391,11 +392,48 @@ class CustomRequest
      */
     public function isRegularExpression($string)
     {
+        if (!is_string($string) || $string === '') {
+            return false;
+        }
         set_error_handler(function () {
         }, E_WARNING);
         $isRegularExpression = preg_match($string, '') !== FALSE;
         restore_error_handler();
         return $isRegularExpression;
+    }
+
+    /**
+     * Check if the string is empty or a JSON array of parameter names
+     *
+     * @param string|null $string
+     * @return bool
+     */
+    public function isUrlParams($string)
+    {
+        if (trim((string)$string) === '') {
+            return true;
+        }
+        $urlParams = json_decode($string, true);
+        if (!is_array($urlParams) || $urlParams !== array_values($urlParams)) {
+            return false;
+        }
+        foreach ($urlParams as $urlParam) {
+            if (!is_string($urlParam) || $urlParam === '') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Get the parameter names of a JSON array of parameter names
+     *
+     * @param string|null $string
+     * @return array
+     */
+    public function getUrlParams($string)
+    {
+        return $this->isUrlParams($string) ? (json_decode((string)$string, true) ?: []) : [];
     }
 
     /**

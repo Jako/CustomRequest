@@ -32,7 +32,7 @@ class CustomrequestConfigsGetListProcessor extends ObjectGetListProcessor
             // If the alias could be retrieved by a resource id or if the alias is a valid regular rexpression
             $ta['pagetitle'] = $resource->get('pagetitle') . ' (' . $ta['resourceid'] . ')';
             $ta['alias_gen'] = ($ta['alias']) ?: '<span class="green" title="' . $this->modx->lexicon('customrequest.configs_alias_generated') . '">' . $this->makeUrl($ta['resourceid'], $resource->get('context_key')) . '</span>';
-            $ta['context'] = ($context->get('name')) ? $context->get('name') . ' (' . $resource->get('context_key') . ')' : $resource->get('context_key');
+            $ta['context'] = ($context && $context->get('name')) ? $context->get('name') . ' (' . $resource->get('context_key') . ')' : $resource->get('context_key');
         } else {
             $ta['resourceid'] = '';
             if ($this->customrequest->isRegularExpression($ta['alias'])) {

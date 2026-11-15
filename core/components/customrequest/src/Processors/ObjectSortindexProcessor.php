@@ -93,7 +93,7 @@ class ObjectSortindexProcessor extends modObjectProcessor
         }
 
         if (!$this->hasErrors()) {
-            $this->afterSortindex();
+            $this->afterSorting();
         }
 
         return $this->success();

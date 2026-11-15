@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.14] - 2026-11-15
+
+### Fixed
+
+- Fix a fatal error after sorting the configs in the grid
+- Fix a fatal error with URI parameters that are not a JSON array and validate them on save
+- Remove unsafe HTML from the configs grid and fix loading it with resources in removed contexts
+- Don't set an empty request parameter if the not found URI is the alias path
+- Don't skip the following configs if the resource of a config could not be calculated
+- Add missing error messages and fix some texts in the lexicon
+
 ## [1.3.13] - 2025-11-21
 
 ### Fixed

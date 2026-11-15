@@ -13,7 +13,7 @@ class CustomrequestResourcesGetListProcessor extends ObjectGetListProcessor
     public $classKey = 'modResource';
     public $defaultSortField = 'pagetitle';
     public $defaultSortDirection = 'DESC';
-    public $objectType = 'customreqest.resources';
+    public $objectType = 'customrequest.resources';
 
     protected $search = ['pagetitle', 'alias'];
 

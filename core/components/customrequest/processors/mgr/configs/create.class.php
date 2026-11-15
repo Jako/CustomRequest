@@ -38,6 +38,10 @@ class CustomrequestConfigsCreateProcessor extends ObjectCreateProcessor
             $this->addFieldError('regex', $this->modx->lexicon('customrequest.configs_err_nv_regex'));
         }
 
+        if (!$this->customrequest->isUrlParams($this->getProperty('urlparams'))) {
+            $this->addFieldError('urlparams', $this->modx->lexicon('customrequest.configs_err_nv_urlparams'));
+        }
+
         $count = $this->modx->getCount($this->classKey);
         $this->object->set('menuindex', $count);
 

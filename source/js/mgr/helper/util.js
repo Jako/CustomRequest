@@ -1,3 +1,3 @@
 CustomRequest.util.htmlRenderer = function (value) {
-    return MODx.util.safeHtml(value, '<span>');
+    return (value === undefined || value === null) ? '' : MODx.util.safeHtml(String(value), '<span>');
 }

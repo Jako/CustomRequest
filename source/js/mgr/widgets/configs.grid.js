@@ -29,6 +29,7 @@ CustomRequest.grid.Configs = function (config) {
         columns: [{
             header: _('customrequest.configs_name'),
             dataIndex: 'name',
+            renderer: CustomRequest.util.htmlRenderer,
             width: 100
         }, {
             header: _('customrequest.configs_alias'),
@@ -38,10 +39,12 @@ CustomRequest.grid.Configs = function (config) {
         }, {
             header: _('customrequest.configs_resourceid'),
             dataIndex: 'pagetitle',
+            renderer: CustomRequest.util.htmlRenderer,
             width: 80
         }, {
             header: _('customrequest.configs_context'),
             dataIndex: 'context',
+            renderer: CustomRequest.util.htmlRenderer,
             width: 80
         }, {
             header: _('id'),
@@ -163,9 +166,7 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
         }
         var r = Ext.apply({}, this.menu.record);
         r.name = _('customrequest.duplicate') + ' ' + r.name;
-        r.original_id = r.id;
         r.id = null;
-        r.repeat_on = (r.repeat_on) ? r.repeat_on : [];
         var duplicateConfig = MODx.load({
             xtype: 'customrequest-window-config-create-update',
             isUpdate: false,
