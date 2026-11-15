@@ -400,6 +400,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Request parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -544,6 +561,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Request parameters
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -586,28 +620,41 @@
   <h1 id="__skip">Usage</h1>
 
 <h2 id="how-it-works">How it works</h2>
-<p>CustomRequest works as routing plugin and maps not found URLs to a MODX resource
-and set additional request parameters by separating the URI path at the URI
-separators or by a regular expression.</p>
-<p>As standard option the first characters of the not found URI will be compared 
-with the alias value of each config entry. If found, this config entry is used. 
-The alias path is stripped from the not found URI and the remaining string is 
+<p>CustomRequest works as a routing plugin. It maps not found URLs to a MODX
+resource and sets additional request parameters by separating the URI path at
+the URI separators or by a regular expression.</p>
+<p>By default, the first characters of the not found URI are compared with the
+alias path of each configuration. If they match, this configuration is used.
+The alias path is stripped from the not found URI and the remaining string is
 used to set the request parameters.</p>
-<p>As a second option, the alias value of a config entry could contain a valid 
-regular expression and the not found URI will be matched with that expression. 
-If matched, this config entry is used. The first subpattern part of the 
-expression is stripped from the found pattern and the remaining  string is used 
-to identify the resource where the user is forwarded to later. At least the 
-found pattern is removed from the not found URI and the remaining string is 
-used to set the request parameters.</p>
+<p>Alternatively, the alias path of a configuration can contain a valid regular
+expression and the not found URI is matched with that expression. If it
+matches, this configuration is used. The first subpattern of the expression is
+stripped from the found pattern and the remaining string is used to identify
+the resource the user is forwarded to. Finally, the found pattern is removed
+from the not found URI and the remaining string is used to set the request
+parameters.</p>
+<p>In multilingual installations, e.g. with Babel, a leading culture key of the
+current context (like <code>de/</code>) is removed from the not found URI before it is
+compared.</p>
+<h3 id="request-parameters">Request parameters</h3>
+<p>The remaining string is divided at the URI separators <code>/</code> (or by the regular
+expression of the configuration) and the parts are assigned to the keys of the
+URI Parameter field in their order. Parts without a key are assigned to <code>p1</code>,
+<code>p2</code> and so on, according to their position, e.g. the third part is assigned to
+<code>p3</code>. A <code>.html</code> in the remaining string is removed before.</p>
+<p>The parameters are set in <code>$_GET</code> and <code>$_REQUEST</code>, so a snippet on the resource
+can use them like normal request parameters. If the regular expression of a
+configuration does not match the remaining string, the request is not
+forwarded.</p>
 <h2 id="custom-manager-page">Custom Manager Page</h2>
-<p>You could configure CustomRequest in a custom manager page in the extras menu. 
-The CustomRequest configurations could be created on that page.</p>
-<p>The configurations are executed in the order of the grid on this page. If there 
-are two configurations starting with the same alias path, the first 
-configuration is used. You can change the order of the configurations by 
+<p>You can configure CustomRequest in a custom manager page in the extras menu.
+The CustomRequest configurations are created on that page.</p>
+<p>The configurations are executed in the order of the grid on this page. If there
+are two configurations starting with the same alias path, the first
+configuration is used. You can change the order of the configurations by
 drag and drop.</p>
-<p>The following settings could be set in each configuration:</p>
+<p>The following settings can be set in each configuration:</p>
 <table>
 <thead>
 <tr>
@@ -622,7 +669,7 @@ drag and drop.</p>
 </tr>
 <tr>
 <td>Alias Path</td>
-<td><p>Normally the first characters of a not found URI are compared with this string. If both strings are matching, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used <strong>(The grid value is shown with green text then)</strong>. The alias path is stripped from the not found URI and the remaining string is used to set the request parameters.</p>As a second option, this field could contain a valid regular expression<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> <strong>(The grid value is shown with blue text then)</strong>. The regular expression has to contain <a href="https://www.php.net/manual/en/regexp.reference.delimiters.php">delimiters</a>. The not found URI will be matched with that expression. If matched, this config entry is used. The first subpattern part of the expression is stripped from the found pattern and the remaining string is used to identify the resource where the user is forwarded to. At least the found pattern is removed from the not found URI and the remaining string is used to set the request parameters.</td>
+<td><p>By default, the first characters of a not found URI are compared with this string. If they match, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used <strong>(the grid value is shown with green text then)</strong>. The alias path is stripped from the not found URI and the remaining string is used to set the request parameters.</p>Alternatively, this field can contain a valid regular expression<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> <strong>(the grid value is shown with blue text then)</strong>. The regular expression has to contain <a href="https://www.php.net/manual/en/regexp.reference.delimiters.php">delimiters</a>. The not found URI is matched with that expression. If it matches, this configuration is used. The first subpattern of the expression is stripped from the found pattern and the remaining string is used to identify the resource the user is forwarded to. Finally, the found pattern is removed from the not found URI and the remaining string is used to set the request parameters.<p>If no resource is selected, the alias path has to be a regular expression.</p></td>
 </tr>
 <tr>
 <td>Resource</td>
@@ -630,11 +677,11 @@ drag and drop.</p>
 </tr>
 <tr>
 <td>URI Parameter</td>
-<td>The request/get/post parameter keys, the divided second part of the not found URI are assigned to. If the Regular Expression field not set, the second part is divided at the URI separators <code>/</code></td>
+<td>A JSON array of request parameter keys, e.g. <code>["year", "month"]</code>. The parts of the not found URI after the alias path are assigned to these keys in their order. If the Regular Expression field is not set, the URI is divided at the URI separators <code>/</code>.</td>
 </tr>
 <tr>
 <td>Regular Expression</td>
-<td>This optional regular expression<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup> is used to divide the second parts of the not found URI. The regular expression has to contain <a href="https://www.php.net/manual/en/regexp.reference.delimiters.php">delimiters</a>. The search results are assigned to the request parameters in the order of occurrence.</td>
+<td>This optional regular expression<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup> is used to divide the remaining string of the not found URI. The regular expression has to contain <a href="https://www.php.net/manual/en/regexp.reference.delimiters.php">delimiters</a>. The subpatterns are assigned to the request parameters in the order of occurrence.</td>
 </tr>
 </tbody>
 </table>
@@ -642,7 +689,7 @@ drag and drop.</p>
 <hr />
 <ol>
 <li id="fn:1">
-<p>To build and check regular expressions you could i.e. use the <a href="https://regex101.com/">regex101</a> website. Please use the code generator, since this generator creates the regular expression with delimiters.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>To build and check regular expressions you can use e.g. the <a href="https://regex101.com/">regex101</a> website. Please use the code generator, since this generator creates the regular expression with delimiters.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
