@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.3.15] - TBA
 
+### Changed
+
+- Don't expose server paths in the manager page options
+
 ### Fixed
 
 - Remove the leading slash of the not found URI before the regular expression divides it
