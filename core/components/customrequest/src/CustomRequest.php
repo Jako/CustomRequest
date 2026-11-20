@@ -458,18 +458,22 @@ class CustomRequest
     }
 
     /**
-     * Check if a resource is not deleted and published
+     * Check if a resource is not deleted and published (or can be viewed
+     * unpublished by the current user, like MODX does in modRequest::getResource)
      *
      * @param int $resourceId
      * @return bool
      */
     public function isAvailableResource($resourceId)
     {
-        return (bool)$this->modx->getCount('modResource', [
+        $where = [
             'id' => (int)$resourceId,
             'deleted' => false,
-            'published' => true
-        ]);
+        ];
+        if (!$this->modx->hasPermission('view_unpublished') || $this->modx->getSessionState() !== $this->modx::SESSION_STATE_INITIALIZED) {
+            $where['published'] = true;
+        }
+        return (bool)$this->modx->getCount('modResource', $where);
     }
 
     /**
