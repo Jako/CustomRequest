@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Sanitize the request parameters like MODX does, so that they can't contain MODX tags
 - Remove the leading slash of the not found URI before the regular expression divides it
 - Fix a fatal error with named subpatterns in the regular expression
 - Remove only a trailing HTML extension from the not found URI

@@ -375,17 +375,15 @@ class CustomRequest
             $setting = $this->requests[$this->found['contextKey'] . ':' . $this->found['alias']];
 
             $foundParams = [];
-            // Set the request parameters
             foreach ($params as $key => $value) {
-                if (isset($setting['urlParams'][$key])) {
-                    $_REQUEST[$setting['urlParams'][$key]] = $value;
-                    $_GET[$setting['urlParams'][$key]] = $value;
-                    $foundParams[$setting['urlParams'][$key]] = $value;
-                } else {
-                    $_REQUEST['p' . ($key + 1)] = $value;
-                    $_GET['p' . ($key + 1)] = $value;
-                    $foundParams['p' . ($key + 1)] = $value;
-                }
+                $foundParams[$setting['urlParams'][$key] ?? 'p' . ($key + 1)] = $value;
+            }
+            // The URI parts are decoded after MODX has sanitized the request, so they have to be sanitized like the other request parameters
+            $this->modx::sanitize($foundParams, array_values($this->modx->sanitizePatterns));
+            // Set the request parameters
+            foreach ($foundParams as $key => $value) {
+                $_REQUEST[$key] = $value;
+                $_GET[$key] = $value;
             }
             if ($this->getOption('debug')) {
                 $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Used configuration:' . "\n" . print_r($setting, true) . "\n" . 'Set params:' . "\n" . print_r($foundParams, true), '', 'CustomRequest Plugin');
