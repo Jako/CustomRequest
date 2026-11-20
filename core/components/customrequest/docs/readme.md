@@ -8,10 +8,12 @@ CustomRequest is an effective routing plugin for MODX Revolution to map pretty
 but not found URLs to a MODX resource and to set the request parameters by
 separating the URI path at the URI separators or by a regular expression.
 
-By default, the start of the not found URI is compared with the alias path of
-each configuration. If the not found URI starts with the alias path at a path
-boundary, this configuration is used. The alias path is stripped from the not
-found URI and the remaining string is used to set the request parameters.
+By default, the first characters of the not found URI are compared with the
+alias path of each configuration. If they match, this configuration is used.
+If the system setting `customrequest.match_path_boundary` is enabled, the alias
+path has to match at a path boundary of the not found URI. The alias path is
+stripped from the not found URI and the remaining string is used to set the
+request parameters.
 
 Alternatively, the alias path of a configuration can contain a valid regular
 expression and the not found URI is matched with that expression. If it

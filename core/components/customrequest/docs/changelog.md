@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.4.0] - TBA
 
+### Added
+
+- System setting to match the alias path only at a path boundary of the not found URI (enabled in new installations, disabled in updated installations)
+
 ### Changed
 
 - Don't expose server paths in the manager page options
-- Match the alias path only at a path boundary of the not found URI
 
 ### Fixed
 

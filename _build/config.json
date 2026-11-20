@@ -36,6 +36,12 @@
         "type": "combo-boolean",
         "area": "system",
         "value": "0"
+      },
+      {
+        "key": "match_path_boundary",
+        "type": "combo-boolean",
+        "area": "system",
+        "value": "1"
       }
     ]
   },
@@ -64,6 +70,7 @@
     "resolver": {
       "after": [
         "resolve.synctables.php",
+        "resolve.version.php",
         "resolve.treehillstudio.php"
       ]
     }

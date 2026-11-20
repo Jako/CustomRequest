@@ -109,6 +109,7 @@ class CustomRequest
         // Add default options
         $this->options = array_merge($this->options, [
             'debug' => (bool)$this->getOption('debug', $options, false),
+            'matchPathBoundary' => (bool)$this->getOption('match_path_boundary', $options, true),
             'modxversion' => $modxversion['version'],
             'is_admin' => $this->modx->user && $this->modx->context && ($modx->hasPermission('settings') || $modx->hasPermission($this->namespace . '_settings')),
             'configsPath' => $this->getOption('configsPath', null, $corePath . 'configs/'),
@@ -441,7 +442,8 @@ class CustomRequest
     }
 
     /**
-     * Check if the search string starts with the alias at a path boundary
+     * Check if the search string starts with the alias (at a path boundary, if
+     * the match_path_boundary system setting is enabled)
      *
      * @param string $search
      * @param string $alias
@@ -452,6 +454,9 @@ class CustomRequest
     {
         if (0 !== strpos($search, $alias)) {
             return false;
+        }
+        if (!$this->getOption('matchPathBoundary', null, true)) {
+            return true;
         }
         $remaining = (string)substr($search, strlen($alias));
         return $remaining === '' ||
