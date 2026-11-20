@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- System setting to match the alias path only at a path boundary of the not found URI (enabled in new installations, disabled in updated installations)
+- System setting to match the alias path at a path boundary (disabled in updated installations)
 
 ### Changed
 
@@ -19,12 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Remove the leading slash of the not found URI before the regular expression divides it
 - Fix a fatal error with named subpatterns in the regular expression
-- Remove only a trailing HTML extension from the not found URI and the alias path
-- Append a new config after the last config, even if configs were removed before
-- Show the selected resource of a config in the resource field, even if it is not published anymore
-- Show the empty entry of the resource field with a label
-- Fix a fatal error when a config is sorted onto a removed config
-- Cache an empty config list, so that the configs are not queried on each not found page
+- Remove only a trailing HTML extension from the not found URI
+- Fix the order of configs created after removing configs
+- Fix the resource field and sorting in the configs grid
+- Cache an empty config list
 
 ## [1.3.14] - 2026-11-15
 
