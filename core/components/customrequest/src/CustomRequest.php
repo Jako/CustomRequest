@@ -63,6 +63,12 @@ class CustomRequest
     public $found = [];
 
     /**
+     * The request is forwarded by CustomRequest
+     * @var bool $forwarding
+     */
+    public $forwarding = false;
+
+    /**
      * CustomRequest constructor
      *
      * @param modX $modx A reference to the modX instance.
@@ -242,6 +248,13 @@ class CustomRequest
                         }
                     }
                 }
+                if ($resourceId && !$this->isAvailableResource($resourceId)) {
+                    // A not found URI can't be forwarded to a deleted or unpublished resource, don't use that setting
+                    if ($this->getOption('debug')) {
+                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The resource with ID "' . $resourceId . '" is deleted or unpublished.', '', 'CustomRequest Plugin');
+                    }
+                    continue;
+                }
                 $this->requests[$contextKey . ':' . $alias] = [
                     'resourceId' => $resourceId,
                     'alias' => $alias,
@@ -309,7 +322,7 @@ class CustomRequest
                         }
                         $resourceId = $this->modx->findResource($alias . $this->modx->getOption('container_suffix'), $request['contextKey']);
                         $resourceId = ($resourceId) ?: $this->modx->findResource($alias . $this->getHtmlExtension(), $request['contextKey']);
-                        if ($resourceId) {
+                        if ($resourceId && $this->isAvailableResource($resourceId)) {
                             $this->found = [
                                 // Strip alias from seached string and urldecode it
                                 'urlParams' => urldecode(substr($search, strlen($matches[0]))),
@@ -388,6 +401,8 @@ class CustomRequest
                 }
             }
         }
+        // If MODX can't forward to the resource, it sends the error page and invokes OnPageNotFound again
+        $this->forwarding = true;
         $this->modx->sendForward($this->found['resourceId']);
     }
 
@@ -441,6 +456,21 @@ class CustomRequest
     public function getUrlParams($string)
     {
         return $this->isUrlParams($string) ? (json_decode((string)$string, true) ?: []) : [];
+    }
+
+    /**
+     * Check if a resource is not deleted and published
+     *
+     * @param int $resourceId
+     * @return bool
+     */
+    public function isAvailableResource($resourceId)
+    {
+        return (bool)$this->modx->getCount('modResource', [
+            'id' => (int)$resourceId,
+            'deleted' => false,
+            'published' => true
+        ]);
     }
 
     /**

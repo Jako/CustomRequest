@@ -40,7 +40,7 @@ $xpdo_meta_map['CustomrequestConfigs']= array (
     'alias' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '100',
+      'precision' => '255',
       'phptype' => 'string',
       'null' => true,
     ),

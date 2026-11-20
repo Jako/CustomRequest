@@ -206,14 +206,12 @@ Ext.extend(CustomRequest.grid.Configs, MODx.grid.Grid, {
         var s = this.getStore();
         s.baseParams.query = tf.getValue();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
     },
     clearFilter: function () {
         var s = this.getStore();
         s.baseParams.query = '';
         Ext.getCmp(this.ident + '-config-filter-search').reset();
         this.getBottomToolbar().changePage(1);
-        this.refresh();
     },
     renderListener: function (grid) {
         new Ext.dd.DropTarget(grid.container, {
