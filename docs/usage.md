@@ -4,10 +4,10 @@ CustomRequest works as a routing plugin. It maps not found URLs to a MODX
 resource and sets additional request parameters by separating the URI path at
 the URI separators or by a regular expression.
 
-By default, the first characters of the not found URI are compared with the
-alias path of each configuration. If they match, this configuration is used.
-The alias path is stripped from the not found URI and the remaining string is
-used to set the request parameters.
+The first characters of the not found URI are compared with the alias path of
+each configuration. If they match, this configuration is used. The alias path
+is stripped from the not found URI and the remaining string is used to set the
+request parameters.
 
 If the system setting `customrequest.match_path_boundary` is enabled, the alias
 path has to match at a path boundary of the not found URI, e.g. the alias path
@@ -23,6 +23,9 @@ the resource the user is forwarded to. Finally, the found pattern is removed
 from the not found URI and the remaining string is used to set the request
 parameters.
 
+A not found URI is only forwarded to a published and not deleted resource.
+Otherwise the following configurations are checked.
+
 In multilingual installations, e.g. with Babel, a leading culture key of the
 current context (like `de/`) is removed from the not found URI before it is
 compared.
@@ -37,7 +40,8 @@ URI Parameters field in their order. Parts without a key are assigned to `p1`,
 removed from the remaining string before.
 
 The parameters are set in `$_GET` and `$_REQUEST`, so a snippet on the resource
-can use them like normal request parameters. If the regular expression of a
+can use them like normal request parameters. Like in normal request parameters,
+MODX tags are removed from the values. If the regular expression of a
 configuration does not match the remaining string, the request is not
 forwarded.
 
@@ -56,7 +60,7 @@ The following settings can be set in each configuration:
 | Key                | Description |
 |--------------------|-------------|
 | Name               | A name to identify this configuration. |
-| Alias Path         | <p>By default, the first characters of a not found URI are compared with this string. If they match, this configuration is used. If the system setting `customrequest.match_path_boundary` is enabled, this string has to match at a path boundary of the not found URI. If the alias path field is not set, the alias path of the selected resource in this form is used **(the grid value is shown with green text then)**. The alias path is stripped from the not found URI and the remaining string is used to set the request parameters.</p>Alternatively, this field can contain a valid regular expression[^1] **(the grid value is shown with blue text then)**. The regular expression has to contain [delimiters](https://www.php.net/manual/en/regexp.reference.delimiters.php). The not found URI is matched with that expression. If it matches, this configuration is used. The first subpattern of the expression is stripped from the found pattern and the remaining string is used to identify the resource the user is forwarded to. Finally, the found pattern is removed from the not found URI and the remaining string is used to set the request parameters.<p>If no resource is selected, the alias path has to be a regular expression. If a resource is selected, the alias path can't be a regular expression.</p> |
+| Alias Path         | <p>The first characters of a not found URI are compared with this string. If they match, this configuration is used. If the system setting `customrequest.match_path_boundary` is enabled, this string has to match at a path boundary of the not found URI. If the alias path field is not set, the alias path of the selected resource in this form is used **(the grid value is shown with green text then)**. The alias path is stripped from the not found URI and the remaining string is used to set the request parameters.</p>Alternatively, this field can contain a valid regular expression[^1] **(the grid value is shown with blue text then)**. The regular expression has to contain [delimiters](https://www.php.net/manual/en/regexp.reference.delimiters.php). The not found URI is matched with that expression. If it matches, this configuration is used. The first subpattern of the expression is stripped from the found pattern and the remaining string is used to identify the resource the user is forwarded to. Finally, the found pattern is removed from the not found URI and the remaining string is used to set the request parameters.<p>If no resource is selected, the alias path has to be a regular expression. If a resource is selected, the alias path can't be a regular expression.</p> |
 | Resource           | A not found URI is forwarded to this resource if the current configuration is used. If the resource is deleted or unpublished, the following configurations are checked. |
 | URI Parameters     | A JSON array of request parameter keys, e.g. `["year", "month"]`. The parts of the not found URI after the alias path are assigned to these keys in their order. If the Regular Expression field is not set, the URI is divided at the URI separators `/`. |
 | Regular Expression | This optional regular expression[^1] is used to divide the remaining string of the not found URI. The regular expression has to contain [delimiters](https://www.php.net/manual/en/regexp.reference.delimiters.php). The subpatterns are assigned to the request parameters in the order of occurrence. Named subpatterns are assigned in their order as well, their names are not used. |

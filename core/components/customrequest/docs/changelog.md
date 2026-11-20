@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow alias paths longer than 100 characters
 - Use the first of several configs with the same alias path
 - Refresh the generated alias paths after moving resources in the tree
-- Don't save a regular expression as alias path, if a resource is selected
+- Don't save a regular expression as alias path if a resource is selected
 
 ## [1.3.14] - 2026-11-15
 
