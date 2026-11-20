@@ -42,8 +42,11 @@ class CustomrequestConfigsCreateProcessor extends ObjectCreateProcessor
             $this->addFieldError('urlparams', $this->modx->lexicon('customrequest.configs_err_nv_urlparams'));
         }
 
-        $count = $this->modx->getCount($this->classKey);
-        $this->object->set('menuindex', $count);
+        // Append the config after the last config, the menuindex values can have gaps after removing configs
+        $c = $this->modx->newQuery($this->classKey);
+        $c->select('MAX(menuindex)');
+        $maxIndex = $this->modx->getValue($c->prepare());
+        $this->object->set('menuindex', ($maxIndex !== null && $maxIndex !== false) ? (int)$maxIndex + 1 : 0);
 
         return parent::beforeSave();
     }

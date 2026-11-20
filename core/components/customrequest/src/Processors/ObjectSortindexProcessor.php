@@ -48,7 +48,11 @@ class ObjectSortindexProcessor extends modObjectProcessor
         }
 
         $targetId = $this->getProperty('targetId');
-        $targetIndex = $this->modx->getObject($this->classKey, $targetId)->get($this->indexKey);
+        $target = $this->modx->getObject($this->classKey, $targetId);
+        if (!$target) {
+            return $this->failure($this->modx->lexicon($this->objectType . '_err_nfs', ['id' => $targetId]));
+        }
+        $targetIndex = $target->get($this->indexKey);
 
         // Prepare the moving ids
         $movingIds = explode(',', $this->getProperty('movingIds', 0));
@@ -143,5 +147,3 @@ class ObjectSortindexProcessor extends modObjectProcessor
         return true;
     }
 }
-
-return 'CustomRequestCategorySortindexProcessor';

@@ -353,14 +353,7 @@ CustomRequest.window.CreateUpdateConfig = function (config) {
             xtype: 'hidden',
             name: 'id',
             id: this.ident + '-id',
-        }],
-        listeners: {
-            render: function (form) {
-                Ext.create('Ext.tip.QuickTip', {
-                    target: form.getEl()
-                });
-            }
-        }
+        }]
     });
     CustomRequest.window.CreateUpdateConfig.superclass.constructor.call(this, config);
 };

@@ -16,6 +16,7 @@ class CustomrequestResourcesGetListProcessor extends ObjectGetListProcessor
     public $objectType = 'customrequest.resources';
 
     protected $search = ['pagetitle', 'alias'];
+    protected $nameField = 'pagetitle';
 
     /**
      * (@inheritDoc}
@@ -25,10 +26,13 @@ class CustomrequestResourcesGetListProcessor extends ObjectGetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $c = parent::prepareQueryBeforeCount($c);
-        $c->where([
-            'deleted' => false,
-            'published' => true
-        ]);
+        // Load the selected resource of a config, even if it is not published anymore
+        if (!$this->getProperty('id')) {
+            $c->where([
+                'deleted' => false,
+                'published' => true
+            ]);
+        }
         return $c;
     }
 

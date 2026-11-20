@@ -160,13 +160,15 @@ class CustomRequest
     {
         $this->requests = $this->modx->cacheManager->get($this->getOption('cacheKey'), $this->getOption('cacheOptions'));
 
-        if (empty($this->requests) || $this->getOption('debug')) {
+        // An empty array is a valid cache value, if there are no configs
+        if (!is_array($this->requests) || $this->getOption('debug')) {
             // Clear the requests in debug mode
             $this->requests = [];
 
             // Import config records
             $c = $this->modx->newQuery('CustomrequestConfigs');
             $c->sortby('menuindex');
+            $c->sortby('id');
             /** @var CustomrequestConfigs[] $configs */
             $configs = $this->modx->getCollection('CustomrequestConfigs', $c);
             $htmlExtension = $this->getHtmlExtension();

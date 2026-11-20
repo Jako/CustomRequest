@@ -19,6 +19,22 @@ class CustomrequestConfigsGetListProcessor extends ObjectGetListProcessor
 
     /**
      * {@inheritDoc}
+     * @param xPDOQuery $c
+     * @return xPDOQuery
+     */
+    public function prepareQueryAfterCount(xPDOQuery $c)
+    {
+        $c = parent::prepareQueryAfterCount($c);
+        // Show configs with the same menuindex in the order they are used
+        if ($this->getProperty('sort') === 'menuindex') {
+            $c->sortby('menuindex', $this->getProperty('dir'));
+            $c->sortby('id');
+        }
+        return $c;
+    }
+
+    /**
+     * {@inheritDoc}
      * @param xPDOObject $object
      * @return array
      */
