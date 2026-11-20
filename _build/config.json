@@ -25,6 +25,7 @@
             "OnDocPublished",
             "OnDocUnPublished",
             "OnPageNotFound",
+            "OnResourceSort",
             "OnSiteRefresh"
           ]
         }

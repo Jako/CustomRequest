@@ -20,6 +20,7 @@ $_lang['customrequest.configs_err_nfs'] = 'Konfiguration mit der ID [[+id]] nich
 $_lang['customrequest.configs_err_ns'] = 'Konfiguration nicht angegeben.';
 $_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Bitte einen Alias angeben oder eine Ressource auswählen.';
 $_lang['customrequest.configs_err_nv_alias_regex'] = 'Wenn keine Ressource ausgewählt ist, muss der Alias ein gültiger regulärer Ausdruck mit Begrenzungszeichen sein.';
+$_lang['customrequest.configs_err_nv_alias_resourceid'] = 'Wenn eine Ressource ausgewählt ist, darf der Alias kein regulärer Ausdruck sein.';
 $_lang['customrequest.configs_err_nv_regex'] = 'Der reguläre Ausdruck muss Begrenzungszeichen enthalten und gültig sein.';
 $_lang['customrequest.configs_err_nv_urlparams'] = 'Die URI-Parameter müssen ein JSON-Array mit Parameternamen sein, z. B. ["year", "month"].';
 $_lang['customrequest.configs_err_remove'] = 'Beim Löschen der Konfiguration ist ein Fehler aufgetreten.';

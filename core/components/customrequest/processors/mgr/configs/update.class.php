@@ -32,6 +32,8 @@ class CustomrequestConfigsUpdateProcessor extends ObjectUpdateProcessor
 
         if (empty($resourceid) && !$this->customrequest->isRegularExpression($alias)) {
             $this->addFieldError('alias', $this->modx->lexicon('customrequest.configs_err_nv_alias_regex'));
+        } elseif (!empty($resourceid) && $this->customrequest->isRegularExpression($alias)) {
+            $this->addFieldError('alias', $this->modx->lexicon('customrequest.configs_err_nv_alias_resourceid'));
         }
 
         if (!empty($regex) && !$this->customrequest->isRegularExpression($regex)) {

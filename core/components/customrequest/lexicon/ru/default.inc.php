@@ -20,6 +20,7 @@ $_lang['customrequest.configs_err_nfs'] = 'Конфигурация с ID [[+id]
 $_lang['customrequest.configs_err_ns'] = 'Конфигурация не указана.';
 $_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Пожалуйста, заполните псевдоним и/или выберите ресурс.';
 $_lang['customrequest.configs_err_nv_alias_regex'] = 'Если не выбран ресурс, псевдоним должен быть действительным регулярным выражением, содержащим разделители.';
+$_lang['customrequest.configs_err_nv_alias_resourceid'] = 'Если выбран ресурс, псевдоним не может быть регулярным выражением.';
 $_lang['customrequest.configs_err_nv_regex'] = 'Регулярное выражение должно содержать разделители и быть действительным.';
 $_lang['customrequest.configs_err_nv_urlparams'] = 'Параметры URI должны быть JSON-массивом имён параметров, например ["year", "month"].';
 $_lang['customrequest.configs_err_remove'] = 'Произошла ошибка при удалении конфигурации.';

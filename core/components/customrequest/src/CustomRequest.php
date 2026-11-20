@@ -248,10 +248,10 @@ class CustomRequest
                         }
                     }
                 }
-                if ($resourceId && !$this->isAvailableResource($resourceId)) {
-                    // A not found URI can't be forwarded to a deleted or unpublished resource, don't use that setting
+                if (isset($this->requests[$contextKey . ':' . $alias])) {
+                    // The first config with the same alias path is used
                     if ($this->getOption('debug')) {
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The resource with ID "' . $resourceId . '" is deleted or unpublished.', '', 'CustomRequest Plugin');
+                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The config "' . $config->get('name') . '" is not used, because a previous config uses the same alias path "' . $alias . '".', '', 'CustomRequest Plugin');
                     }
                     continue;
                 }
@@ -297,7 +297,8 @@ class CustomRequest
             foreach ($this->requests as $request) {
                 if (!$request['aliasRegEx']) {
                     // Check if searched string starts with the alias at a path boundary and for the contextKey
-                    if ($request['alias'] && $this->startsWithAlias($search, $request['alias'], $htmlExtension) && $request['contextKey'] == $this->modx->context->key) {
+                    // A not found URI can't be forwarded to a deleted or unpublished resource, so the following configs are checked then
+                    if ($request['alias'] && $this->startsWithAlias($search, $request['alias'], $htmlExtension) && $request['contextKey'] == $this->modx->context->key && $this->isAvailableResource($request['resourceId'])) {
                         $this->found = [
                             // Strip alias from seached string and urldecode it
                             'urlParams' => urldecode(substr($search, strlen($request['alias']))),

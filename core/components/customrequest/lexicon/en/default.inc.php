@@ -20,6 +20,7 @@ $_lang['customrequest.configs_err_nfs'] = 'Configuration with the ID [[+id]] not
 $_lang['customrequest.configs_err_ns'] = 'Configuration not specified.';
 $_lang['customrequest.configs_err_ns_alias_resourceid'] = 'Please fill in the alias and/or select a resource.';
 $_lang['customrequest.configs_err_nv_alias_regex'] = 'If no resource is selected, the alias has to be a valid regular expression containing delimiters.';
+$_lang['customrequest.configs_err_nv_alias_resourceid'] = 'If a resource is selected, the alias can\'t be a regular expression.';
 $_lang['customrequest.configs_err_nv_regex'] = 'The regular expression has to contain delimiters and has to be valid.';
 $_lang['customrequest.configs_err_nv_urlparams'] = 'The URI parameters have to be a JSON array of parameter names, e.g. ["year", "month"].';
 $_lang['customrequest.configs_err_remove'] = 'An error occurred while trying to remove the configuration.';
