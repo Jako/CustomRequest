@@ -8,7 +8,7 @@
 $_lang['customrequest'] = 'CustomRequest';
 $_lang['customrequest.configs'] = 'Konfigurationen';
 $_lang['customrequest.configs_alias'] = 'Alias-Pfad';
-$_lang['customrequest.configs_alias_desc'] = 'Mit diesem Pfad wird der Anfang einer nicht gefundenen URI verglichen. Wenn beide Pfade übereinstimmen, dann wird diese Konfiguration benutzt. Wenn der Alias-Pfad nicht gesetzt ist, wird der Alias-Pfad der angegebenen Ressource herangezogen.';
+$_lang['customrequest.configs_alias_desc'] = 'Mit diesem Pfad wird der Anfang einer nicht gefundenen URI verglichen. Wenn beide Pfade übereinstimmen, dann wird diese Konfiguration benutzt. Wenn der Alias-Pfad nicht gesetzt ist, wird der Alias-Pfad der angegebenen Ressource herangezogen. Wenn keine Ressource ausgewählt ist, muss dieses Feld einen regulären Ausdruck mit Begrenzungszeichen enthalten.';
 $_lang['customrequest.configs_alias_generated'] = 'Generiert';
 $_lang['customrequest.configs_alias_regex'] = 'Regulärer Ausdruck';
 $_lang['customrequest.configs_context'] = 'Kontext';

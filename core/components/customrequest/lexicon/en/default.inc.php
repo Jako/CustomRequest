@@ -8,7 +8,7 @@
 $_lang['customrequest'] = 'CustomRequest';
 $_lang['customrequest.configs'] = 'Configurations';
 $_lang['customrequest.configs_alias'] = 'Alias Path';
-$_lang['customrequest.configs_alias_desc'] = 'The first characters of a not found URI are compared with this string. If both paths match, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used.';
+$_lang['customrequest.configs_alias_desc'] = 'The first characters of a not found URI are compared with this string. If both paths match, this configuration is used. If the alias path field is not set, the alias path of the selected resource in this form is used. If no resource is selected, this field has to contain a regular expression with delimiters.';
 $_lang['customrequest.configs_alias_generated'] = 'Generated';
 $_lang['customrequest.configs_alias_regex'] = 'Regular Expression';
 $_lang['customrequest.configs_context'] = 'Context';

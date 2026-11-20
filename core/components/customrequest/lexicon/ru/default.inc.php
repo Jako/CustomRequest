@@ -8,7 +8,7 @@
 $_lang['customrequest'] = 'CustomRequest';
 $_lang['customrequest.configs'] = 'Конфигурации';
 $_lang['customrequest.configs_alias'] = 'Путь псевдонима';
-$_lang['customrequest.configs_alias_desc'] = 'Первые символы не найденного URI сравниваются с этой строкой. Если оба пути совпадают, то используется эта конфигурация. Если поле пути псевдонима не установлено, используется путь к псевдонимам выбранного ресурса в этой форме.';
+$_lang['customrequest.configs_alias_desc'] = 'Первые символы не найденного URI сравниваются с этой строкой. Если оба пути совпадают, то используется эта конфигурация. Если поле пути псевдонима не установлено, используется путь псевдонима ресурса, выбранного в этой форме. Если ресурс не выбран, это поле должно содержать регулярное выражение с разделителями.';
 $_lang['customrequest.configs_alias_generated'] = 'Сгенерировано';
 $_lang['customrequest.configs_alias_regex'] = 'Регулярное выражение';
 $_lang['customrequest.configs_context'] = 'Контекст';
@@ -31,7 +31,7 @@ $_lang['customrequest.configs_regex_desc'] = 'Это необязательно�
 $_lang['customrequest.configs_remove'] = 'Удалить конфигурацию';
 $_lang['customrequest.configs_remove_confirm'] = 'Вы уверены, что хотите удалить эту конфигурацию CustomRequest?';
 $_lang['customrequest.configs_resourceid'] = 'Ресурс';
-$_lang['customrequest.configs_resourceid_desc'] = 'Не найденный URI перенаправлен на этот ресурс, если используется текущая конфигурация.';
+$_lang['customrequest.configs_resourceid_desc'] = 'Не найденный URI перенаправляется на этот ресурс, если используется текущая конфигурация.';
 $_lang['customrequest.configs_update'] = 'Обновить конфигурацию';
 $_lang['customrequest.configs_urlparams'] = 'Параметры URI';
 $_lang['customrequest.configs_urlparams_desc'] = 'Ключи параметров запроса, которым назначаются части не найденного URI после пути псевдонима. Если поле «Регулярное выражение» не заполнено, URI делится по разделителям URI `/`.';

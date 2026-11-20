@@ -15,8 +15,9 @@ path has to match at a path boundary of the not found URI, e.g. the alias path
 new installations and disabled in installations updated from a version before
 1.4.0.
 
-Alternatively, the alias path of a configuration can contain a valid regular
-expression and the not found URI is matched with that expression. If it
+Alternatively, if no resource is selected, the alias path of a configuration
+can contain a valid regular expression and the not found URI is matched with
+that expression. If it
 matches, this configuration is used. The first subpattern of the expression is
 stripped from the found pattern and the remaining string is used to identify
 the resource the user is forwarded to. Finally, the found pattern is removed
@@ -25,7 +26,8 @@ parameters.
 
 A not found URI is only forwarded to a published and not deleted resource. Like
 in MODX, users with the `view_unpublished` permission are forwarded to
-unpublished resources too. Otherwise the following configurations are checked.
+unpublished resources too. If the resource is not available, the following
+configurations are checked.
 
 In multilingual installations, e.g. with Babel, a leading culture key of the
 current context (like `de/`) is removed from the not found URI before it is

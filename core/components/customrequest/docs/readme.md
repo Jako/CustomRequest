@@ -15,8 +15,9 @@ path has to match at a path boundary of the not found URI. The alias path is
 stripped from the not found URI and the remaining string is used to set the
 request parameters.
 
-Alternatively, the alias path of a configuration can contain a valid regular
-expression and the not found URI is matched with that expression. If it
+Alternatively, if no resource is selected, the alias path of a configuration
+can contain a valid regular expression and the not found URI is matched with
+that expression. If it
 matches, this configuration is used. The first subpattern of the expression is
 stripped from the found pattern and the remaining string is used to identify
 the resource the user is forwarded to. Finally, the found pattern is removed
