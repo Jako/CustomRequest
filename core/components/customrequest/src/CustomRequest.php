@@ -168,6 +168,7 @@ class CustomRequest
             $c->sortby('menuindex');
             /** @var CustomrequestConfigs[] $configs */
             $configs = $this->modx->getCollection('CustomrequestConfigs', $c);
+            $htmlExtension = $this->getHtmlExtension();
             foreach ($configs as $config) {
                 // Fill additional urlParams if defined
                 $urlParams = $this->getUrlParams($config->get('urlparams'));
@@ -219,8 +220,8 @@ class CustomRequest
                                     $this->modx->switchContext($tmpKey);
                                 }
                                 if ($alias) {
-                                    // Cutoff trailing .html or /
-                                    $alias = rtrim(str_replace('.html', '', $alias), '/');
+                                    // Cutoff a trailing / or HTML extension
+                                    $alias = $this->stripExtension(rtrim($alias, '/'), $htmlExtension);
                                 } else {
                                     // If alias could not be calculated, don't use that setting
                                     if ($this->getOption('debug')) {
@@ -276,10 +277,11 @@ class CustomRequest
         $valid = false;
         // Loop through the allowed aliases
         if (is_array($this->requests) && count($this->requests)) {
+            $htmlExtension = $this->getHtmlExtension();
             foreach ($this->requests as $request) {
                 if (!$request['aliasRegEx']) {
-                    // Check if searched string starts with the alias and for the contextKey
-                    if ($request['alias'] && 0 === strpos($search, $request['alias']) && $request['contextKey'] == $this->modx->context->key) {
+                    // Check if searched string starts with the alias at a path boundary and for the contextKey
+                    if ($request['alias'] && $this->startsWithAlias($search, $request['alias'], $htmlExtension) && $request['contextKey'] == $this->modx->context->key) {
                         $this->found = [
                             // Strip alias from seached string and urldecode it
                             'urlParams' => urldecode(substr($search, strlen($request['alias']))),
@@ -337,7 +339,7 @@ class CustomRequest
      */
     public function setRequest()
     {
-        $params = str_replace('.html', '', $this->found['urlParams']);
+        $params = $this->stripExtension($this->found['urlParams'], $this->getHtmlExtension());
         if ($this->found['regEx']) {
             // The remaining URI part starts with a slash, if the alias path is set without a trailing slash
             $params = ltrim($params, '/');
@@ -345,9 +347,9 @@ class CustomRequest
                 // Return without redirecting
                 return;
             }
-            // $matches[0] contains the full match, we don't want that
+            // $matches[0] contains the full match, we don't want that, and named subpatterns are contained twice
             array_shift($matches);
-            $params = $matches;
+            $params = array_values(array_filter($matches, 'is_int', ARRAY_FILTER_USE_KEY));
         } else {
             $params = trim($params, '/');
             $params = ($params !== '') ? explode('/', $params) : [];
@@ -439,6 +441,42 @@ class CustomRequest
     }
 
     /**
+     * Check if the search string starts with the alias at a path boundary
+     *
+     * @param string $search
+     * @param string $alias
+     * @param string $extension
+     * @return bool
+     */
+    public function startsWithAlias($search, $alias, $extension = '')
+    {
+        if (0 !== strpos($search, $alias)) {
+            return false;
+        }
+        $remaining = (string)substr($search, strlen($alias));
+        return $remaining === '' ||
+            substr($alias, -1) === '/' ||
+            $remaining[0] === '/' ||
+            ($extension !== '' && $remaining === $extension);
+    }
+
+    /**
+     * Strip a trailing extension from a string
+     *
+     * @param string $string
+     * @param string $extension
+     * @return string
+     */
+    public function stripExtension($string, $extension)
+    {
+        $string = (string)$string;
+        if ($extension !== '' && substr($string, -strlen($extension)) === $extension) {
+            $string = substr($string, 0, -strlen($extension));
+        }
+        return $string;
+    }
+
+    /**
      * Get the extension for the MODX HTML content type
      *
      * @return string
@@ -446,7 +484,7 @@ class CustomRequest
     public function getHtmlExtension()
     {
         $htmlContentType = $this->modx->getObject('modContentType', ['name' => 'HTML']);
-        return ($htmlContentType) ? $htmlContentType->get('file_extensions') : '.html';
+        return ($htmlContentType) ? (string)$htmlContentType->get('file_extensions') : '.html';
     }
 
     /**
