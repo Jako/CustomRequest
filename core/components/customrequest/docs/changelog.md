@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix the resource field and sorting in the configs grid
 - Cache an empty config list
 - Fix an endless loop with deleted or unpublished resources
-- Allow alias paths with up to 255 characters
+- Allow alias paths longer than 100 characters
 
 ## [1.3.14] - 2026-11-15
 
